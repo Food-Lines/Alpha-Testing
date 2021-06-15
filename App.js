@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Router, Route, Link } from './react-router';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Router, Route, Link } from "./react-router";
 
 const Home = () => <Text>Home</Text>;
 
@@ -27,11 +27,11 @@ const App = () => (
 const styles = StyleSheet.create({
   container: {
     marginTop: 25,
-    padding: 10
+    padding: 10,
   },
-  nav:{
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  nav: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 });
 
