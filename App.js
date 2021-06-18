@@ -1,38 +1,37 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Router, Route, Link } from "./react-router";
+import * as React from "react";
+import { BottomNavigation, Text } from "react-native-paper";
 
 const Home = () => <Text>Home</Text>;
 
-const About = () => <Text>About</Text>;
+const Sysco = () => <Text>Sysco</Text>;
 
-const App = () => (
-  <Router>
-    <View style={styles.container}>
-      <View style={styles.nav}>
-        <Link to="/">
-          <Text>Home</Text>
-        </Link>
-        <Link to="/about">
-          <Text>About</Text>
-        </Link>
-      </View>
+const UsFood = () => <Text>US Foods</Text>;
 
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </View>
-  </Router>
-);
+const Settings = () => <Text>Settings</Text>;
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 25,
-    padding: 10,
-  },
-  nav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-});
+const App = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: "home", title: "Home", icon: "home" },
+    { key: "sysco", title: "Sysco", icon: "food" },
+    { key: "usFood", title: "US Foods", icon: "food" },
+    { key: "settings", title: "Settings", icon: "cog" },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: Home,
+    sysco: Sysco,
+    usFood: UsFood,
+    settings: Settings,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
+  );
+};
 
 export default App;
