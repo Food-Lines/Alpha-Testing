@@ -1,119 +1,131 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
+//icons
+import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
+
+//formik
+import { Formik } from "formik";
+
+import {
+  StyledContainer,
+  InnerContainer,
+  PageLogo,
+  PageTitle,
+  SubTitle,
+  StyledFormArea,
+  StyledButton,
+  StyledInputLabel,
+  StyledTextInput,
+  LeftIcon,
+  RightIcon,
+  ButtonText,
+  Colors,
+  MsgBox,
+  Line,
+  ExtraView,
+  ExtraText,
+  TextLink,
+  TextLinkContent,
+} from "./../Components/styles";
+
+import { View } from "react-native";
+
+//Colors
+const { brand, darkLight, primary } = Colors;
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isValid, setIsValid] = useState(true);
-
-  const inputChangeHandler = (event) => {
-    if (event.target.value.trim().length > 0) {
-      setIsValid(true);
-    }
-    setUsername(event.target.value);
-  };
-
-  const onFocusHandler = () => {};
-
-  const submitHandler = (event) => {
-    if (username.trim().length === 0) {
-      setIsValid(false);
-      return;
-    }
-  };
+  const [hidePassword, setHidePassword] = useState(true);
 
   return (
-    <View style={styles.mainContainer}>
-      <Text style={styles.title}>FOOD LINES</Text>
-      <Text style={styles.subTitle}>Sign in to access your console</Text>
-      <View>
-        <Text style={(styles.label, { color: !isValid ? "red" : "#525252" })}>
-          Username
-        </Text>
-        <TextInput
-          styles={
-            (styles.userInput, { borderColor: !isValid ? "red" : "black" })
-          }
-          placeholder="Username"
-          autoCompleteType="username"
-          maxLength={20}
-          onFocus={onFocusHandler}
-          onChange={inputChangeHandler}
+    <StyledContainer>
+      <StatusBar style="dark" />
+      <InnerContainer>
+        <PageLogo
+          resizeMode="cover"
+          source={require("./../Assets/mockLogo.png")}
         />
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          styles={styles.userInput}
-          placeholder="Password"
-          autoCompleteType="username"
-          maxLength={20}
-          onFocus={onFocusHandler}
-        />
-        <Button
-          style={styles.submitButton}
-          title="Sign In"
-          backgroundColor="#000000"
-          color="#fffffff"
-          onPress={submitHandler}
-        />
-      </View>
-    </View>
+        <PageTitle>Food Lines</PageTitle>
+        <SubTitle>Account Login</SubTitle>
+        <Formik
+          initialValues={{ username: "", password: "" }}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+        >
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <StyledFormArea>
+              <MyTextInput
+                label="Username"
+                icon="person"
+                placeholder="greendog21"
+                placeholderTextColor={darkLight}
+                onChangetext={handleChange("username")}
+                onBlur={handleBlur("username")}
+                value={values.username}
+              />
+              <MyTextInput
+                label="Password"
+                icon="lock"
+                placeholder="* * * * * * * *"
+                placeholderTextColor={darkLight}
+                onChangetext={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                secureTextEntry={hidePassword}
+                isPassword={true}
+                hidePassword={hidePassword}
+                setHidePassword={setHidePassword}
+              />
+              <MsgBox>...</MsgBox>
+              <StyledButton onPress={handleSubmit}>
+                <ButtonText>Login</ButtonText>
+              </StyledButton>
+              <Line />
+              <StyledButton google={true} onPress={handleSubmit}>
+                <Fontisto name="google" color={primary} size={25} />
+                <ButtonText google={true}>Sign in with Google</ButtonText>
+              </StyledButton>
+              <ExtraView>
+                <ExtraText>Don't have an account already?</ExtraText>
+                <TextLink>
+                  <TextLinkContent> Sign Up</TextLinkContent>
+                </TextLink>
+              </ExtraView>
+            </StyledFormArea>
+          )}
+        </Formik>
+      </InnerContainer>
+    </StyledContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    padding: 30,
-    marginTop: 40,
-    backgroundColor: "#ffffff",
-  },
-  userInputContainer: {
-    flex: 1,
-    marginTop: 20,
-    marginBottom: 20,
-    backgroundColor: "#ffffff",
-  },
-  topTitle: {
-    marginTop: 50,
-    color: "#20232a",
-    textAlign: "left",
-    fontSize: 30,
-  },
-  title: {
-    marginTop: 10,
-    color: "#20232a",
-    textAlign: "left",
-    fontSize: 40,
-    fontWeight: "bold",
-  },
-  subTitle: {
-    color: "#20232a",
-    textAlign: "left",
-    fontSize: 15,
-  },
-  label: {
-    flex: 1,
-    color: "#525252",
-    textAlign: "left",
-    fontSize: 15,
-  },
-  userInput: {
-    flex: 2,
-    borderWidth: 2,
-    padding: 10,
-    borderColor: "#8c8c8c",
-    borderRadius: 5,
-    borderBottomColor: "#8c8c8c",
-    borderRightColor: "#8c8c8c",
-    borderTopColor: "#8c8c8c",
-    borderLeftColor: "#8c8c8c",
-    fontSize: 12,
-  },
-  submitButton: {
-    flex: 1,
-    padding: 10,
-    fontSize: 12,
-  },
-});
+const MyTextInput = ({
+  label,
+  icon,
+  isPassword,
+  hidePassword,
+  setHidePassword,
+  ...props
+}) => {
+  return (
+    <View>
+      <LeftIcon>
+        <Octicons name={icon} size={30} color={brand} />
+      </LeftIcon>
+      <StyledInputLabel>{label}</StyledInputLabel>
+      <StyledTextInput {...props} />
+      {isPassword && (
+        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
+          <Ionicons
+            name={hidePassword ? "md-eye-off" : "md-eye"}
+            size={30}
+            color={darkLight}
+          />
+        </RightIcon>
+      )}
+    </View>
+  );
+};
 
 export default SignIn;
