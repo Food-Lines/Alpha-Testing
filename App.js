@@ -3,9 +3,10 @@ import { NativeRouter, Route, Router } from "react-router-native";
 
 //Screens
 import SignIn from "./src/Pages/SignIn";
+import SignUp from "./src/Pages/SignUp";
 
 const App = () => {
-  return <SignIn />;
+  return <SignUp />;
 };
 
 export default App;
