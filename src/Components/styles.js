@@ -15,9 +15,11 @@ export const Colors = {
   brand: "#6D28D9",
   green: "#10B981",
   red: "#EF4444",
+  black: "#000000",
 };
 
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const { primary, secondary, tertiary, darkLight, brand, green, red, black } =
+  Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -33,8 +35,8 @@ export const InnerContainer = styled.View`
 `;
 
 export const PageLogo = styled.Image`
-  width: 250px;
-  height: 200px;
+  width: 200px;
+  height: 150px;
 `;
 
 export const PageTitle = styled.Text`
@@ -67,7 +69,7 @@ export const StyledTextInput = styled.TextInput`
   height: 60px;
   margin-vertical: 3px;
   margin-bottom: 10px;
-  color: ${secondary};
+  color: ${black};
 `;
 
 export const StyledInputLabel = styled.Text`
@@ -87,7 +89,7 @@ export const LeftIcon = styled.View`
 
 export const RightIcon = styled.TouchableOpacity`
   right: 15px;
-  top: 38px;
+  top: 35px;
   position: absolute;
   z-index: 1;
 `;

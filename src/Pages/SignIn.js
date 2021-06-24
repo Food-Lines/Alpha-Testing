@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { TextInput } from "react-native";
 
 //icons
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
@@ -36,7 +37,6 @@ const { brand, darkLight, primary } = Colors;
 
 const SignIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
-
   return (
     <StyledContainer>
       <StatusBar style="dark" />
@@ -49,27 +49,30 @@ const SignIn = () => {
         <SubTitle>Account Login</SubTitle>
         <Formik
           initialValues={{ username: "", password: "" }}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
+          onSubmit={(values) => console.log(values)}
         >
           {({ handleChange, handleBlur, handleSubmit, values }) => (
             <StyledFormArea>
-              <MyTextInput
-                label="Username"
-                icon="person"
-                placeholder="greendog21"
-                placeholderTextColor={darkLight}
-                onChangetext={handleChange("username")}
-                onBlur={handleBlur("username")}
-                value={values.username}
-              />
+              <View>
+                <LeftIcon>
+                  <Octicons name={"person"} size={30} color={brand} />
+                </LeftIcon>
+                <StyledInputLabel>{"Username"}</StyledInputLabel>
+                <StyledTextInput
+                  name="username"
+                  placeholder="greendog21"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("username")}
+                  onBlur={handleBlur("username")}
+                  value={values.username}
+                />
+              </View>
               <MyTextInput
                 label="Password"
                 icon="lock"
                 placeholder="* * * * * * * *"
                 placeholderTextColor={darkLight}
-                onChangetext={handleChange("password")}
+                onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 value={values.password}
                 secureTextEntry={hidePassword}
@@ -78,7 +81,7 @@ const SignIn = () => {
                 setHidePassword={setHidePassword}
               />
               <MsgBox>...</MsgBox>
-              <StyledButton onPress={handleSubmit}>
+              <StyledButton onPress={handleSubmit} title="Submit">
                 <ButtonText>Login</ButtonText>
               </StyledButton>
               <Line />

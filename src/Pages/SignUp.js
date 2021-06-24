@@ -13,8 +13,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   StyledContainer,
   InnerContainer,
-  PageLogo,
   PageTitle,
+  PageLogo,
   SubTitle,
   StyledFormArea,
   StyledButton,
@@ -32,46 +32,24 @@ import {
   TextLinkContent,
 } from "./../Components/styles";
 
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 
 //Colors
-const { brand, darkLight, primary } = Colors;
+const { brand, darkLight } = Colors;
 
 const SignUp = () => {
   const [hidePassword, setHidePassword] = useState(true);
-  const [show, setShow] = useState(false);
-  const [date, setDate] = useState(new Date(2000, 0, 1));
-
-  //Actual date of birth to be sent
-  const [dob, setDob] = useState();
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(false);
-    setDate(currentDate);
-    setDob(currentDate);
-  };
-
-  const showDatePicker = () => {
-    setShow(true);
-  };
 
   return (
     <StyledContainer>
       <StatusBar style="dark" />
       <InnerContainer>
+        <PageLogo
+          resizeMode="cover"
+          source={require("./../Assets/mockLogo.png")}
+        />
         <PageTitle>Food Lines</PageTitle>
         <SubTitle>Account Sign Up</SubTitle>
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="date"
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
         <Formik
           initialValues={{
             fullName: "",
@@ -91,7 +69,7 @@ const SignUp = () => {
                 icon="person"
                 placeholder="John Smith"
                 placeholderTextColor={darkLight}
-                onChangetext={handleChange("fullName")}
+                onChangeText={handleChange("fullName")}
                 onBlur={handleBlur("fullName")}
                 value={values.fullName}
               />
@@ -101,28 +79,16 @@ const SignUp = () => {
                 icon="person"
                 placeholder="greendog21"
                 placeholderTextColor={darkLight}
-                onChangetext={handleChange("dateOfBirth")}
-                onBlur={handleBlur("dateOfBirth")}
-                value={values.dateOfBirth}
-              />
-              <MyTextInput
-                label="Date of Birth"
-                icon="calendar"
-                placeholder="YYYY - MM - DD"
-                placeholderTextColor={darkLight}
-                onChangetext={handleChange("username")}
+                onChangeText={handleChange("username")}
                 onBlur={handleBlur("username")}
-                value={dob ? dob.toDateString() : ""}
-                isDate={true}
-                editable={false}
-                showDatePicker={showDatePicker}
+                value={values.username}
               />
               <MyTextInput
                 label="Password"
                 icon="lock"
                 placeholder="* * * * * * * *"
                 placeholderTextColor={darkLight}
-                onChangetext={handleChange("password")}
+                onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 value={values.password}
                 secureTextEntry={hidePassword}
@@ -135,7 +101,7 @@ const SignUp = () => {
                 icon="lock"
                 placeholder="* * * * * * * *"
                 placeholderTextColor={darkLight}
-                onChangetext={handleChange("confirmPassword")}
+                onChangeText={handleChange("confirmPassword")}
                 onBlur={handleBlur("confirmPassword")}
                 value={values.confirmPassword}
                 secureTextEntry={hidePassword}
@@ -145,7 +111,7 @@ const SignUp = () => {
               />
               <MsgBox>...</MsgBox>
               <StyledButton onPress={handleSubmit}>
-                <ButtonText>Login</ButtonText>
+                <ButtonText>Register</ButtonText>
               </StyledButton>
               <Line />
               <ExtraView>
@@ -168,8 +134,6 @@ const MyTextInput = ({
   isPassword,
   hidePassword,
   setHidePassword,
-  isDate,
-  showDatePicker,
   ...props
 }) => {
   return (
@@ -178,12 +142,7 @@ const MyTextInput = ({
         <Octicons name={icon} size={30} color={brand} />
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
-      {!isDate && <StyledTextInput {...props} />}
-      {isDate && (
-        <TouchableOpacity onPress={showDatePicker}>
-          <StyledTextInput {...props} />
-        </TouchableOpacity>
-      )}
+      <StyledTextInput {...props} />
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
