@@ -38,7 +38,7 @@ const { brand, darkLight, primary } = Colors;
 //KeyboardAvoidingWrapper
 import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
     <KeyboardAvoidingWrapper>
@@ -53,7 +53,10 @@ const SignIn = () => {
           <SubTitle>Account Login</SubTitle>
           <Formik
             initialValues={{ username: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => {
+              console.log(values);
+              navigation.navigate("Welcome");
+            }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
@@ -95,7 +98,7 @@ const SignIn = () => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink>
+                  <TextLink onPress={() => navigation.navigate("Sign up")}>
                     <TextLinkContent> Sign Up</TextLinkContent>
                   </TextLink>
                 </ExtraView>

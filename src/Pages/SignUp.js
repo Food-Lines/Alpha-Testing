@@ -40,7 +40,7 @@ import {
 //Colors
 const { brand, darkLight } = Colors;
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
@@ -125,7 +125,7 @@ const SignUp = () => {
                     <Line />
                     <ExtraView>
                       <ExtraText>Have an acount already?</ExtraText>
-                      <TextLink>
+                      <TextLink onPress={() => navigation.navigate("Sign in")}>
                         <TextLinkContent> Log In</TextLinkContent>
                       </TextLink>
                     </ExtraView>

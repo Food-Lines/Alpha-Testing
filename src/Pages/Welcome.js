@@ -14,7 +14,7 @@ import {
   Avatar,
 } from "./../Components/styles";
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     <>
       <StatusBar style="light" />
@@ -34,6 +34,14 @@ const Welcome = () => {
             <Line />
             <StyledButton onPress={() => {}} title="Submit">
               <ButtonText>Go to Console</ButtonText>
+            </StyledButton>
+            <StyledButton
+              onPress={() => {
+                navigation.navigate("Sign in");
+              }}
+              title="Submit"
+            >
+              <ButtonText>Log Out</ButtonText>
             </StyledButton>
           </StyledFormArea>
         </WelcomeContainer>
