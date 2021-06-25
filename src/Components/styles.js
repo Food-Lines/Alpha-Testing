@@ -60,8 +60,8 @@ export const WelcomeImage = styled.Image`
 `;
 
 export const PageLogo = styled.Image`
-  width: 250px;
-  height: 200px;
+  width: 200px;
+  height: 150px;
 `;
 
 export const PageTitle = styled.Text`
@@ -182,6 +182,7 @@ export const ExtraView = styled.View`
 export const ExtraText = styled.Text`
   justify-content: center;
   align-content: center;
+  text-align: center;
   color: ${tertiary};
   font-size: 15px;
 `;

@@ -87,10 +87,15 @@ const SignIn = ({ navigation }) => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <MsgBox>...</MsgBox>
                 <StyledButton onPress={handleSubmit} title="Submit">
                   <ButtonText>Login</ButtonText>
                 </StyledButton>
+                <ExtraView>
+                  <ExtraText>Forgot Password?</ExtraText>
+                  <TextLink onPress={() => navigation.navigate("ConfirmEmail")}>
+                    <TextLinkContent> Reset</TextLinkContent>
+                  </TextLink>
+                </ExtraView>
                 <Line />
                 <StyledButton google={true} onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />
@@ -99,7 +104,7 @@ const SignIn = ({ navigation }) => {
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
                   <TextLink onPress={() => navigation.navigate("Sign up")}>
-                    <TextLinkContent> Sign Up</TextLinkContent>
+                    <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>
               </StyledFormArea>

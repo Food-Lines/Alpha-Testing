@@ -13,7 +13,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SignIn from "./../Pages/SignIn";
 import SignUp from "./../Pages/SignUp";
 import Welcome from "./../Pages/Welcome";
-import Test from "./../Pages/Test";
+import ConfirmEmail from "./../Pages/ConfirmEmail";
+import OTP from "./../Pages/OTP";
 
 const Stack = createStackNavigator();
 
@@ -41,7 +42,8 @@ const RootStack = () => {
           name="Welcome"
           component={Welcome}
         />
-        <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
+        <Stack.Screen name="OTP" component={OTP} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -62,8 +62,8 @@ const SignUp = ({ navigation }) => {
               <Formik
                 initialValues={{
                   fullName: "",
+                  email: "",
                   username: "",
-                  dateOfBirth: "",
                   password: "",
                   confirmPassword: "",
                 }}
@@ -81,6 +81,16 @@ const SignUp = ({ navigation }) => {
                       onChangeText={handleChange("fullName")}
                       onBlur={handleBlur("fullName")}
                       value={values.fullName}
+                    />
+
+                    <MyTextInput
+                      label="Email"
+                      icon="mail"
+                      placeholder="greendog21@gmail.com"
+                      placeholderTextColor={darkLight}
+                      onChangeText={handleChange("email")}
+                      onBlur={handleBlur("email")}
+                      value={values.email}
                     />
 
                     <MyTextInput
@@ -118,8 +128,11 @@ const SignUp = ({ navigation }) => {
                       hidePassword={hidePassword}
                       setHidePassword={setHidePassword}
                     />
-                    <MsgBox>...</MsgBox>
-                    <StyledButton onPress={handleSubmit}>
+                    <StyledButton
+                      onPress={
+                        (() => navigation.navigate("Welcome"), handleSubmit)
+                      }
+                    >
                       <ButtonText>Register</ButtonText>
                     </StyledButton>
                     <Line />
