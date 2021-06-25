@@ -8,7 +8,7 @@ import Test from "./src/Pages/Test";
 import Welcome from "./src/Pages/Welcome";
 
 const App = () => {
-  return <Welcome />;
+  return <SignIn />;
 };
 
 export default App;

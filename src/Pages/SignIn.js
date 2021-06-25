@@ -35,71 +35,76 @@ import { View } from "react-native";
 //Colors
 const { brand, darkLight, primary } = Colors;
 
+//KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
+
 const SignIn = () => {
   const [hidePassword, setHidePassword] = useState(true);
   return (
-    <StyledContainer>
-      <StatusBar style="dark" />
-      <InnerContainer>
-        <PageLogo
-          resizeMode="cover"
-          source={require("./../Assets/mockLogo.png")}
-        />
-        <PageTitle>Food Lines</PageTitle>
-        <SubTitle>Account Login</SubTitle>
-        <Formik
-          initialValues={{ username: "", password: "" }}
-          onSubmit={(values) => console.log(values)}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <StyledFormArea>
-              <View>
-                <LeftIcon>
-                  <Octicons name={"person"} size={30} color={brand} />
-                </LeftIcon>
-                <StyledInputLabel>{"Username"}</StyledInputLabel>
-                <StyledTextInput
-                  name="username"
-                  placeholder="greendog21"
+    <KeyboardAvoidingWrapper>
+      <StyledContainer>
+        <StatusBar style="dark" />
+        <InnerContainer>
+          <PageLogo
+            resizeMode="cover"
+            source={require("./../Assets/mockLogo.png")}
+          />
+          <PageTitle>Food Lines</PageTitle>
+          <SubTitle>Account Login</SubTitle>
+          <Formik
+            initialValues={{ username: "", password: "" }}
+            onSubmit={(values) => console.log(values)}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <StyledFormArea>
+                <View>
+                  <LeftIcon>
+                    <Octicons name={"person"} size={30} color={brand} />
+                  </LeftIcon>
+                  <StyledInputLabel>{"Username"}</StyledInputLabel>
+                  <StyledTextInput
+                    name="username"
+                    placeholder="greendog21"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange("username")}
+                    onBlur={handleBlur("username")}
+                    value={values.username}
+                  />
+                </View>
+                <MyTextInput
+                  label="Password"
+                  icon="lock"
+                  placeholder="* * * * * * * *"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("username")}
-                  onBlur={handleBlur("username")}
-                  value={values.username}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  value={values.password}
+                  secureTextEntry={hidePassword}
+                  isPassword={true}
+                  hidePassword={hidePassword}
+                  setHidePassword={setHidePassword}
                 />
-              </View>
-              <MyTextInput
-                label="Password"
-                icon="lock"
-                placeholder="* * * * * * * *"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-                secureTextEntry={hidePassword}
-                isPassword={true}
-                hidePassword={hidePassword}
-                setHidePassword={setHidePassword}
-              />
-              <MsgBox>...</MsgBox>
-              <StyledButton onPress={handleSubmit} title="Submit">
-                <ButtonText>Login</ButtonText>
-              </StyledButton>
-              <Line />
-              <StyledButton google={true} onPress={handleSubmit}>
-                <Fontisto name="google" color={primary} size={25} />
-                <ButtonText google={true}>Sign in with Google</ButtonText>
-              </StyledButton>
-              <ExtraView>
-                <ExtraText>Don't have an account already?</ExtraText>
-                <TextLink>
-                  <TextLinkContent> Sign Up</TextLinkContent>
-                </TextLink>
-              </ExtraView>
-            </StyledFormArea>
-          )}
-        </Formik>
-      </InnerContainer>
-    </StyledContainer>
+                <MsgBox>...</MsgBox>
+                <StyledButton onPress={handleSubmit} title="Submit">
+                  <ButtonText>Login</ButtonText>
+                </StyledButton>
+                <Line />
+                <StyledButton google={true} onPress={handleSubmit}>
+                  <Fontisto name="google" color={primary} size={25} />
+                  <ButtonText google={true}>Sign in with Google</ButtonText>
+                </StyledButton>
+                <ExtraView>
+                  <ExtraText>Don't have an account already?</ExtraText>
+                  <TextLink>
+                    <TextLinkContent> Sign Up</TextLinkContent>
+                  </TextLink>
+                </ExtraView>
+              </StyledFormArea>
+            )}
+          </Formik>
+        </InnerContainer>
+      </StyledContainer>
+    </KeyboardAvoidingWrapper>
   );
 };
 

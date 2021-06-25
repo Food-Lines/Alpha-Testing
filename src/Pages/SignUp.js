@@ -7,9 +7,6 @@ import { Octicons, Ionicons } from "@expo/vector-icons";
 //formik
 import { Formik } from "formik";
 
-//Date Time Picker
-import DateTimePicker from "@react-native-community/datetimepicker";
-
 import {
   StyledContainer,
   InnerContainer,
@@ -32,7 +29,13 @@ import {
   TextLinkContent,
 } from "./../Components/styles";
 
-import { View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView,
+} from "react-native";
 
 //Colors
 const { brand, darkLight } = Colors;
@@ -41,90 +44,99 @@ const SignUp = () => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
-    <StyledContainer>
-      <StatusBar style="dark" />
-      <InnerContainer>
-        <PageLogo
-          resizeMode="cover"
-          source={require("./../Assets/mockLogo.png")}
-        />
-        <PageTitle>Food Lines</PageTitle>
-        <SubTitle>Account Sign Up</SubTitle>
-        <Formik
-          initialValues={{
-            fullName: "",
-            username: "",
-            dateOfBirth: "",
-            password: "",
-            confirmPassword: "",
-          }}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
-        >
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <StyledFormArea>
-              <MyTextInput
-                label="Full Name"
-                icon="person"
-                placeholder="John Smith"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("fullName")}
-                onBlur={handleBlur("fullName")}
-                value={values.fullName}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : 20}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView>
+          <StyledContainer>
+            <StatusBar style="dark" />
+            <InnerContainer>
+              <PageLogo
+                resizeMode="cover"
+                source={require("./../Assets/mockLogo.png")}
               />
+              <PageTitle>Food Lines</PageTitle>
+              <SubTitle>Account Sign Up</SubTitle>
+              <Formik
+                initialValues={{
+                  fullName: "",
+                  username: "",
+                  dateOfBirth: "",
+                  password: "",
+                  confirmPassword: "",
+                }}
+                onSubmit={(values) => {
+                  console.log(values);
+                }}
+              >
+                {({ handleChange, handleBlur, handleSubmit, values }) => (
+                  <StyledFormArea>
+                    <MyTextInput
+                      label="Full Name"
+                      icon="person"
+                      placeholder="John Smith"
+                      placeholderTextColor={darkLight}
+                      onChangeText={handleChange("fullName")}
+                      onBlur={handleBlur("fullName")}
+                      value={values.fullName}
+                    />
 
-              <MyTextInput
-                label="Username"
-                icon="person"
-                placeholder="greendog21"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("username")}
-                onBlur={handleBlur("username")}
-                value={values.username}
-              />
-              <MyTextInput
-                label="Password"
-                icon="lock"
-                placeholder="* * * * * * * *"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-                secureTextEntry={hidePassword}
-                isPassword={true}
-                hidePassword={hidePassword}
-                setHidePassword={setHidePassword}
-              />
-              <MyTextInput
-                label="Confirm Password"
-                icon="lock"
-                placeholder="* * * * * * * *"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange("confirmPassword")}
-                onBlur={handleBlur("confirmPassword")}
-                value={values.confirmPassword}
-                secureTextEntry={hidePassword}
-                isPassword={true}
-                hidePassword={hidePassword}
-                setHidePassword={setHidePassword}
-              />
-              <MsgBox>...</MsgBox>
-              <StyledButton onPress={handleSubmit}>
-                <ButtonText>Register</ButtonText>
-              </StyledButton>
-              <Line />
-              <ExtraView>
-                <ExtraText>Have an acount already?</ExtraText>
-                <TextLink>
-                  <TextLinkContent> Log In</TextLinkContent>
-                </TextLink>
-              </ExtraView>
-            </StyledFormArea>
-          )}
-        </Formik>
-      </InnerContainer>
-    </StyledContainer>
+                    <MyTextInput
+                      label="Username"
+                      icon="person"
+                      placeholder="greendog21"
+                      placeholderTextColor={darkLight}
+                      onChangeText={handleChange("username")}
+                      onBlur={handleBlur("username")}
+                      value={values.username}
+                    />
+                    <MyTextInput
+                      label="Password"
+                      icon="lock"
+                      placeholder="* * * * * * * *"
+                      placeholderTextColor={darkLight}
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                      value={values.password}
+                      secureTextEntry={hidePassword}
+                      isPassword={true}
+                      hidePassword={hidePassword}
+                      setHidePassword={setHidePassword}
+                    />
+                    <MyTextInput
+                      label="Confirm Password"
+                      icon="lock"
+                      placeholder="* * * * * * * *"
+                      placeholderTextColor={darkLight}
+                      onChangeText={handleChange("confirmPassword")}
+                      onBlur={handleBlur("confirmPassword")}
+                      value={values.confirmPassword}
+                      secureTextEntry={hidePassword}
+                      isPassword={true}
+                      hidePassword={hidePassword}
+                      setHidePassword={setHidePassword}
+                    />
+                    <MsgBox>...</MsgBox>
+                    <StyledButton onPress={handleSubmit}>
+                      <ButtonText>Register</ButtonText>
+                    </StyledButton>
+                    <Line />
+                    <ExtraView>
+                      <ExtraText>Have an acount already?</ExtraText>
+                      <TextLink>
+                        <TextLinkContent> Log In</TextLinkContent>
+                      </TextLink>
+                    </ExtraView>
+                  </StyledFormArea>
+                )}
+              </Formik>
+            </InnerContainer>
+          </StyledContainer>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
