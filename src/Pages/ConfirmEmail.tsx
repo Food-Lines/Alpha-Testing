@@ -30,7 +30,7 @@ import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 // Colors
 const { brand, darkLight, primary, black } = Colors
 
-const ConfirmEmail = ({ navigation }) => {
+const ConfirmEmail = ({ navigation }): React.ReactElement => {
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>

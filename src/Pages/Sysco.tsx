@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native-paper'
 
-const Sysco = () => {
+const Sysco = (): React.ReactElement => {
   return <Text>Sysco!</Text>
 }
 

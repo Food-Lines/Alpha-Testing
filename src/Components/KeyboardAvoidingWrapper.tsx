@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native'
 
-const KeyboardAvoidingWrapper = ({ children }) => {
+const KeyboardAvoidingWrapper = ({ children }): React.ReactElement => {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}

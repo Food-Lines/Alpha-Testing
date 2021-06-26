@@ -22,7 +22,7 @@ import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 // Colors
 const { brand, darkLight, primary, black } = Colors
 
-const Confirmation = ({ navigation }) => {
+const Confirmation = ({ navigation }): React.ReactElement => {
   const onSubmitHandler = () => {
     navigation.navigate('Sign in')
   }

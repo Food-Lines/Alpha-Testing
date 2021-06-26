@@ -5,7 +5,7 @@ import Sysco from './Sysco'
 import UserSettings from './UserSettings'
 import UsFood from './UsFood'
 
-const Home = () => {
+const Home = (): React.ReactElement => {
   const [index, setIndex] = React.useState(0)
   const [routes] = React.useState([
     { key: 'home', title: 'Home', icon: 'home', color: '#3F51B5' },

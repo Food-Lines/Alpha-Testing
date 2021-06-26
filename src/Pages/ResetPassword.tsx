@@ -29,7 +29,7 @@ import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 // Colors
 const { brand, darkLight, primary, black } = Colors
 
-const ResetPassword = ({ navigation }) => {
+const ResetPassword = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingWrapper>

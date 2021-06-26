@@ -35,7 +35,7 @@ import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 // Colors
 const { brand, darkLight, primary } = Colors
 
-const SignIn = ({ navigation }) => {
+const SignIn = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingWrapper>

@@ -14,7 +14,7 @@ import {
   Avatar,
 } from '../Components/styles'
 
-const Welcome = ({ navigation }) => {
+const Welcome = ({ navigation }): React.ReactElement => {
   return (
     <>
       <StatusBar style="light" />

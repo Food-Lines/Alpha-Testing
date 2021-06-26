@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native-paper'
 
-const UsFood = () => {
+const UsFood = (): React.ReactElement => {
   return <Text>UsFood!</Text>
 }
 

@@ -40,7 +40,7 @@ import {
 // Colors
 const { brand, darkLight } = Colors
 
-const SignUp = ({ navigation }) => {
+const SignUp = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
 
   return (

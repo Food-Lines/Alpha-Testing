@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, TextInput, View, Text } from 'react-native'
 import { Formik } from 'formik'
 
-const Test = () => {
+const Test = (): React.ReactElement => {
   return (
     <Formik
       initialValues={{ password: '' }}
