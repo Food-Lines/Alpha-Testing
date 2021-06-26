@@ -50,7 +50,7 @@ const SignIn = ({ navigation }) => {
           <SubTitle>Account Login</SubTitle>
           <Formik
             initialValues={{ username: '', password: '' }}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values)
               navigation.navigate('Welcome')
             }}

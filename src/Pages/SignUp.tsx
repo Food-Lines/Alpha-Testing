@@ -67,7 +67,7 @@ const SignUp = ({ navigation }) => {
                   password: '',
                   confirmPassword: '',
                 }}
-                onSubmit={values => {
+                onSubmit={(values) => {
                   console.log(values)
                 }}
               >

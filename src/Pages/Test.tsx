@@ -6,7 +6,7 @@ const Test = () => {
   return (
     <Formik
       initialValues={{ password: '' }}
-      onSubmit={values => console.log(values)}
+      onSubmit={(values) => console.log(values)}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <View style={{ flex: 1, justifyContent: 'center' }}>

@@ -69,7 +69,7 @@ export const PageTitle = styled.Text`
   color: ${brand};
   padding: 10px;
 
-  ${props =>
+  ${(props) =>
     props.welcome &&
     `
     font-size:35px;
@@ -83,7 +83,7 @@ export const SubTitle = styled.Text`
   font-weight: bold;
   color: ${tertiary};
 
-  ${props =>
+  ${(props) =>
     props.welcome &&
     `
   margin-bottom: 5px;
@@ -140,7 +140,7 @@ export const StyledButton = styled.TouchableOpacity`
   height: 60px;
   width: 100%;
 
-  ${props =>
+  ${(props) =>
     props.google === true &&
     `
   background-color: ${green};
@@ -160,7 +160,7 @@ export const ButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
 
-  ${props =>
+  ${(props) =>
     props.google === true &&
     `
   margin-left: 10px;
