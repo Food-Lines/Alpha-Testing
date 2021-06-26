@@ -27,7 +27,7 @@ const { brand, darkLight, primary, black } = Colors
 const OTP = ({ navigation }): React.ReactElement => {
   const [otp, setOTP] = useState('')
 
-  const onChangeOTPHandler = value => {
+  const onChangeOTPHandler = (value) => {
     setOTP(value)
     console.log(otp)
   }

@@ -49,7 +49,7 @@ const ResetPassword = ({ navigation }): React.ReactElement => {
               password: '',
               confirmPassword: '',
             }}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values)
               navigation.navigate('Confirmation')
             }}

@@ -46,7 +46,7 @@ const ConfirmEmail = ({ navigation }): React.ReactElement => {
           </ExtraView>
           <Formik
             initialValues={{ email: '' }}
-            onSubmit={values => {
+            onSubmit={(values) => {
               console.log(values)
               navigation.navigate('OTP')
             }}
