@@ -149,6 +149,14 @@ export const StyledButton = styled.TouchableOpacity`
   `}
 `;
 
+export const StyledTransparentButton = styled.TouchableOpacity`
+  padding: 5px;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+`;
+
 export const ButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;

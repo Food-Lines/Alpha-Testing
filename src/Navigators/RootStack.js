@@ -15,6 +15,7 @@ import SignUp from "./../Pages/SignUp";
 import Welcome from "./../Pages/Welcome";
 import ConfirmEmail from "./../Pages/ConfirmEmail";
 import OTP from "./../Pages/OTP";
+import ResetPassword from "./../Pages/ResetPassword";
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,7 @@ const RootStack = () => {
         />
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
         <Stack.Screen name="OTP" component={OTP} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

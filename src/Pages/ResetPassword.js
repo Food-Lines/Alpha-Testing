@@ -32,7 +32,7 @@ const { brand, darkLight, primary, black } = Colors;
 //KeyboardAvoidingWrapper
 import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
 
-const OTP = ({ navigation }) => {
+const ResetPassword = ({ navigation }) => {
   const [otp, setOTP] = useState("");
 
   const onChangeOTPHandler = (value) => {
@@ -93,4 +93,4 @@ const OTP = ({ navigation }) => {
   );
 };
 
-export default OTP;
+export default ResetPassword;
