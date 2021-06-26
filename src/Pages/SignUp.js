@@ -49,7 +49,7 @@ const SignUp = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : 20}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: "#ffffff" }}>
           <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>

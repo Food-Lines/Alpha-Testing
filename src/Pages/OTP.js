@@ -40,6 +40,10 @@ const OTP = ({ navigation }) => {
     console.log(otp);
   };
 
+  const resendOTPHandler = () => {
+    return;
+  };
+
   const onSubmitHandler = () => {
     navigation.navigate("ResetPassword");
   };
@@ -67,21 +71,19 @@ const OTP = ({ navigation }) => {
             onChange={onChangeOTPHandler}
             value={otp}
           />
+          <ExtraView>
+            <ExtraText style={{ fontSize: 12 }}>Didn't Recieve Code?</ExtraText>
+            <TextLink onPress={resendOTPHandler}>
+              <TextLinkContent style={{ fontSize: 12 }}>
+                {" "}
+                Resend Code
+              </TextLinkContent>
+            </TextLink>
+          </ExtraView>
           <StyledFormArea>
-            <StyledTransparentButton
-              style={{ marginTop: 5 }}
-              onPress={() => {}}
-            >
-              <ButtonText style={{ color: "#000000", fontSize: 12 }}>
-                Resend code
-              </ButtonText>
-            </StyledTransparentButton>
             <Line style={{ width: "89%", marginLeft: 18 }} />
             <StyledButton
-              style={{
-                marginLeft: 18,
-                marginRight: 18,
-              }}
+              style={{ marginLeft: 18, width: "90%" }}
               onPress={onSubmitHandler}
             >
               <ButtonText>Next</ButtonText>

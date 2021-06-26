@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, StatusBar } from "react-native";
 
-import OTPInput from "react-native-otp";
+//icons
+import { Octicons, Ionicons } from "@expo/vector-icons";
+
+//formik
+import { Formik } from "formik";
 
 import {
   StyledContainer,
@@ -11,7 +14,6 @@ import {
   SubTitle,
   StyledFormArea,
   StyledButton,
-  StyledTransparentButton,
   StyledInputLabel,
   StyledTextInput,
   LeftIcon,
@@ -26,6 +28,8 @@ import {
   TextLinkContent,
 } from "./../Components/styles";
 
+import { View, StatusBar } from "react-native";
+
 //Colors
 const { brand, darkLight, primary, black } = Colors;
 
@@ -33,63 +37,95 @@ const { brand, darkLight, primary, black } = Colors;
 import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
 
 const ResetPassword = ({ navigation }) => {
-  const [otp, setOTP] = useState("");
-
-  const onChangeOTPHandler = (value) => {
-    setOTP(value);
-    console.log(otp);
-  };
-
-  const onSubmitHandler = () => {
-    navigation.navigate("ResetPassword");
-  };
+  const [hidePassword, setHidePassword] = useState(true);
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
         <StatusBar style="dark" />
         <InnerContainer>
           <PageLogo
-            resizeMode="contain"
-            source={require("./../Assets/code.png")}
+            resizeMode="cover"
+            source={require("./../Assets/delta.png")}
           />
-          <PageTitle>Verification</PageTitle>
-          <ExtraView>
-            <ExtraText
-              style={{ fontSize: 12, paddingLeft: 30, paddingRight: 30 }}
-            >
-              Enterd One Time Password sent to greendog@gmail.com
-            </ExtraText>
-          </ExtraView>
-          <OTPInput
-            tintColor="#FB6C6A"
-            offTintColor="#BBBCBE"
-            otpLength={6}
-            onChange={onChangeOTPHandler}
-            value={otp}
-          />
-          <StyledFormArea>
-            <StyledTransparentButton
-              style={{ marginTop: 5 }}
-              onPress={() => {}}
-            >
-              <ButtonText style={{ color: "#000000", fontSize: 12 }}>
-                Resend code
-              </ButtonText>
-            </StyledTransparentButton>
-            <Line style={{ width: "89%", marginLeft: 18 }} />
-            <StyledButton
-              style={{
-                marginLeft: 18,
-                marginRight: 18,
-              }}
-              onPress={onSubmitHandler}
-            >
-              <ButtonText>Next</ButtonText>
-            </StyledButton>
-          </StyledFormArea>
+          <PageTitle>Reset Password</PageTitle>
+          <SubTitle style={{ fontSize: 12 }}>
+            Input your new password below.
+          </SubTitle>
+          <Formik
+            initialValues={{
+              password: "",
+              confirmPassword: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+              navigation.navigate("Confirmation");
+            }}
+          >
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
+              <StyledFormArea>
+                <MyTextInput
+                  label="Password"
+                  icon="lock"
+                  placeholder="* * * * * * * *"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  value={values.password}
+                  secureTextEntry={hidePassword}
+                  isPassword={true}
+                  hidePassword={hidePassword}
+                  setHidePassword={setHidePassword}
+                />
+                <MyTextInput
+                  label="Confirm Password"
+                  icon="lock"
+                  placeholder="* * * * * * * *"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange("confirmPassword")}
+                  onBlur={handleBlur("confirmPassword")}
+                  value={values.confirmPassword}
+                  secureTextEntry={hidePassword}
+                  isPassword={true}
+                  hidePassword={hidePassword}
+                  setHidePassword={setHidePassword}
+                />
+                <StyledButton onPress={handleSubmit}>
+                  <ButtonText>Next</ButtonText>
+                </StyledButton>
+              </StyledFormArea>
+            )}
+          </Formik>
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
+  );
+};
+
+const MyTextInput = ({
+  label,
+  icon,
+  isPassword,
+  hidePassword,
+  setHidePassword,
+  ...props
+}) => {
+  return (
+    <View>
+      <LeftIcon>
+        <Octicons name={icon} size={30} color={brand} />
+      </LeftIcon>
+      <StyledInputLabel>{label}</StyledInputLabel>
+      <StyledTextInput {...props} />
+      {isPassword && (
+        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
+          <Ionicons
+            name={hidePassword ? "md-eye-off" : "md-eye"}
+            size={30}
+            color={darkLight}
+          />
+        </RightIcon>
+      )}
+    </View>
   );
 };
 
