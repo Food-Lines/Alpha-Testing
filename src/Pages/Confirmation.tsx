@@ -1,58 +1,44 @@
-import React from "react";
+import React from 'react'
 
-//icons
-import { Octicons, Ionicons } from "@expo/vector-icons";
+// icons
 
-//formik
-import { Formik } from "formik";
+// formik
 
+import { StatusBar } from 'react-native'
 import {
   StyledContainer,
   InnerContainer,
   PageLogo,
   PageTitle,
   SubTitle,
-  StyledFormArea,
   StyledButton,
-  StyledInputLabel,
-  StyledTextInput,
-  LeftIcon,
-  RightIcon,
   ButtonText,
   Colors,
-  MsgBox,
-  Line,
-  ExtraView,
-  ExtraText,
-  TextLink,
-  TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-import { View, StatusBar } from "react-native";
+// KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
-//Colors
-const { brand, darkLight, primary, black } = Colors;
-
-//KeyboardAvoidingWrapper
-import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
+// Colors
+const { brand, darkLight, primary, black } = Colors
 
 const Confirmation = ({ navigation }) => {
   const onSubmitHandler = () => {
-    navigation.navigate("Sign in");
-  };
+    navigation.navigate('Sign in')
+  }
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
-        <StatusBar style="dark" />
+        <StatusBar />
         <InnerContainer style={{ marginTop: 20 }}>
           <PageTitle style={{ fontSize: 40 }}>Password Updated</PageTitle>
           <PageLogo
             style={{ marginTop: 20 }}
             resizeMode="contain"
-            source={require("./../Assets/checkMark.png")}
+            source={require('../Assets/checkMark.png')}
           />
           <SubTitle
-            style={{ fontSize: 12, textAlign: "center", marginTop: 30 }}
+            style={{ fontSize: 12, textAlign: 'center', marginTop: 30 }}
           >
             Your password has been updated scucessfully! Don't forget it this
             time
@@ -64,7 +50,7 @@ const Confirmation = ({ navigation }) => {
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
-  );
-};
+  )
+}
 
-export default Confirmation;
+export default Confirmation

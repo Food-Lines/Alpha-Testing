@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-//icons
-import { Octicons, Ionicons } from "@expo/vector-icons";
+// icons
+import { Octicons, Ionicons } from '@expo/vector-icons'
 
-//formik
-import { Formik } from "formik";
+// formik
+import { Formik } from 'formik'
 
+import { View, StatusBar } from 'react-native'
 import {
   StyledContainer,
   InnerContainer,
@@ -20,32 +21,24 @@ import {
   RightIcon,
   ButtonText,
   Colors,
-  MsgBox,
-  Line,
-  ExtraView,
-  ExtraText,
-  TextLink,
-  TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-import { View, StatusBar } from "react-native";
+// KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
-//Colors
-const { brand, darkLight, primary, black } = Colors;
-
-//KeyboardAvoidingWrapper
-import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
+// Colors
+const { brand, darkLight, primary, black } = Colors
 
 const ResetPassword = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
-        <StatusBar style="dark" />
+        <StatusBar />
         <InnerContainer>
           <PageLogo
             resizeMode="cover"
-            source={require("./../Assets/delta.png")}
+            source={require('../Assets/delta.png')}
           />
           <PageTitle>Reset Password</PageTitle>
           <SubTitle style={{ fontSize: 12 }}>
@@ -53,12 +46,12 @@ const ResetPassword = ({ navigation }) => {
           </SubTitle>
           <Formik
             initialValues={{
-              password: "",
-              confirmPassword: "",
+              password: '',
+              confirmPassword: '',
             }}
-            onSubmit={(values) => {
-              console.log(values);
-              navigation.navigate("Confirmation");
+            onSubmit={values => {
+              console.log(values)
+              navigation.navigate('Confirmation')
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -68,11 +61,11 @@ const ResetPassword = ({ navigation }) => {
                   icon="lock"
                   placeholder="* * * * * * * *"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
                   value={values.password}
                   secureTextEntry={hidePassword}
-                  isPassword={true}
+                  isPassword
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
@@ -81,11 +74,11 @@ const ResetPassword = ({ navigation }) => {
                   icon="lock"
                   placeholder="* * * * * * * *"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("confirmPassword")}
-                  onBlur={handleBlur("confirmPassword")}
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
                   value={values.confirmPassword}
                   secureTextEntry={hidePassword}
-                  isPassword={true}
+                  isPassword
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
@@ -98,8 +91,8 @@ const ResetPassword = ({ navigation }) => {
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
-  );
-};
+  )
+}
 
 const MyTextInput = ({
   label,
@@ -119,14 +112,14 @@ const MyTextInput = ({
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
-            name={hidePassword ? "md-eye-off" : "md-eye"}
+            name={hidePassword ? 'md-eye-off' : 'md-eye'}
             size={30}
             color={darkLight}
           />
         </RightIcon>
       )}
     </View>
-  );
-};
+  )
+}
 
-export default ResetPassword;
+export default ResetPassword

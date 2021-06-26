@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { TextInput } from "react-native";
+import React, { useState } from 'react'
+import { StatusBar } from 'expo-status-bar'
+import { View } from 'react-native'
 
-//icons
-import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
+// icons
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
 
-//formik
-import { Formik } from "formik";
+// formik
+import { Formik } from 'formik'
 
 import {
   StyledContainer,
@@ -22,24 +22,21 @@ import {
   RightIcon,
   ButtonText,
   Colors,
-  MsgBox,
   Line,
   ExtraView,
   ExtraText,
   TextLink,
   TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-import { View } from "react-native";
+// KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
-//Colors
-const { brand, darkLight, primary } = Colors;
-
-//KeyboardAvoidingWrapper
-import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
+// Colors
+const { brand, darkLight, primary } = Colors
 
 const SignIn = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
@@ -47,30 +44,30 @@ const SignIn = ({ navigation }) => {
         <InnerContainer>
           <PageLogo
             resizeMode="cover"
-            source={require("./../Assets/mockLogo.png")}
+            source={require('../Assets/mockLogo.png')}
           />
           <PageTitle>Food Lines</PageTitle>
           <SubTitle>Account Login</SubTitle>
           <Formik
-            initialValues={{ username: "", password: "" }}
-            onSubmit={(values) => {
-              console.log(values);
-              navigation.navigate("Welcome");
+            initialValues={{ username: '', password: '' }}
+            onSubmit={values => {
+              console.log(values)
+              navigation.navigate('Welcome')
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
                 <View>
                   <LeftIcon>
-                    <Octicons name={"person"} size={30} color={brand} />
+                    <Octicons name="person" size={30} color={brand} />
                   </LeftIcon>
-                  <StyledInputLabel>{"Username"}</StyledInputLabel>
+                  <StyledInputLabel>Username</StyledInputLabel>
                   <StyledTextInput
                     name="username"
                     placeholder="greendog21"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange("username")}
-                    onBlur={handleBlur("username")}
+                    onChangeText={handleChange('username')}
+                    onBlur={handleBlur('username')}
                     value={values.username}
                   />
                 </View>
@@ -79,11 +76,11 @@ const SignIn = ({ navigation }) => {
                   icon="lock"
                   placeholder="* * * * * * * *"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
                   value={values.password}
                   secureTextEntry={hidePassword}
-                  isPassword={true}
+                  isPassword
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
@@ -92,18 +89,18 @@ const SignIn = ({ navigation }) => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Forgot Password?</ExtraText>
-                  <TextLink onPress={() => navigation.navigate("ConfirmEmail")}>
+                  <TextLink onPress={() => navigation.navigate('ConfirmEmail')}>
                     <TextLinkContent> Reset</TextLinkContent>
                   </TextLink>
                 </ExtraView>
                 <Line />
-                <StyledButton google={true} onPress={handleSubmit}>
+                <StyledButton google onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />
-                  <ButtonText google={true}>Sign in with Google</ButtonText>
+                  <ButtonText google>Sign in with Google</ButtonText>
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink onPress={() => navigation.navigate("Sign up")}>
+                  <TextLink onPress={() => navigation.navigate('Sign up')}>
                     <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>
@@ -113,8 +110,8 @@ const SignIn = ({ navigation }) => {
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
-  );
-};
+  )
+}
 
 const MyTextInput = ({
   label,
@@ -134,14 +131,14 @@ const MyTextInput = ({
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
-            name={hidePassword ? "md-eye-off" : "md-eye"}
+            name={hidePassword ? 'md-eye-off' : 'md-eye'}
             size={30}
             color={darkLight}
           />
         </RightIcon>
       )}
     </View>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

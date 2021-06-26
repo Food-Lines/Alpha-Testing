@@ -1,12 +1,20 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from 'react'
+import { StatusBar } from 'expo-status-bar'
 
-//icons
-import { Octicons, Ionicons } from "@expo/vector-icons";
+// icons
+import { Octicons, Ionicons } from '@expo/vector-icons'
 
-//formik
-import { Formik } from "formik";
+// formik
+import { Formik } from 'formik'
 
+import {
+  KeyboardAvoidingView,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView,
+  Platform,
+} from 'react-native'
 import {
   StyledContainer,
   InnerContainer,
@@ -27,48 +35,40 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-import {
-  KeyboardAvoidingView,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  ScrollView,
-} from "react-native";
-
-//Colors
-const { brand, darkLight } = Colors;
+// Colors
+const { brand, darkLight } = Colors
 
 const SignUp = ({ navigation }) => {
-  const [hidePassword, setHidePassword] = useState(true);
+  const [hidePassword, setHidePassword] = useState(true)
 
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : 20}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView style={{ backgroundColor: "#ffffff" }}>
+        <ScrollView style={{ backgroundColor: '#ffffff' }}>
           <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>
               <PageLogo
                 resizeMode="cover"
-                source={require("./../Assets/mockLogo.png")}
+                source={require('../Assets/mockLogo.png')}
               />
               <PageTitle>Food Lines</PageTitle>
               <SubTitle>Account Sign Up</SubTitle>
               <Formik
                 initialValues={{
-                  fullName: "",
-                  email: "",
-                  username: "",
-                  password: "",
-                  confirmPassword: "",
+                  fullName: '',
+                  email: '',
+                  username: '',
+                  password: '',
+                  confirmPassword: '',
                 }}
-                onSubmit={(values) => {
-                  console.log(values);
+                onSubmit={values => {
+                  console.log(values)
                 }}
               >
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -78,9 +78,12 @@ const SignUp = ({ navigation }) => {
                       icon="person"
                       placeholder="John Smith"
                       placeholderTextColor={darkLight}
-                      onChangeText={handleChange("fullName")}
-                      onBlur={handleBlur("fullName")}
+                      onChangeText={handleChange('fullName')}
+                      onBlur={handleBlur('fullName')}
                       value={values.fullName}
+                      isPassword={false}
+                      hidePassword={false}
+                      setHidePassword={false}
                     />
 
                     <MyTextInput
@@ -88,9 +91,12 @@ const SignUp = ({ navigation }) => {
                       icon="mail"
                       placeholder="greendog21@gmail.com"
                       placeholderTextColor={darkLight}
-                      onChangeText={handleChange("email")}
-                      onBlur={handleBlur("email")}
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
                       value={values.email}
+                      isPassword={false}
+                      hidePassword={false}
+                      setHidePassword={false}
                     />
 
                     <MyTextInput
@@ -98,20 +104,23 @@ const SignUp = ({ navigation }) => {
                       icon="person"
                       placeholder="greendog21"
                       placeholderTextColor={darkLight}
-                      onChangeText={handleChange("username")}
-                      onBlur={handleBlur("username")}
+                      onChangeText={handleChange('username')}
+                      onBlur={handleBlur('username')}
                       value={values.username}
+                      isPassword={false}
+                      hidePassword={false}
+                      setHidePassword={false}
                     />
                     <MyTextInput
                       label="Password"
                       icon="lock"
                       placeholder="* * * * * * * *"
                       placeholderTextColor={darkLight}
-                      onChangeText={handleChange("password")}
-                      onBlur={handleBlur("password")}
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
                       value={values.password}
                       secureTextEntry={hidePassword}
-                      isPassword={true}
+                      isPassword
                       hidePassword={hidePassword}
                       setHidePassword={setHidePassword}
                     />
@@ -120,25 +129,26 @@ const SignUp = ({ navigation }) => {
                       icon="lock"
                       placeholder="* * * * * * * *"
                       placeholderTextColor={darkLight}
-                      onChangeText={handleChange("confirmPassword")}
-                      onBlur={handleBlur("confirmPassword")}
+                      onChangeText={handleChange('confirmPassword')}
+                      onBlur={handleBlur('confirmPassword')}
                       value={values.confirmPassword}
                       secureTextEntry={hidePassword}
-                      isPassword={true}
+                      isPassword
                       hidePassword={hidePassword}
                       setHidePassword={setHidePassword}
                     />
                     <StyledButton
-                      onPress={
-                        (() => navigation.navigate("Welcome"), handleSubmit)
-                      }
+                      onPress={() => {
+                        navigation.navigate('Welcome')
+                        handleSubmit
+                      }}
                     >
                       <ButtonText>Register</ButtonText>
                     </StyledButton>
                     <Line />
                     <ExtraView>
                       <ExtraText>Have an acount already?</ExtraText>
-                      <TextLink onPress={() => navigation.navigate("Sign in")}>
+                      <TextLink onPress={() => navigation.navigate('Sign in')}>
                         <TextLinkContent> Log In</TextLinkContent>
                       </TextLink>
                     </ExtraView>
@@ -150,8 +160,8 @@ const SignUp = ({ navigation }) => {
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
-  );
-};
+  )
+}
 
 const MyTextInput = ({
   label,
@@ -171,14 +181,14 @@ const MyTextInput = ({
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
-            name={hidePassword ? "md-eye-off" : "md-eye"}
+            name={hidePassword ? 'md-eye-off' : 'md-eye'}
             size={30}
             color={darkLight}
           />
         </RightIcon>
       )}
     </View>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

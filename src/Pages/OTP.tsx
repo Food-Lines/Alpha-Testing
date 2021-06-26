@@ -1,60 +1,50 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, StatusBar } from "react-native";
+import React, { useState } from 'react'
+import { StatusBar } from 'react-native'
 
-import OTPInput from "react-native-otp";
-
+import OTPInput from 'react-native-otp'
 import {
   StyledContainer,
   InnerContainer,
   PageLogo,
   PageTitle,
-  SubTitle,
   StyledFormArea,
   StyledButton,
-  StyledTransparentButton,
-  StyledInputLabel,
-  StyledTextInput,
-  LeftIcon,
-  RightIcon,
   ButtonText,
   Colors,
-  MsgBox,
   Line,
   ExtraView,
   ExtraText,
   TextLink,
   TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-//Colors
-const { brand, darkLight, primary, black } = Colors;
+// KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
-//KeyboardAvoidingWrapper
-import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
+// Colors
+const { brand, darkLight, primary, black } = Colors
 
 const OTP = ({ navigation }) => {
-  const [otp, setOTP] = useState("");
+  const [otp, setOTP] = useState('')
 
-  const onChangeOTPHandler = (value) => {
-    setOTP(value);
-    console.log(otp);
-  };
+  const onChangeOTPHandler = value => {
+    setOTP(value)
+    console.log(otp)
+  }
 
-  const resendOTPHandler = () => {
-    return;
-  };
+  const resendOTPHandler = () => {}
 
   const onSubmitHandler = () => {
-    navigation.navigate("ResetPassword");
-  };
+    navigation.navigate('ResetPassword')
+  }
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
-        <StatusBar style="dark" />
+        <StatusBar />
         <InnerContainer>
           <PageLogo
             resizeMode="contain"
-            source={require("./../Assets/code.png")}
+            source={require('../Assets/code.png')}
           />
           <PageTitle>Verification</PageTitle>
           <ExtraView>
@@ -75,15 +65,15 @@ const OTP = ({ navigation }) => {
             <ExtraText style={{ fontSize: 12 }}>Didn't Recieve Code?</ExtraText>
             <TextLink onPress={resendOTPHandler}>
               <TextLinkContent style={{ fontSize: 12 }}>
-                {" "}
+                {' '}
                 Resend Code
               </TextLinkContent>
             </TextLink>
           </ExtraView>
           <StyledFormArea>
-            <Line style={{ width: "89%", marginLeft: 18 }} />
+            <Line style={{ width: '89%', marginLeft: 18 }} />
             <StyledButton
-              style={{ marginLeft: 18, width: "90%" }}
+              style={{ marginLeft: 18, width: '90%' }}
               onPress={onSubmitHandler}
             >
               <ButtonText>Next</ButtonText>
@@ -92,7 +82,7 @@ const OTP = ({ navigation }) => {
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
-  );
-};
+  )
+}
 
-export default OTP;
+export default OTP
