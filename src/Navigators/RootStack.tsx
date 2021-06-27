@@ -1,24 +1,25 @@
-import React from "react";
+import React from 'react'
 
-//Colors
-import { Colors } from "./../Components/styles";
-const { primary, tertiary } = Colors;
+// Colors
 
-//React Navigation
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+// React Navigation
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { Colors } from '../Components/styles'
 
-//Screens
-//Screens
-import SignIn from "./../Pages/SignIn";
-import SignUp from "./../Pages/SignUp";
-import Welcome from "./../Pages/Welcome";
-import ConfirmEmail from "./../Pages/ConfirmEmail";
-import OTP from "./../Pages/OTP";
-import ResetPassword from "./../Pages/ResetPassword";
-import Confirmation from "../Pages/Confirmation";
+// Screens
+// Screens
+import SignIn from '../Pages/SignIn'
+import SignUp from '../Pages/SignUp'
+import Welcome from '../Pages/Welcome'
+import ConfirmEmail from '../Pages/ConfirmEmail'
+import OTP from '../Pages/OTP'
+import ResetPassword from '../Pages/ResetPassword'
+import Confirmation from '../Pages/Confirmation'
 
-const Stack = createStackNavigator();
+const { primary, tertiary } = Colors
+
+const Stack = createStackNavigator()
 
 const RootStack = () => {
   return (
@@ -26,11 +27,11 @@ const RootStack = () => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "transparent",
+            backgroundColor: 'transparent',
           },
           headerTintColor: tertiary,
           headerTransparent: true,
-          headerTitle: "",
+          headerTitle: '',
           headerLeftContainerStyle: {
             paddingLeft: 20,
           },
@@ -50,7 +51,7 @@ const RootStack = () => {
         <Stack.Screen name="Confirmation" component={Confirmation} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-};
+  )
+}
 
-export default RootStack;
+export default RootStack

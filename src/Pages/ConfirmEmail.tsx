@@ -1,51 +1,42 @@
-import React from "react";
+import React from 'react'
 
-//icons
-import { Octicons, Ionicons } from "@expo/vector-icons";
+// icons
+import { Octicons } from '@expo/vector-icons'
 
-//formik
-import { Formik } from "formik";
+// formik
+import { Formik } from 'formik'
 
+import { View, StatusBar } from 'react-native'
 import {
   StyledContainer,
   InnerContainer,
   PageLogo,
   PageTitle,
-  SubTitle,
   StyledFormArea,
   StyledButton,
   StyledInputLabel,
   StyledTextInput,
   LeftIcon,
-  RightIcon,
   ButtonText,
   Colors,
-  MsgBox,
   Line,
   ExtraView,
   ExtraText,
-  TextLink,
-  TextLinkContent,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-import { View, StatusBar } from "react-native";
+// KeyboardAvoidingWrapper
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
-//Colors
-const { brand, darkLight, primary, black } = Colors;
+// Colors
+const { brand, darkLight, primary, black } = Colors
 
-//KeyboardAvoidingWrapper
-import KeyboardAvoidingWrapper from "./../Components/KeyboardAvoidingWrapper";
-
-const ConfirmEmail = ({ navigation }) => {
+const ConfirmEmail = ({ navigation }): React.ReactElement => {
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
-        <StatusBar style="dark" />
+        <StatusBar />
         <InnerContainer>
-          <PageLogo
-            resizeMode="cover"
-            source={require("./../Assets/lock.png")}
-          />
+          <PageLogo resizeMode="cover" source={require('../Assets/lock.png')} />
           <PageTitle>Forget Password</PageTitle>
           <ExtraView>
             <ExtraText style={{ fontSize: 12 }}>
@@ -54,21 +45,25 @@ const ConfirmEmail = ({ navigation }) => {
             </ExtraText>
           </ExtraView>
           <Formik
-            initialValues={{ email: "" }}
+            initialValues={{ email: '' }}
             onSubmit={(values) => {
-              console.log(values);
-              navigation.navigate("OTP");
+              console.log(values)
+              navigation.navigate('OTP')
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
                 <MyTextInput
+                  label="email"
                   icon="mail"
                   placeholder="Email"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
                   value={values.email}
+                  isPassword={false}
+                  hidePassword={false}
+                  setHidePassword={false}
                 />
                 <Line />
                 <StyledButton onPress={handleSubmit}>
@@ -80,8 +75,8 @@ const ConfirmEmail = ({ navigation }) => {
         </InnerContainer>
       </StyledContainer>
     </KeyboardAvoidingWrapper>
-  );
-};
+  )
+}
 
 const MyTextInput = ({ label, icon, ...props }) => {
   return (
@@ -92,7 +87,7 @@ const MyTextInput = ({ label, icon, ...props }) => {
       <StyledInputLabel>{label}</StyledInputLabel>
       <StyledTextInput {...props} />
     </View>
-  );
-};
+  )
+}
 
-export default ConfirmEmail;
+export default ConfirmEmail

@@ -1,5 +1,5 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import React from 'react'
+import { StatusBar } from 'expo-status-bar'
 
 import {
   InnerContainer,
@@ -12,32 +12,32 @@ import {
   WelcomeContainer,
   WelcomeImage,
   Avatar,
-} from "./../Components/styles";
+} from '../Components/styles'
 
-const Welcome = ({ navigation }) => {
+const Welcome = ({ navigation }): React.ReactElement => {
   return (
     <>
       <StatusBar style="light" />
       <InnerContainer>
         <WelcomeImage
           resizeMode="contain"
-          source={require("./../Assets/backgroundImage.jpg")}
+          source={require('../Assets/backgroundImage.jpg')}
         />
         <WelcomeContainer>
-          <PageTitle welcome={true}>Welcome</PageTitle>
-          <SubTitle welcome={true}>John Smith</SubTitle>
+          <PageTitle welcome>Welcome</PageTitle>
+          <SubTitle welcome>John Smith</SubTitle>
           <StyledFormArea>
             <Avatar
               resizeMode="cover"
-              source={require("./../Assets/mockPFP.jpg")}
+              source={require('../Assets/mockPFP.jpg')}
             />
             <Line />
-            <StyledButton onPress={() => {}} title="Submit">
+            <StyledButton title="Submit">
               <ButtonText>Go to Console</ButtonText>
             </StyledButton>
             <StyledButton
               onPress={() => {
-                navigation.navigate("Sign in");
+                navigation.navigate('Sign in')
               }}
               title="Submit"
             >
@@ -47,7 +47,7 @@ const Welcome = ({ navigation }) => {
         </WelcomeContainer>
       </InnerContainer>
     </>
-  );
-};
+  )
+}
 
-export default Welcome;
+export default Welcome
