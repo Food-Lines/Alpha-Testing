@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState }from 'react'
 import { StatusBar } from 'react-native'
 
-import OTPInput from 'react-native-otp'
+import OTPInputView from '@twotalltotems/react-native-otp-input'
 import {
   StyledContainer,
   InnerContainer,
@@ -54,13 +54,15 @@ const OTP = ({ navigation }): React.ReactElement => {
               Enterd One Time Password sent to greendog@gmail.com
             </ExtraText>
           </ExtraView>
-          <OTPInput
-            tintColor="#FB6C6A"
-            offTintColor="#BBBCBE"
-            otpLength={6}
-            onChange={onChangeOTPHandler}
-            value={otp}
-          />
+          <OTPInputView 
+            pinCount={6} 
+            style={{width: '80%', height: 100}} 
+            autoFocusOnLoad
+            codeInputFieldStyle={{borderColor: "#7d7d7d", color: "#000000", backgroundColor:"#f0f0f0"}}
+            codeInputHighlightStyle={ {borderColor: "#e01458", color: "#000000", backgroundColor:"#f0f0f0"}}
+            onCodeFilled = {(code => {
+            console.log(`Code is ${code}, you are good to go!`)
+    })}/>
           <ExtraView>
             <ExtraText style={{ fontSize: 12 }}>Didn't Recieve Code?</ExtraText>
             <TextLink onPress={resendOTPHandler}>
