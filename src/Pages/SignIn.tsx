@@ -31,11 +31,15 @@ import {
 
 // KeyboardAvoidingWrapper
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
+import { useReduxDispatch } from '../Redux'
+
+import { login } from '../Redux/slices/user'
 
 // Colors
 const { brand, darkLight, primary } = Colors
 
 const SignIn = ({ navigation }): React.ReactElement => {
+  const dispatch = useReduxDispatch()
   const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingWrapper>
@@ -49,10 +53,21 @@ const SignIn = ({ navigation }): React.ReactElement => {
           <PageTitle>Food Lines</PageTitle>
           <SubTitle>Account Login</SubTitle>
           <Formik
-            initialValues={{ username: '', password: '' }}
-            onSubmit={(values) => {
+            initialValues={{ email: '', password: '' }}
+            onSubmit={async (
+              values
+            ) => {
+              const resultAction = await dispatch(login({...values}))
+              if (login.fulfilled.match(resultAction)) {
+                // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+                const user = resultAction.payload
+                alert("Success")
+              }
+              else {
+                  alert(`Fail: ${resultAction.payload}`)
+              }
               console.log(values)
-              navigation.navigate('Welcome')
+              
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -61,14 +76,15 @@ const SignIn = ({ navigation }): React.ReactElement => {
                   <LeftIcon>
                     <Octicons name="person" size={30} color={brand} />
                   </LeftIcon>
-                  <StyledInputLabel>Username</StyledInputLabel>
+                  <StyledInputLabel>Email</StyledInputLabel>
                   <StyledTextInput
-                    name="username"
-                    placeholder="greendog21"
+                    name="email"
+                    label="Email"
+                    placeholder="greendog21@foodlines.com"
                     placeholderTextColor={darkLight}
-                    onChangeText={handleChange('username')}
-                    onBlur={handleBlur('username')}
-                    value={values.username}
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
                   />
                 </View>
                 <MyTextInput
