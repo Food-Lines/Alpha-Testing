@@ -54,20 +54,16 @@ const SignIn = ({ navigation }): React.ReactElement => {
           <SubTitle>Account Login</SubTitle>
           <Formik
             initialValues={{ email: '', password: '' }}
-            onSubmit={async (
-              values
-            ) => {
-              const resultAction = await dispatch(login({...values}))
+            onSubmit={async (values) => {
+              const resultAction = await dispatch(login({ ...values }))
               if (login.fulfilled.match(resultAction)) {
                 // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
                 const user = resultAction.payload
-                alert("Success")
-              }
-              else {
-                  alert(`Fail: ${resultAction.payload}`)
+                alert('Success')
+              } else {
+                alert(`Fail: ${resultAction.payload}`)
               }
               console.log(values)
-              
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (

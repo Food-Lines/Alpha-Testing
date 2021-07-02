@@ -17,47 +17,55 @@ import ConfirmEmail from '../Pages/ConfirmEmail'
 import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
-import Home  from '../Pages/Home'
+import Home from '../Pages/Home'
 
 const { primary, tertiary } = Colors
 
 const MainNavigation = (): React.ReactElement => {
-    const isLoggedIn = useReduxSelector(selectUser)
+  const isLoggedIn = useReduxSelector(selectUser)
 
-    return (
-        <NavigationContainer>
-            <MainStack.Navigator
-             screenOptions={{
-                headerStyle: {
-                  backgroundColor: 'transparent',
-                },
-                headerTintColor: tertiary,
-                headerTransparent: true,
-                headerTitle: '',
-                headerLeftContainerStyle: {
-                  paddingLeft: 20,
-                },
-              }}
-              initialRouteName={MainRoutes.SignIn}
-              >
-                {isLoggedIn ? (
-                    <>
-                        <MainStack.Screen name={MainRoutes.Home} component={Home} />
-                    </>
-                ) : (
-                    <>
-                        <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} />
-                        <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} />
-                        <MainStack.Screen name={MainRoutes.Welcome} component={Welcome} />
-                        <MainStack.Screen name={MainRoutes.ConfirmEmail} component={ConfirmEmail} />
-                        <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
-                        <MainStack.Screen name={MainRoutes.ResetPassword} component={ResetPassword} />
-                        <MainStack.Screen name={MainRoutes.Confirmation} component={Confirmation} />
-                        
-                    </>
-                )}
-            </MainStack.Navigator>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer>
+      <MainStack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+          headerTintColor: tertiary,
+          headerTransparent: true,
+          headerTitle: '',
+          headerLeftContainerStyle: {
+            paddingLeft: 20,
+          },
+        }}
+        initialRouteName={MainRoutes.SignIn}
+      >
+        {isLoggedIn ? (
+          <>
+            <MainStack.Screen name={MainRoutes.Home} component={Home} />
+          </>
+        ) : (
+          <>
+            <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} />
+            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} />
+            <MainStack.Screen name={MainRoutes.Welcome} component={Welcome} />
+            <MainStack.Screen
+              name={MainRoutes.ConfirmEmail}
+              component={ConfirmEmail}
+            />
+            <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
+            <MainStack.Screen
+              name={MainRoutes.ResetPassword}
+              component={ResetPassword}
+            />
+            <MainStack.Screen
+              name={MainRoutes.Confirmation}
+              component={Confirmation}
+            />
+          </>
+        )}
+      </MainStack.Navigator>
+    </NavigationContainer>
+  )
 }
 export default MainNavigation
