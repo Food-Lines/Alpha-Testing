@@ -12,7 +12,7 @@ import { selectUser } from '../Redux/slices/user'
 //Bottom Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-// Screens
+//Screens Auth
 import SignIn from '../Pages/SignIn'
 import SignUp from '../Pages/SignUp'
 import Welcome from '../Pages/Welcome'
@@ -22,6 +22,8 @@ import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
 import Home from '../Pages/Home'
 import UserSettings from '../Pages/UserSettings'
+
+//Screen Home
 import NavBar from '../Pages/NavBar'
 
 const { primary, tertiary } = Colors

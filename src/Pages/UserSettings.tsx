@@ -1,8 +1,13 @@
 import React from 'react'
 import { Text } from 'react-native-paper'
+import { StyledContainer } from '../Components/styles'
 
 const UserSettings = (): React.ReactElement => {
-  return <Text>User Settings!</Text>
+  return (
+    <StyledContainer>
+      <Text>User Settings!</Text>
+    </StyledContainer>
+  )
 }
 
 export default UserSettings

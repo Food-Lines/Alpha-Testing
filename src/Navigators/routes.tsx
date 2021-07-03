@@ -11,6 +11,8 @@ export enum MainRoutes {
   Confirmation = 'Confirmation',
   UserSettings = 'User Settings',
   NavBar = 'NavBar',
+  Sysco = 'Sysco',
+  UsFoods = 'UsFoods',
 }
 
 export type MainStackParamList = {
@@ -24,6 +26,8 @@ export type MainStackParamList = {
   [MainRoutes.Confirmation]: undefined
   [MainRoutes.UserSettings]: undefined
   [MainRoutes.NavBar]: undefined
+  [MainRoutes.Sysco]: undefined
+  [MainRoutes.UsFoods]: undefined
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()
