@@ -16,6 +16,7 @@ import ConfirmEmail from '../Pages/ConfirmEmail'
 import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
+import Home from '../Pages/Home'
 
 const { primary, tertiary } = Colors
 
@@ -49,6 +50,7 @@ const RootStack = () => {
         <Stack.Screen name="OTP" component={OTP} />
         <Stack.Screen name="ResetPassword" component={ResetPassword} />
         <Stack.Screen name="Confirmation" component={Confirmation} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   )

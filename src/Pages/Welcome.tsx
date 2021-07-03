@@ -32,7 +32,12 @@ const Welcome = ({ navigation }): React.ReactElement => {
               source={require('../Assets/mockPFP.jpg')}
             />
             <Line />
-            <StyledButton title="Submit">
+            <StyledButton
+              title="Submit"
+              onPress={() => {
+                navigation.navigate('Home')
+              }}
+            >
               <ButtonText>Go to Console</ButtonText>
             </StyledButton>
             <StyledButton
