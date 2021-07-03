@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 // React Navigation stack
-import RootStack from './src/Navigators/RootStack'
+import RootStack from './src/Navigators/MainNavigation'
 import store from './src/Redux'
 
 const App = (): React.ReactElement => {

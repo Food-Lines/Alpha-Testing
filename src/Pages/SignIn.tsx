@@ -112,7 +112,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink onPress={() => navigation.navigate('Sign up')}>
+                  <TextLink onPress={() => navigation.navigate()}>
                     <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>

@@ -9,6 +9,9 @@ import { MainStack, MainRoutes } from './routes'
 import { useReduxSelector } from '../Redux'
 import { selectUser } from '../Redux/slices/user'
 
+//Bottom Navigation
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
 // Screens
 import SignIn from '../Pages/SignIn'
 import SignUp from '../Pages/SignUp'
@@ -18,8 +21,58 @@ import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
 import Home from '../Pages/Home'
+import UserSettings from '../Pages/UserSettings'
+import NavBar from '../Pages/NavBar'
 
 const { primary, tertiary } = Colors
+
+// const MainNavigation = (): React.ReactElement => {
+//   const isLoggedIn = useReduxSelector(selectUser)
+
+//   return (
+//     <NavigationContainer>
+//       <MainStack.Navigator
+//         screenOptions={{
+//           headerStyle: {
+//             backgroundColor: 'transparent',
+//           },
+//           headerTintColor: tertiary,
+//           headerTransparent: true,
+//           headerTitle: '',
+//           headerLeftContainerStyle: {
+//             paddingLeft: 20,
+//           },
+//         }}
+//         initialRouteName={MainRoutes.Home}
+//       >
+//         {isLoggedIn ? (
+//           <>
+//             <MainStack.Screen name={MainRoutes.Home} component={Home} />
+//           </>
+//         ) : (
+//           <>
+//             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} />
+//             <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} />
+//             <MainStack.Screen name={MainRoutes.Welcome} component={Welcome} />
+//             <MainStack.Screen
+//               name={MainRoutes.ConfirmEmail}
+//               component={ConfirmEmail}
+//             />
+//             <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
+//             <MainStack.Screen
+//               name={MainRoutes.ResetPassword}
+//               component={ResetPassword}
+//             />
+//             <MainStack.Screen
+//               name={MainRoutes.Confirmation}
+//               component={Confirmation}
+//             />
+//           </>
+//         )}
+//       </MainStack.Navigator>
+//     </NavigationContainer>
+//   )
+// }
 
 const MainNavigation = (): React.ReactElement => {
   const isLoggedIn = useReduxSelector(selectUser)
@@ -38,32 +91,11 @@ const MainNavigation = (): React.ReactElement => {
             paddingLeft: 20,
           },
         }}
-        initialRouteName={MainRoutes.SignIn}
+        initialRouteName={MainRoutes.NavBar}
       >
-        {isLoggedIn ? (
-          <>
-            <MainStack.Screen name={MainRoutes.Home} component={Home} />
-          </>
-        ) : (
-          <>
-            <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} />
-            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} />
-            <MainStack.Screen name={MainRoutes.Welcome} component={Welcome} />
-            <MainStack.Screen
-              name={MainRoutes.ConfirmEmail}
-              component={ConfirmEmail}
-            />
-            <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
-            <MainStack.Screen
-              name={MainRoutes.ResetPassword}
-              component={ResetPassword}
-            />
-            <MainStack.Screen
-              name={MainRoutes.Confirmation}
-              component={Confirmation}
-            />
-          </>
-        )}
+        <>
+          <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
+        </>
       </MainStack.Navigator>
     </NavigationContainer>
   )
