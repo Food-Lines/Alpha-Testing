@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import Firebase from '../../../config/Firebase.js'
 import { RootState } from '../index.js'
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth'
 
 export const login = createAsyncThunk(
   'users/login',
@@ -10,9 +15,12 @@ export const login = createAsyncThunk(
     { rejectWithValue }: any
   ) => {
     const { email, password } = userData
-    return signInWithEmailAndPassword( getAuth(Firebase), email, password)
+    return signInWithEmailAndPassword(getAuth(Firebase), email, password)
       .then((response) => {
-        return {email: response.user.email, fullName: response.user.displayName}
+        return {
+          email: response.user.email,
+          fullName: response.user.displayName,
+        }
       })
       .catch((err) => {
         return rejectWithValue(err.code)
@@ -23,14 +31,17 @@ export const login = createAsyncThunk(
 export const signup = createAsyncThunk(
   'users/signup',
   async (
-    userData: { email: string; password: string; fullName: string},
+    userData: { email: string; password: string; fullName: string },
     { rejectWithValue }: any
   ) => {
     const { email, password, fullName } = userData
-    return createUserWithEmailAndPassword (getAuth(Firebase), email, password)
+    return createUserWithEmailAndPassword(getAuth(Firebase), email, password)
       .then(async (response) => {
-        await updateProfile(response.user, {displayName: fullName})
-        return {email: response.user.email, fullName: response.user.displayName}
+        await updateProfile(response.user, { displayName: fullName })
+        return {
+          email: response.user.email,
+          fullName: response.user.displayName,
+        }
       })
       .catch((err) => {
         return rejectWithValue(err.code)
@@ -39,7 +50,7 @@ export const signup = createAsyncThunk(
 )
 
 const initialState = {
-  user: {email: null as any, fullName: null as any},
+  user: { email: null as any, fullName: null as any },
   error: null as any,
 }
 

@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 
 // icons
 import { Octicons, Ionicons } from '@expo/vector-icons'
-import {MainRoutes} from '../Navigators/routes'
+import { MainRoutes } from '../Navigators/routes'
 
 // formik
 import { Formik } from 'formik'
@@ -149,15 +149,15 @@ const SignUp = ({ navigation }): React.ReactElement => {
                       hidePassword={hidePassword}
                       setHidePassword={setHidePassword}
                     />
-                    <StyledButton
-                      onPress={handleSubmit} title="Submit"
-                    >
+                    <StyledButton onPress={handleSubmit} title="Submit">
                       <ButtonText>Register</ButtonText>
                     </StyledButton>
                     <Line />
                     <ExtraView>
                       <ExtraText>Have an acount already?</ExtraText>
-                      <TextLink onPress={() => navigation.navigate(MainRoutes.SignIn)}>
+                      <TextLink
+                        onPress={() => navigation.navigate(MainRoutes.SignIn)}
+                      >
                         <TextLinkContent> Log In</TextLinkContent>
                       </TextLink>
                     </ExtraView>
