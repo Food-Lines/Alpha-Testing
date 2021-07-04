@@ -6,7 +6,8 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Colors } from '../Components/styles'
 import { MainStack, MainRoutes } from './routes'
-import Firebase from '../../config/Firebase.js'
+import { useReduxSelector } from '../Redux'
+import { selectUser } from '../Redux/slices/user'
 
 //Screens Auth
 import SignIn from '../Pages/SignIn'
@@ -19,11 +20,11 @@ import Confirmation from '../Pages/Confirmation'
 
 //Screen Home
 import NavBar from '../Pages/NavBar'
-import { getAuth } from '@firebase/auth'
 
 const { primary, tertiary } = Colors
 
 const MainNavigation = (): React.ReactElement => {
+  const user = useReduxSelector(selectUser)
 
   return (
     <NavigationContainer>
@@ -41,7 +42,7 @@ const MainNavigation = (): React.ReactElement => {
         }}
         initialRouteName={MainRoutes.Home}
       >
-        {getAuth(Firebase).currentUser ? (
+        {user ? (
           <>
             <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
           </>
