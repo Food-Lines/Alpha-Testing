@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 
 // icons
 import { Octicons, Ionicons } from '@expo/vector-icons'
+import {MainRoutes} from '../Navigators/routes'
 
 // formik
 import { Formik } from 'formik'
@@ -36,12 +37,15 @@ import {
   TextLink,
   TextLinkContent,
 } from '../Components/styles'
+import { useReduxDispatch } from '../Redux'
+import { signup } from '../Redux/slices/user'
 
 // Colors
 const { brand, darkLight } = Colors
 
 const SignUp = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
+  const dispatch = useReduxDispatch()
 
   return (
     <KeyboardAvoidingView
@@ -67,7 +71,15 @@ const SignUp = ({ navigation }): React.ReactElement => {
                   password: '',
                   confirmPassword: '',
                 }}
-                onSubmit={(values) => {
+                onSubmit={async (values) => {
+                  const resultAction = await dispatch(signup({ ...values }))
+                  if (signup.fulfilled.match(resultAction)) {
+                    // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+                    const user = resultAction.payload
+                    alert('Success')
+                  } else {
+                    alert(`Fail: ${resultAction.payload}`)
+                  }
                   console.log(values)
                 }}
               >
@@ -99,7 +111,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
                       setHidePassword={false}
                     />
 
-                    <MyTextInput
+                    {/* <MyTextInput
                       label="Username"
                       icon="person"
                       placeholder="greendog21"
@@ -110,7 +122,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
                       isPassword={false}
                       hidePassword={false}
                       setHidePassword={false}
-                    />
+                    /> */}
                     <MyTextInput
                       label="Password"
                       icon="lock"
@@ -138,17 +150,14 @@ const SignUp = ({ navigation }): React.ReactElement => {
                       setHidePassword={setHidePassword}
                     />
                     <StyledButton
-                      onPress={() => {
-                        navigation.navigate('Welcome')
-                        handleSubmit
-                      }}
+                      onPress={handleSubmit} title="Submit"
                     >
                       <ButtonText>Register</ButtonText>
                     </StyledButton>
                     <Line />
                     <ExtraView>
                       <ExtraText>Have an acount already?</ExtraText>
-                      <TextLink onPress={() => navigation.navigate('Sign in')}>
+                      <TextLink onPress={() => navigation.navigate(MainRoutes.SignIn)}>
                         <TextLinkContent> Log In</TextLinkContent>
                       </TextLink>
                     </ExtraView>

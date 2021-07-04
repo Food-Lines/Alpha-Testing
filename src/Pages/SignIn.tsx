@@ -4,6 +4,7 @@ import { View } from 'react-native'
 
 // icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
+import {MainRoutes} from '../Navigators/routes'
 
 // formik
 import { Formik } from 'formik'
@@ -112,7 +113,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink onPress={() => navigation.navigate()}>
+                  <TextLink onPress={() => navigation.navigate(MainRoutes.SignUp)}>
                     <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>

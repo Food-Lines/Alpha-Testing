@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import { initializeApp } from 'firebase/app';
 import {
   API_KEY,
   AUTH_DOMAIN,
@@ -19,6 +19,6 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-const Firebase = firebase.initializeApp(firebaseConfig)
+const Firebase = initializeApp(firebaseConfig)
 
 export default Firebase
