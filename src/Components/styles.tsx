@@ -14,8 +14,9 @@ export const Colors = {
   green: '#10B981',
   red: '#EF4444',
   black: '#000000',
-  grey: '#858585',
-  primary: '#F9813A',
+  grey: '#999',
+  primary: '#FF6347',
+  orangeLight: '#fdeae7',
 }
 
 const {
@@ -25,11 +26,14 @@ const {
   darkLight,
   brand,
   green,
+  grey,
   red,
   black,
   primary,
+  orangeLight,
 } = Colors
 
+//Containers
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
@@ -54,13 +58,15 @@ export const WelcomeContainer = styled(InnerContainer)`
 
 export const TextWrapper = styled.View`
   flex-direction: row;
+  justify-content: space-between;
 `
+
 //Slider Stuff
 
 export const SliderContainer = styled.View`
   height: 200px;
   width: 90%;
-  margin-top: 10px;
+  margin-top: 20px;
   justify-content: center;
   align-self: center;
   border-radius: 8px;
@@ -78,6 +84,90 @@ export const SliderImage = styled.Image`
   border-radius: 8px;
 `
 
+//Category Stuff
+
+export const CategoryContainer = styled.View`
+  flex-direction: row;
+  width: 90%;
+  align-self: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+`
+export const CategoryButton = styled.TouchableOpacity`
+  flex: 1;
+  width: 30%;
+  margin-horizontal: 0px;
+  align-self: center;
+`
+
+export const CategoryIcon = styled.View`
+  border-width: 0px;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 70px;
+  height: 70px;
+  background-color: ${orangeLight};
+  border-radius: 50px;
+`
+
+export const CategoryButtonText = styled.Text`
+  align-self: center;
+  margin-top: 5px;
+  color: #de4f35;
+`
+
+//Card Stuff
+
+export const Card = styled.View`
+  height: 100px;
+  margin-vertical: 10px;
+  flex-direction: row;
+  shadow-color: ${grey};
+  shadow-offset: {width: 0, height: 1}
+  shadow-opacity 0.8;
+  shadow-radius: 2px;
+  elevation: 5;
+`
+
+export const CardWrapper = styled.View`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  align-self: center;
+`
+export const CardImage = styled.Image`
+  height: 100%
+  width: 100%;
+  align-self: center;
+  border-radius: 8px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+`
+
+export const CardImageWrapper = styled.View`
+  flex: 1;
+`
+
+export const CardInfo = styled.View`
+  flex: 2;
+  padding: 10px;
+  border-left-width: 0px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: ${white};
+`
+export const CardTitle = styled.Text`
+  font-weight: bold;
+`
+
+export const CardDetails = styled.Text`
+  font-size: 12px;
+  color: ${grey};
+`
+
+//Image Stuff
+
 export const Avatar = styled.Image`
   width: 100px;
   height: 100px;
@@ -90,8 +180,8 @@ export const Avatar = styled.Image`
 `
 
 export const ProfilePicture = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50px;
   border-width: 2px;
   border-color: ${black};
@@ -106,6 +196,8 @@ export const PageLogo = styled.Image`
   width: 200px;
   height: 150px;
 `
+
+//Text Stuff
 
 export const PageTitle = styled.Text`
   font-size: 30px;
@@ -140,6 +232,8 @@ export const SubTitle = styled.Text`
   font-weight: normal
   `}
 `
+
+//Form Stuff
 
 export const StyledFormArea = styled.View`
   width: 90%;
@@ -179,6 +273,8 @@ export const RightIcon = styled.TouchableOpacity`
   position: absolute;
   z-index: 1;
 `
+
+export const SearchIcon = styled.TouchableOpacity``
 
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
@@ -255,8 +351,10 @@ export const TextLinkContent = styled.Text`
 `
 
 export const StyledHeader = styled.View`
-  margin-top: 20px;
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 20px;
+  align-items: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5px;
 `

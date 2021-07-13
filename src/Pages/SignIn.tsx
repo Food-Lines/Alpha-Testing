@@ -4,6 +4,8 @@ import { View } from 'react-native'
 
 // icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
+
+//Routes
 import { MainRoutes } from '../Navigators/routes'
 
 // formik
