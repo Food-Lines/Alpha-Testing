@@ -6,7 +6,7 @@ const StatusBarHeight = Constants.statusBarHeight
 
 // colors
 export const Colors = {
-  primary: '#ffffff',
+  white: '#ffffff',
   secondary: '#E5E7EB',
   tertiary: '#1F2937',
   darkLight: '#9CA3AF',
@@ -14,16 +14,27 @@ export const Colors = {
   green: '#10B981',
   red: '#EF4444',
   black: '#000000',
+  grey: '#858585',
+  primary: '#F9813A',
 }
 
-const { primary, secondary, tertiary, darkLight, brand, green, red, black } =
-  Colors
+const {
+  white,
+  secondary,
+  tertiary,
+  darkLight,
+  brand,
+  green,
+  red,
+  black,
+  primary,
+} = Colors
 
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
   padding-top: ${StatusBarHeight + 30}px;
-  background-color: ${primary};
+  background-color: ${white};
 `
 
 export const InnerContainer = styled.View`
@@ -41,6 +52,32 @@ export const WelcomeContainer = styled(InnerContainer)`
   align-content: center;
 `
 
+export const TextWrapper = styled.View`
+  flex-direction: row;
+`
+//Slider Stuff
+
+export const SliderContainer = styled.View`
+  height: 200px;
+  width: 90%;
+  margin-top: 10px;
+  justify-content: center;
+  align-self: center;
+  border-radius: 8px;
+`
+export const Slide = styled.View`
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  border-radius: 8px;
+`
+export const SliderImage = styled.Image`
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  border-radius: 8px;
+`
+
 export const Avatar = styled.Image`
   width: 100px;
   height: 100px;
@@ -50,6 +87,14 @@ export const Avatar = styled.Image`
   border-color: ${secondary};
   margin-bottom: 10px;
   margin-top: 10px;
+`
+
+export const ProfilePicture = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border-width: 2px;
+  border-color: ${black};
 `
 
 export const WelcomeImage = styled.Image`
@@ -74,6 +119,11 @@ export const PageTitle = styled.Text`
     `
     font-size:35px;
   `}
+`
+export const StyledTitle = styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+  color: ${black};
 `
 
 export const SubTitle = styled.Text`
@@ -157,7 +207,7 @@ export const StyledTransparentButton = styled.TouchableOpacity`
 `
 
 export const ButtonText = styled.Text`
-  color: ${primary};
+  color: ${white};
   font-size: 16px;
 
   ${(props) =>
@@ -202,4 +252,11 @@ export const TextLink = styled.TouchableOpacity`
 export const TextLinkContent = styled.Text`
   color: ${brand};
   font-size: 15px;
+`
+
+export const StyledHeader = styled.View`
+  margin-top: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-horizontal: 20px;
 `

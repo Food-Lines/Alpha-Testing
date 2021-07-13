@@ -1,8 +1,13 @@
 import React from 'react'
-import { Text } from 'react-native-paper'
+import { Text } from 'react-native'
+import { StyledContainer } from '../Components/styles'
 
 const UsFood = (): React.ReactElement => {
-  return <Text>UsFood!</Text>
+  return (
+    <StyledContainer>
+      <Text>UsFoods!</Text>
+    </StyledContainer>
+  )
 }
 
 export default UsFood

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text } from 'react-native-paper'
+import { Text } from 'react-native'
 import { StyledContainer } from '../Components/styles'
 
 const UserSettings = (): React.ReactElement => {

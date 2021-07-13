@@ -16,6 +16,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 //Routes
 import { MainRoutes } from './../Navigators/routes'
 
+//Colors
+import { Colors } from '../Components/styles'
+const { primary } = Colors
+
 const NavBar = (): React.ReactElement => {
   const Tab = createBottomTabNavigator()
 
@@ -40,7 +44,7 @@ const NavBar = (): React.ReactElement => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'cornflowerblue',
+        activeTintColor: primary,
         inactiveTintColor: 'gray',
       }}
     >

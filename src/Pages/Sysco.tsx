@@ -1,8 +1,13 @@
 import React from 'react'
-import { Text } from 'react-native-paper'
+import { Text } from 'react-native'
+import { StyledContainer } from '../Components/styles'
 
 const Sysco = (): React.ReactElement => {
-  return <Text>Sysco!</Text>
+  return (
+    <StyledContainer>
+      <Text>Sysco!</Text>
+    </StyledContainer>
+  )
 }
 
 export default Sysco
