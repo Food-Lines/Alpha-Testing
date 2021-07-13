@@ -14,18 +14,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native'
+
 import {
   Colors,
   StyledHeader,
-  SubTitle,
-  StyledTitle,
   ProfilePicture,
   TextWrapper,
-  StyledContainer,
-  SliderContainer,
-  Slide,
-  SliderImage,
-  RightIcon,
   SearchIcon,
   CategoryContainer,
   CategoryIcon,
@@ -40,7 +34,7 @@ import {
 } from '../Components/styles'
 
 //Slider
-import Swiper from 'react-native-swiper'
+import VerticalSwiper from '../Components/Home/VerticalSwiper'
 
 // Colors
 const { primary, white, darkLight, grey } = Colors
@@ -70,78 +64,14 @@ const Home = ({ navigation }): React.ReactElement => {
         </SearchIcon>
       </StyledHeader>
       <ScrollView style={{ marginTop: 10 }}>
-        <SliderContainer>
-          <Swiper
-            autoplay
-            height={200}
-            horizontal={false}
-            activeDotColor={primary}
-          >
-            <Slide>
-              <SliderImage
-                resizeMode="cover"
-                source={require('../Assets/slider1.jpg')}
-              />
-            </Slide>
-            <Slide>
-              <SliderImage
-                resizeMode="cover"
-                source={require('../Assets/slider2.jpg')}
-              />
-            </Slide>
-            <Slide>
-              <SliderImage
-                resizeMode="cover"
-                source={require('../Assets/slider3.jpg')}
-              />
-            </Slide>
-            <Slide>
-              <SliderImage
-                resizeMode="cover"
-                source={require('../Assets/slider4.jpg')}
-              />
-            </Slide>
-          </Swiper>
-        </SliderContainer>
+        <VerticalSwiper />
         <CategoryContainer>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
-        </CategoryContainer>
-        <CategoryContainer>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
-          <CategoryButton onPress={() => {}}>
-            <CategoryIcon>
-              <Ionicons name="ios-restaurant" size={35} color={primary} />
-            </CategoryIcon>
-            <CategoryButtonText>Meats</CategoryButtonText>
-          </CategoryButton>
+          <Categories label="Meat" icon="restaurant-outline" />
+          <Categories label="Seafood" icon="restaurant-outline" />
+          <Categories label="Poultry" icon="restaurant-outline" />
+          <Categories label="Produce" icon="restaurant-outline" />
+          <Categories label="Frozen" icon="restaurant-outline" />
+          <Categories label="Dairy" icon="restaurant-outline" />
         </CategoryContainer>
         <CardWrapper>
           <Text style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>
@@ -255,6 +185,20 @@ const Home = ({ navigation }): React.ReactElement => {
         </CardWrapper>
       </ScrollView>
     </SafeAreaView>
+  )
+}
+
+const Categories = ({ label, icon }) => {
+  return (
+    <View>
+      <CategoryButton onPress={() => {}}>
+        <CategoryIcon>
+          <Ionicons name={icon} size={35} color={primary} />
+        </CategoryIcon>
+        <CategoryButtonText>{label}</CategoryButtonText>
+      </CategoryButton>
+      <CategoryButton onPress={() => {}}></CategoryButton>
+    </View>
   )
 }
 
