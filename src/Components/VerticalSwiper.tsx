@@ -4,7 +4,7 @@ import React from 'react'
 import Swiper from 'react-native-swiper'
 
 //Components
-import { Colors, SliderContainer, Slide, SliderImage } from '../styles'
+import { Colors, SliderContainer, Slide, SliderImage } from './styles'
 
 // Colors
 const { primary, white, darkLight, grey } = Colors

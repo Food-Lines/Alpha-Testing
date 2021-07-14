@@ -20,7 +20,6 @@ import {
   StyledHeader,
   ProfilePicture,
   TextWrapper,
-  SearchIcon,
   CategoryContainer,
   CategoryIcon,
   CategoryButton,
@@ -34,10 +33,10 @@ import {
 } from '../Components/styles'
 
 //Slider
-import VerticalSwiper from '../Components/Home/VerticalSwiper'
+import VerticalSwiper from '../Components/VerticalSwiper'
 
 // Colors
-const { primary, white, darkLight, grey } = Colors
+const { primary, white, darkLight, grey, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
@@ -46,159 +45,149 @@ const Home = ({ navigation }): React.ReactElement => {
   //Placeholder Variable
   const name = 'Bob'
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: white, alignContent: 'center' }}
-    >
-      <StyledHeader>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(MainRoutes.UserSettings)}
-        >
-          <ProfilePicture
-            source={require('../Assets/mockPFP.jpg')}
-            resizeMode="cover"
-          />
-        </TouchableOpacity>
-        <Text style={{ fontWeight: 'bold', paddingTop: 5 }}>Overview</Text>
-        <SearchIcon onPress={() => {}}>
-          <Ionicons name={'search'} size={30} color={darkLight} />
-        </SearchIcon>
-      </StyledHeader>
-      <ScrollView style={{ marginTop: 10 }}>
-        <VerticalSwiper />
-        <CategoryContainer>
-          <Categories label="Meat" icon="restaurant-outline" />
-          <Categories label="Seafood" icon="restaurant-outline" />
-          <Categories label="Poultry" icon="restaurant-outline" />
-          <Categories label="Produce" icon="restaurant-outline" />
-          <Categories label="Frozen" icon="restaurant-outline" />
-          <Categories label="Dairy" icon="restaurant-outline" />
-        </CategoryContainer>
-        <CardWrapper>
-          <Text style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>
-            Recently Viewed
-          </Text>
-          <Card
-            containerStyle={{
-              borderRadius: 8,
-              height: 100,
-              marginVertical: 10,
-              shadowColor: grey,
-              shadowOffset: { width: 0, height: 1 },
-              shadowRadius: 2,
-              shadowOpacity: 0.8,
-              elevation: 5,
-              padding: 0,
-              marginLeft: 0,
-              width: '100%',
-            }}
-            wrapperStyle={{ flexDirection: 'row' }}
-          >
-            <CardImageWrapper>
-              <CardImage
-                source={require('../Assets/slider1.jpg')}
-                resizeMode="cover"
-              />
-            </CardImageWrapper>
-            <CardInfo>
-              <TextWrapper>
-                <CardTitle>Mixed Vegetables</CardTitle>
-                <CardTitle>$10.99/lb</CardTitle>
-              </TextWrapper>
-              <CardDetails>#45687</CardDetails>
-              <CardDetails style={{ marginTop: 5 }}>
-                Minimum Purchase Amount: 50 Cases
-              </CardDetails>
-              <CardDetails>Average Weight per Case: 40lb </CardDetails>
-              <CardDetails>Shelf Life: 14 days</CardDetails>
-            </CardInfo>
-          </Card>
-          <Card
-            containerStyle={{
-              borderRadius: 8,
-              height: 100,
-              marginVertical: 10,
-              shadowColor: grey,
-              shadowOffset: { width: 0, height: 1 },
-              shadowRadius: 2,
-              shadowOpacity: 0.8,
-              elevation: 5,
-              padding: 0,
-              marginLeft: 0,
-              width: '100%',
-            }}
-            wrapperStyle={{ flexDirection: 'row' }}
-          >
-            <CardImageWrapper>
-              <CardImage
-                source={require('../Assets/slider1.jpg')}
-                resizeMode="cover"
-              />
-            </CardImageWrapper>
-            <CardInfo>
-              <TextWrapper>
-                <CardTitle>Mixed Vegetables</CardTitle>
-                <CardTitle>$10.99/lb</CardTitle>
-              </TextWrapper>
-              <CardDetails>#45687</CardDetails>
-              <CardDetails style={{ marginTop: 5 }}>
-                Minimum Purchase Amount: 50 Cases
-              </CardDetails>
-              <CardDetails>Average Weight per Case: 40lb </CardDetails>
-              <CardDetails>Shelf Life: 14 days</CardDetails>
-            </CardInfo>
-          </Card>
-          <Card
-            containerStyle={{
-              borderRadius: 8,
-              height: 100,
-              marginVertical: 10,
-              shadowColor: grey,
-              shadowOffset: { width: 0, height: 1 },
-              shadowRadius: 2,
-              shadowOpacity: 0.8,
-              elevation: 5,
-              padding: 0,
-              marginLeft: 0,
-              width: '100%',
-            }}
-            wrapperStyle={{ flexDirection: 'row' }}
-          >
-            <CardImageWrapper>
-              <CardImage
-                source={require('../Assets/slider1.jpg')}
-                resizeMode="cover"
-              />
-            </CardImageWrapper>
-            <CardInfo>
-              <TextWrapper>
-                <CardTitle>Mixed Vegetables</CardTitle>
-                <CardTitle>$10.99/lb</CardTitle>
-              </TextWrapper>
-              <CardDetails>#45687</CardDetails>
-              <CardDetails style={{ marginTop: 5 }}>
-                Minimum Purchase Amount: 50 Cases
-              </CardDetails>
-              <CardDetails>Average Weight per Case: 40lb </CardDetails>
-              <CardDetails>Shelf Life: 14 days</CardDetails>
-            </CardInfo>
-          </Card>
-        </CardWrapper>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <Header
+        backgroundColor={white}
+        elevated
+        leftContainerStyle={{ marginLeft: 15 }}
+        rightContainerStyle={{ marginRight: 15 }}
+        centerContainerStyle={{ marginTop: 10 }}
+      >
+        <ProfilePictureComp navigation={navigation} />
+        <Text style={{ fontWeight: 'bold' }}>Home</Text>
+        <SearchIcon />
+      </Header>
+      <SafeAreaView
+        style={{ flex: 1, backgroundColor: white, alignContent: 'center' }}
+      >
+        <ScrollView style={{ marginTop: 10 }}>
+          <VerticalSwiper />
+          <CategoryContainer>
+            <Categories label="Meat" icon="restaurant-outline" />
+            <Categories label="Seafood" icon="restaurant-outline" />
+            <Categories label="Poultry" icon="restaurant-outline" />
+          </CategoryContainer>
+          <CategoryContainer>
+            <Categories label="Produce" icon="restaurant-outline" />
+            <Categories label="Frozen" icon="restaurant-outline" />
+            <Categories label="Dairy" icon="restaurant-outline" />
+          </CategoryContainer>
+          <CardWrapper>
+            <Text
+              style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}
+            >
+              Recently Viewed
+            </Text>
+            <CardView
+              foodName="Mixed Vegetables"
+              price="$10.99"
+              id="#46928"
+              minPurchase="50 Cases"
+              shelfLife="14 days"
+              weight="40 lb"
+              image="../Assets/slider1.jpg"
+            />
+            <CardView
+              foodName="Pizza"
+              price="$10.99"
+              id="#46928"
+              minPurchase="50 Cases"
+              shelfLife="14 days"
+              weight="40 lb"
+              image="../Assets/slider2.jpg"
+            />
+            <CardView
+              foodName="Mixed Vegetables"
+              price="$10.99"
+              id="#46928"
+              minPurchase="50 Cases"
+              shelfLife="14 days"
+              weight="40 lb"
+              image="../Assets/slider3.jpg"
+            />
+          </CardWrapper>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   )
 }
 
 const Categories = ({ label, icon }) => {
   return (
-    <View>
-      <CategoryButton onPress={() => {}}>
-        <CategoryIcon>
-          <Ionicons name={icon} size={35} color={primary} />
-        </CategoryIcon>
-        <CategoryButtonText>{label}</CategoryButtonText>
-      </CategoryButton>
-      <CategoryButton onPress={() => {}}></CategoryButton>
-    </View>
+    <CategoryButton onPress={() => {}}>
+      <CategoryIcon>
+        <Ionicons name={icon} size={35} color={primary} />
+      </CategoryIcon>
+      <CategoryButtonText>{label}</CategoryButtonText>
+    </CategoryButton>
+  )
+}
+
+//Reusable Components
+const CardView = ({
+  foodName,
+  price,
+  id,
+  minPurchase,
+  weight,
+  shelfLife,
+  image,
+}) => {
+  return (
+    <Card
+      containerStyle={{
+        borderRadius: 8,
+        height: 100,
+        marginVertical: 10,
+        shadowColor: grey,
+        shadowOffset: { width: 0, height: 1 },
+        shadowRadius: 2,
+        shadowOpacity: 0.8,
+        elevation: 5,
+        padding: 0,
+        marginLeft: 0,
+        width: '100%',
+      }}
+      wrapperStyle={{ flexDirection: 'row' }}
+    >
+      <CardImageWrapper>
+        <CardImage
+          source={require('../Assets/slider1.jpg')}
+          resizeMode="cover"
+        />
+      </CardImageWrapper>
+      <CardInfo>
+        <TextWrapper>
+          <CardTitle>{foodName}</CardTitle>
+          <CardTitle>{price + '/lb'}</CardTitle>
+        </TextWrapper>
+        <CardDetails>{id}</CardDetails>
+        <CardDetails style={{ marginTop: 5 }}>
+          {'Minimum Purchase Amount: ' + minPurchase}
+        </CardDetails>
+        <CardDetails>{'Average Weight per Case: ' + weight}</CardDetails>
+        <CardDetails>{'Shelf Life: ' + shelfLife}</CardDetails>
+      </CardInfo>
+    </Card>
+  )
+}
+
+const ProfilePictureComp = ({ navigation }) => {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)}>
+      <ProfilePicture
+        source={require('../Assets/mockPFP.jpg')}
+        resizeMode="cover"
+      />
+    </TouchableOpacity>
+  )
+}
+
+const SearchIcon = () => {
+  return (
+    <TouchableOpacity onPress={() => {}}>
+      <Ionicons name={'search'} size={30} color={black} />
+    </TouchableOpacity>
   )
 }
 

@@ -17,6 +17,7 @@ export const Colors = {
   grey: '#999',
   primary: '#FF6347',
   orangeLight: '#fdeae7',
+  greyLight: '#dddddd',
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   black,
   primary,
   orangeLight,
+  greyLight,
 } = Colors
 
 //Containers
@@ -60,13 +62,53 @@ export const TextWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `
+export const UserInfoSection = styled.View`
+  padding-horizontal: 30px;
+  margin-bottom: 25px;
+`
+export const InfoBoxWrapper = styled.View`
+  border-bottom-color: ${greyLight};
+  border-bottom-width: 1px;
+  border-top-color: ${greyLight};
+  border-top-width: 1px;
+  flex-direction: row;
+  height: 100px;
+`
+export const InfoBox = styled.View`
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+`
+
+export const MenuWrapper = styled.View`
+  margin-top: 10px;
+`
+
+export const MenuItem = styled.View`
+  flex-direction: row;
+  padding-vertical: 15px;
+  padding-horizontal: 30px;
+`
+
+export const MenuItemText = styled.Text`
+  color: #777777;
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+`
+export const Row = styled.View`
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
+`
 
 //Slider Stuff
 
 export const SliderContainer = styled.View`
   height: 200px;
   width: 90%;
-  margin-top: 20px;
+  margin-top: 10px;
   justify-content: center;
   align-self: center;
   border-radius: 8px;
@@ -90,13 +132,14 @@ export const CategoryContainer = styled.View`
   flex-direction: row;
   width: 90%;
   align-self: center;
+  justify-content: center;
   margin-top: 25px;
   margin-bottom: 10px;
 `
 export const CategoryButton = styled.TouchableOpacity`
   flex: 1;
   width: 30%;
-  margin-horizontal: 0px;
+  margin-horizontal: 20px;
   align-self: center;
 `
 
@@ -169,14 +212,11 @@ export const CardDetails = styled.Text`
 //Image Stuff
 
 export const Avatar = styled.Image`
-  width: 100px;
-  height: 100px;
-  margin: auto;
+  width: 75px;
+  height: 75px;
   border-radius: 50px;
   border-width: 2px;
-  border-color: ${secondary};
-  margin-bottom: 10px;
-  margin-top: 10px;
+  border-color: ${black};
 `
 
 export const ProfilePicture = styled.Image`
@@ -213,9 +253,16 @@ export const PageTitle = styled.Text`
   `}
 `
 export const StyledTitle = styled.Text`
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
   color: ${black};
+`
+
+export const Caption = styled.Text`
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 500;
+  color: ${grey};
 `
 
 export const SubTitle = styled.Text`
@@ -273,8 +320,6 @@ export const RightIcon = styled.TouchableOpacity`
   position: absolute;
   z-index: 1;
 `
-
-export const SearchIcon = styled.TouchableOpacity``
 
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;

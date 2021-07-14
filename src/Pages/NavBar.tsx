@@ -4,7 +4,7 @@ import { Text } from 'react-native'
 //Screens
 import Home from './Home'
 import Sysco from './Sysco'
-import UserSettings from './UserSettings'
+import Profile from './Profile'
 import UsFood from './UsFood'
 
 //Tab
@@ -18,10 +18,15 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors } from '../Components/styles'
+import { createStackNavigator } from '@react-navigation/stack'
 const { primary } = Colors
 
 const NavBar = (): React.ReactElement => {
   const Tab = createBottomTabNavigator()
+
+  //Individaul Page Stacks
+  const HomeStack = createStackNavigator()
+  const ProfileStack = createStackNavigator()
 
   return (
     <Tab.Navigator
@@ -31,8 +36,8 @@ const NavBar = (): React.ReactElement => {
 
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline'
-          } else if (route.name === 'User Settings') {
-            iconName = focused ? 'settings' : 'settings-outline'
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'person' : 'person-outline'
           } else if (route.name === 'Sysco') {
             iconName = focused ? 'fast-food' : 'fast-food-outline'
           } else if (route.name === 'UsFoods') {
@@ -51,7 +56,7 @@ const NavBar = (): React.ReactElement => {
       <Tab.Screen name={MainRoutes.Home} component={Home} />
       <Tab.Screen name={MainRoutes.Sysco} component={Sysco} />
       <Tab.Screen name={MainRoutes.UsFoods} component={UsFood} />
-      <Tab.Screen name={MainRoutes.UserSettings} component={UserSettings} />
+      <Tab.Screen name={MainRoutes.Profile} component={Profile} />
     </Tab.Navigator>
   )
 }

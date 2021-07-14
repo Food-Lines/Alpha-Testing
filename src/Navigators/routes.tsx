@@ -9,7 +9,7 @@ export enum MainRoutes {
   OTP = 'OTP',
   ResetPassword = 'Reset Password',
   Confirmation = 'Confirmation',
-  UserSettings = 'User Settings',
+  Profile = 'Profile',
   NavBar = 'NavBar',
   Sysco = 'Sysco',
   UsFoods = 'UsFoods',
@@ -24,7 +24,7 @@ export type MainStackParamList = {
   [MainRoutes.OTP]: undefined
   [MainRoutes.ResetPassword]: undefined
   [MainRoutes.Confirmation]: undefined
-  [MainRoutes.UserSettings]: undefined
+  [MainRoutes.Profile]: undefined
   [MainRoutes.NavBar]: undefined
   [MainRoutes.Sysco]: undefined
   [MainRoutes.UsFoods]: undefined
