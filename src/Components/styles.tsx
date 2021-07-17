@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Constants from 'expo-constants'
 
+import { Text, TouchableOpacity, View, TextInput } from 'react-native'
+
 // Getting Status Bar Height
 const StatusBarHeight = Constants.statusBarHeight
 
@@ -321,6 +323,8 @@ export const RightIcon = styled.TouchableOpacity`
   z-index: 1;
 `
 
+//Button Stuff
+
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${brand};
@@ -402,4 +406,95 @@ export const StyledHeader = styled.View`
   width: 90%;
   margin-left: 5%;
   margin-top: 5px;
+`
+//Edit Profile Styles
+
+export const CommandButton = styled.TouchableOpacity`
+  padding: 15px;
+  border-radius: 10px;
+  background-color: ${primary};
+  align-items: center;
+  margin-top: 10px;
+  width: 90%;
+  margin-left: 5%;
+`
+
+export const Panel = styled.View`
+  padding: 20px;
+  background-Color: '#FFFFFF';
+  padding-Top: 20px;
+  border-Top-Left-Radius: 20px;
+  border-Top-Right-Radius: 20px;
+  shadow-Color: ${black};
+  shadow-Offset: {width: 0px, height: 0px};
+  shadow-Radius: 5px;
+  shadow-Opacity: 0.4;
+`
+export const EditProfileHeader = styled.View`
+  background-Color: ${white}'
+  shadow-Color: ${grey},
+  shadow-Offset: {width: -1px, height: -3px};
+  shadow-Radius: 2px;
+  shadow-Opacity: 0.4;
+  elevation: 5;
+  padding-Top: 20px
+  border-Top-Left-Radius: 20px;
+  border-Top-Right-Radius: 20px;
+`
+
+export const PanelHeader = styled.View`
+  align-items: center;
+`
+
+export const PanelHandle = styled.View`
+  width: 40px,
+  height: 8ox,
+  border-Radius: 4px,
+  background-Color: ${black},
+  margin-Bottom: 10px,
+`
+export const PanelTitle = styled.Text`
+  font-size: 27px;
+  height: 35px;
+`
+
+export const PanelSubtitle = styled.Text`
+  fontsize: 14px;
+  height: 35px;
+  borderradius: 4px;
+  background-color: ${grey};
+  margin-bottom: 10px;
+`
+
+export const PanelButton = styled.TouchableOpacity`
+  padding: 13px;
+  border-radius: 10px;
+  background-color: ${primary};
+  align-items: center;
+  margin-vertical: 7px;
+`
+export const PanelButtonTitle = styled.Text`
+  font-Size: 17px;
+  font-Weight: bold';
+  color: ${white};
+`
+export const Action = styled.View`
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${greyLight};
+  padding-bottom: 5px;
+`
+export const actionError = styled.View` 
+  flex-Direction: row;
+  margin-Top: 10px,
+  border-Bottom-Width: 1px;
+  border-Bottom-Color: '#FF0000';
+  padding-Bottom: 5px;
+`
+export const EditProfileTextInput = styled.TextInput`
+  flex: 1px;
+  padding-left: 10px;
+  color: ${black};
 `

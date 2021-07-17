@@ -13,6 +13,7 @@ export enum MainRoutes {
   NavBar = 'NavBar',
   Sysco = 'Sysco',
   UsFoods = 'UsFoods',
+  EditProfile = 'EditProfile',
 }
 
 export type MainStackParamList = {
@@ -28,6 +29,7 @@ export type MainStackParamList = {
   [MainRoutes.NavBar]: undefined
   [MainRoutes.Sysco]: undefined
   [MainRoutes.UsFoods]: undefined
+  [MainRoutes.EditProfile]: undefined
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()
