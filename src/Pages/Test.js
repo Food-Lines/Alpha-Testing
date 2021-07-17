@@ -22,11 +22,7 @@ import {
   PanelButtonTitle,
   EditProfileHeader,
   PanelHeader,
-  PanelHandle,
-  Panel,
-  PanelTitle,
-  PanelSubtitle,
-  PanelButton
+  PanelHandle
 } from '../Components/styles'
 import { TouchableOpacity } from 'react-native'
 import { TouchableRipple } from 'react-native-paper'
@@ -45,55 +41,39 @@ import Feather from 'react-native-vector-icons/Feather'
 import { Icon } from 'react-native-elements/dist/icons/Icon'
 
 
-const EditProfile = ({ navigation }): React.ReactElement => {
+const EditProfile = ({ navigation }) => {
+
+  const renderInner = () => {
+    <Text>Hello</Text>
+
+  }
 
   const renderHeader = () => {
-    return (
     <EditProfileHeader>
     <PanelHeader>
-      <PanelHandle />
+      <PanelHandle>
+      </PanelHandle>
     </PanelHeader>
   </EditProfileHeader>
-    )
-  }
-  
-  
-  const renderInner = () => {
-    return (
-      <Panel style={{shadowOffset: {width: 0, height: 0}}}>
-        <PanelHeader>
-          <PanelTitle>Upload Photo</PanelTitle>
-          <PanelSubtitle>Choose Your Profile Picture</PanelSubtitle>
-        </PanelHeader>
-        <PanelButton>
-          <PanelButtonTitle>Take Photo</PanelButtonTitle>
-        </PanelButton>
-        <PanelButton>
-          <PanelButtonTitle>Choose From Library</PanelButtonTitle>
-        </PanelButton>
-        <PanelButton onPress={() => bs.current.snapTo(1)}>
-          <PanelButtonTitle>Cancel</PanelButtonTitle>
-        </PanelButton>
-    </Panel>
-    )
   }
 
-  let bs =  React.createRef<BottomSheet>()
-  let fall = new Animated.Value(1)
+
+    bs = React.createRef()
+    fall = new Animated.Value(1)
   return (
     <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
       <BottomSheet 
-        ref={bs}
-        initialSnap={1}
-        callbackNode={fall}
-        snapPoints={[330, 0]}
-        renderHeader={renderHeader}
-        renderContent={renderInner}
-        enabledGestureInteraction={true}
+      snapPoints={[330, 0]} 
+      initialSnap={1} 
+      ref={this.bs}
+      callbackNode={this.fall}
+      enabledGestureInteraction={true} 
+      renderContent={this.renderInner}
+      renderHeader={this.renderHeader}
       />
-      <Animated.View style={{ margin: 20, opacity:Animated.add(0.3, Animated.multiply(fall, 1.0)),  }}>
+      <View style={{ margin: 20 }}>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => bs.current.snapTo(0)}>
+          <TouchableOpacity onPress={() => this.bs.current.snapPoints(0)}>
             <View
               style={{
                 height: 100,
@@ -166,14 +146,13 @@ const EditProfile = ({ navigation }): React.ReactElement => {
           placeholder="City"
           keybaordType="default"
         />
-      </Animated.View>
+      </View>
       <CommandButton onPress={() => {}}>
         <PanelButtonTitle>Submit</PanelButtonTitle>
       </CommandButton>
     </SafeAreaView>
   )
 }
-
 
 const SearchIcon = () => {
   return (

@@ -421,12 +421,13 @@ export const CommandButton = styled.TouchableOpacity`
 
 export const Panel = styled.View`
   padding: 20px;
-  background-Color: '#FFFFFF';
-  padding-Top: 20px;
+  background-Color: ${white};
+  padding-top: 20px;
+  border-color: ${black}
+  border-width: 1px;
   border-Top-Left-Radius: 20px;
   border-Top-Right-Radius: 20px;
   shadow-Color: ${black};
-  shadow-Offset: {width: 0px, height: 0px};
   shadow-Radius: 5px;
   shadow-Opacity: 0.4;
 `
@@ -447,11 +448,11 @@ export const PanelHeader = styled.View`
 `
 
 export const PanelHandle = styled.View`
-  width: 40px,
-  height: 8ox,
-  border-Radius: 4px,
-  background-Color: ${black},
-  margin-Bottom: 10px,
+  width: 40px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #00000040;
+  margin-bottom: 10px;
 `
 export const PanelTitle = styled.Text`
   font-size: 27px;
@@ -459,10 +460,10 @@ export const PanelTitle = styled.Text`
 `
 
 export const PanelSubtitle = styled.Text`
-  fontsize: 14px;
+  font-size: 14px;
   height: 35px;
-  borderradius: 4px;
-  background-color: ${grey};
+  border-radius: 4px;
+  color: ${grey};
   margin-bottom: 10px;
 `
 
@@ -475,7 +476,7 @@ export const PanelButton = styled.TouchableOpacity`
 `
 export const PanelButtonTitle = styled.Text`
   font-Size: 17px;
-  font-Weight: bold';
+  font-Weight: bold;
   color: ${white};
 `
 export const Action = styled.View`
@@ -490,7 +491,7 @@ export const actionError = styled.View`
   flex-Direction: row;
   margin-Top: 10px,
   border-Bottom-Width: 1px;
-  border-Bottom-Color: '#FF0000';
+  border-Bottom-Color: #FF0000;
   padding-Bottom: 5px;
 `
 export const EditProfileTextInput = styled.TextInput`

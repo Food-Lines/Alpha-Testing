@@ -18,7 +18,7 @@ import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
 
-//Screen Home
+//Screens Main
 import NavBar from '../Pages/NavBar'
 
 const { primary, tertiary } = Colors

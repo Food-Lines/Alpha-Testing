@@ -46,31 +46,20 @@ const Home = ({ navigation }): React.ReactElement => {
   const name = 'Bob'
   return (
     <View style={{ flex: 1 }}>
-      <Header
-        backgroundColor={white}
-        elevated
-        leftContainerStyle={{ marginLeft: 15 }}
-        rightContainerStyle={{ marginRight: 15 }}
-        centerContainerStyle={{ marginTop: 10 }}
-      >
-        <ProfilePictureComp navigation={navigation} />
-        <Text style={{ fontWeight: 'bold' }}>Home</Text>
-        <SearchIcon />
-      </Header>
       <SafeAreaView
         style={{ flex: 1, backgroundColor: white, alignContent: 'center' }}
       >
         <ScrollView style={{ marginTop: 10 }}>
           <VerticalSwiper />
           <CategoryContainer>
-            <Categories label="Meat" icon="restaurant-outline" />
-            <Categories label="Seafood" icon="restaurant-outline" />
-            <Categories label="Poultry" icon="restaurant-outline" />
+            <Categories label="Meat" icon="restaurant-outline" navigation={navigation} title="Meat"/>
+            <Categories label="Seafood" icon="restaurant-outline" navigation={navigation} title="Seafood"/>
+            <Categories label="Poultry" icon="restaurant-outline" navigation={navigation} title="Poultry"/>
           </CategoryContainer>
           <CategoryContainer>
-            <Categories label="Produce" icon="restaurant-outline" />
-            <Categories label="Frozen" icon="restaurant-outline" />
-            <Categories label="Dairy" icon="restaurant-outline" />
+            <Categories label="Produce" icon="restaurant-outline" navigation={navigation} title="Produce"/>
+            <Categories label="Frozen" icon="restaurant-outline" navigation={navigation} title="Frozen"/>
+            <Categories label="Dairy" icon="restaurant-outline" navigation={navigation} title="Dairy"/>
           </CategoryContainer>
           <CardWrapper>
             <Text
@@ -112,9 +101,9 @@ const Home = ({ navigation }): React.ReactElement => {
   )
 }
 
-const Categories = ({ label, icon }) => {
+const Categories = ({ label, icon, navigation, title }) => {
   return (
-    <CategoryButton onPress={() => {}}>
+    <CategoryButton onPress={() => navigation.navigate(MainRoutes.CategoryListScreen, {title: title })}>
       <CategoryIcon>
         <Ionicons name={icon} size={35} color={primary} />
       </CategoryIcon>
@@ -172,23 +161,5 @@ const CardView = ({
   )
 }
 
-const ProfilePictureComp = ({ navigation }) => {
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)}>
-      <ProfilePicture
-        source={require('../Assets/mockPFP.jpg')}
-        resizeMode="cover"
-      />
-    </TouchableOpacity>
-  )
-}
-
-const SearchIcon = () => {
-  return (
-    <TouchableOpacity onPress={() => {}}>
-      <Ionicons name={'search'} size={30} color={black} />
-    </TouchableOpacity>
-  )
-}
 
 export default Home

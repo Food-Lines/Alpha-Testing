@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, Text } from 'react-native'
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
 
 //Screens
 import Home from './Home'
@@ -7,6 +7,7 @@ import Sysco from './Sysco'
 import Profile from './Profile'
 import UsFood from './UsFood'
 import EditProfile from './EditProfile'
+import CategoryListScreen from './CategoryListScreen'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -23,7 +24,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { MainRoutes } from './../Navigators/routes'
 
 //Colors
-import { Colors } from '../Components/styles'
+import { Colors, ProfilePicture } from '../Components/styles'
 import { marginTop } from 'styled-system'
 
 const { primary, white, black } = Colors
@@ -61,7 +62,7 @@ const NavBar = (): React.ReactElement => {
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name={MainRoutes.Home} component={Home} />
+      <Tab.Screen name={MainRoutes.Home} component={HomeStackScreen} />
       <Tab.Screen name={MainRoutes.Sysco} component={Sysco} />
       <Tab.Screen name={MainRoutes.UsFoods} component={UsFoodsStackScreen} />
       <Tab.Screen name={MainRoutes.Profile} component={ProfileStackScreen} />
@@ -70,6 +71,49 @@ const NavBar = (): React.ReactElement => {
 }
 
 export default NavBar
+
+const HomeStackScreen = ({navigation}) => {
+  return(
+    <SafeAreaView style={{ flex: 1, backgroundColor: white}}>
+      <HomeStack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: white,
+            shadowColor: white, // iOS
+            elevation: 0, // Android
+          },
+          headerTintColor: black,
+        }}
+        >
+          <HomeStack.Screen
+            name={MainRoutes.Home}
+            component={Home}
+            options={{
+            title: 'Home',
+            headerLeftContainerStyle: {marginLeft: 20},
+            headerLeft: () => (
+            <ProfilePictureComp
+              navigation={navigation}
+            />
+          ),
+          headerRightContainerStyle: {marginRight: 20},
+          headerRight: () => (
+            <SearchIcon/>
+          )
+        }}
+      />
+      <HomeStack.Screen 
+        name={MainRoutes.CategoryListScreen} 
+        component={CategoryListScreen}
+        options={({route}) => ({
+          title: route.params.title,
+          headerBackTitleVisible: false
+        })} />
+      </HomeStack.Navigator>
+    </SafeAreaView>
+  )
+
+}
 
 const ProfileStackScreen = ({ navigation }) => {
   return (
@@ -149,5 +193,24 @@ const UsFoodsStackScreen = ({ navigation }) => {
         }}
       />
     </UsFoodsStack.Navigator>
+  )
+}
+
+const ProfilePictureComp = ({ navigation }) => {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)}>
+      <ProfilePicture
+        source={require('../Assets/mockPFP.jpg')}
+        resizeMode="cover"
+      />
+    </TouchableOpacity>
+  )
+}
+
+const SearchIcon = () => {
+  return (
+    <TouchableOpacity onPress={() => {}}>
+      <Ionicons name={'search'} size={30} color={black} />
+    </TouchableOpacity>
   )
 }
