@@ -3,7 +3,7 @@ import React from 'react'
 import { MainRoutes } from '../Navigators/routes'
 
 //react native elements
-import { Card, Header } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 
 //Components
 import {
@@ -103,7 +103,7 @@ const Home = ({ navigation }): React.ReactElement => {
 
 const Categories = ({ label, icon, navigation, title }) => {
   return (
-    <CategoryButton onPress={() => navigation.navigate(MainRoutes.CategoryListScreen, {title: title })}>
+    <CategoryButton onPress={() => navigation.navigate(MainRoutes.CardListScreen, {title: title })}>
       <CategoryIcon>
         <Ionicons name={icon} size={35} color={primary} />
       </CategoryIcon>

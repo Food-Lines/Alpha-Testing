@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
+import CardItemDetails from '../Pages/CardItemDetail'
 
 export enum MainRoutes {
   SignIn = 'Sign In',
@@ -14,7 +15,8 @@ export enum MainRoutes {
   Sysco = 'Sysco',
   UsFoods = 'UsFoods',
   EditProfile = 'EditProfile',
-  CategoryListScreen = 'CategoryListScreen'
+  CardListScreen = 'CardListScreen',
+  CardItemDetails = 'CardItemDetails',
 }
 
 export type MainStackParamList = {
@@ -31,7 +33,9 @@ export type MainStackParamList = {
   [MainRoutes.Sysco]: undefined
   [MainRoutes.UsFoods]: undefined
   [MainRoutes.EditProfile]: undefined
-  [MainRoutes.CategoryListScreen]: undefined
+  [MainRoutes.CardListScreen]: undefined
+  [MainRoutes.CardItemDetails]: undefined
+  
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()

@@ -204,6 +204,7 @@ export const CardInfo = styled.View`
 `
 export const CardTitle = styled.Text`
   font-weight: bold;
+  font-size: 12px;
 `
 
 export const CardDetails = styled.Text`
@@ -499,3 +500,4 @@ export const EditProfileTextInput = styled.TextInput`
   padding-left: 10px;
   color: ${black};
 `
+

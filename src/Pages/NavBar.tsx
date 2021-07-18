@@ -7,7 +7,8 @@ import Sysco from './Sysco'
 import Profile from './Profile'
 import UsFood from './UsFood'
 import EditProfile from './EditProfile'
-import CategoryListScreen from './CategoryListScreen'
+import CardListScreen from './CardListScreen'
+import CardItemDetails from './CardItemDetail'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -103,10 +104,16 @@ const HomeStackScreen = ({navigation}) => {
         }}
       />
       <HomeStack.Screen 
-        name={MainRoutes.CategoryListScreen} 
-        component={CategoryListScreen}
+        name={MainRoutes.CardListScreen} 
+        component={CardListScreen}
         options={({route}) => ({
           title: route.params.title,
+          headerBackTitleVisible: false
+        })} />
+      <HomeStack.Screen 
+        name={MainRoutes.CardItemDetails} 
+        component={CardItemDetails}
+        options={({route}) => ({
           headerBackTitleVisible: false
         })} />
       </HomeStack.Navigator>
