@@ -37,13 +37,12 @@ const CardListScreen = ({ navigation }): React.ReactElement => {
 
   return (
     <SafeAreaView style={{ backgroundColor: white, flex: 1}}>
-        <ScrollView style={{padding: 20}}>
           <FlatList 
           data={MeatData} 
           renderItem={renderItem} 
           keyExtractor={item=> item.id} 
-          style={{marginBottom: 50, paddingBottom: 10}}/>
-        </ScrollView>
+          style={{ padding: 20, flex: 1, paddingBottom: 50}}/>
+        
     </SafeAreaView>
   )
 }

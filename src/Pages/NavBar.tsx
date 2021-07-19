@@ -26,7 +26,7 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors, ProfilePicture } from '../Components/styles'
-import { marginTop } from 'styled-system'
+import { flex, marginTop } from 'styled-system'
 
 const { primary, white, black } = Colors
 
@@ -75,7 +75,7 @@ export default NavBar
 
 const HomeStackScreen = ({navigation}) => {
   return(
-    <SafeAreaView style={{ flex: 1, backgroundColor: white}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: white}}>
       <HomeStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -107,17 +107,25 @@ const HomeStackScreen = ({navigation}) => {
         name={MainRoutes.CardListScreen} 
         component={CardListScreen}
         options={({route}) => ({
-          title: route.params.title,
-          headerBackTitleVisible: false
+          title: route.params.title , 
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: {marginLeft: 20},
         })} />
       <HomeStack.Screen 
         name={MainRoutes.CardItemDetails} 
+        
         component={CardItemDetails}
         options={({route}) => ({
-          headerBackTitleVisible: false
+          title: '',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
+          headerLeftContainerStyle: {marginLeft: 20},
+
         })} />
       </HomeStack.Navigator>
     </SafeAreaView>
+
   )
 
 }

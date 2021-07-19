@@ -20,6 +20,7 @@ export const Colors = {
   primary: '#FF6347',
   orangeLight: '#fdeae7',
   greyLight: '#dddddd',
+  greyDark: '#2a2a2a'
 }
 
 const {
@@ -35,6 +36,7 @@ const {
   primary,
   orangeLight,
   greyLight,
+  greyDark
 } = Colors
 
 //Containers
@@ -63,6 +65,7 @@ export const WelcomeContainer = styled(InnerContainer)`
 export const TextWrapper = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `
 export const UserInfoSection = styled.View`
   padding-horizontal: 30px;
@@ -208,8 +211,12 @@ export const CardTitle = styled.Text`
 `
 
 export const CardDetails = styled.Text`
-  font-size: 12px;
+  font-size: 10px;
   color: ${grey};
+`
+export const CardDetailsDark = styled.Text`
+  font-size: 10px;
+  color: ${greyDark};
 `
 
 //Image Stuff

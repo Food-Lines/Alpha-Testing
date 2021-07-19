@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar } from 'expo-status-bar'
+import { StatusBar } from 'react-native'
 
 import {
   InnerContainer,
@@ -17,7 +17,7 @@ import {
 const Welcome = ({ navigation }): React.ReactElement => {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar barStyle="light-content" />
       <InnerContainer>
         <WelcomeImage
           resizeMode="contain"

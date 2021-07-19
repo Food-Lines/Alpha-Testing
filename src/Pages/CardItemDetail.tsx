@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import { MainRoutes } from '../Navigators/routes'
 
 //Image Scroll View
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view'
+
+//Animations
+import * as Animatable from 'react-native-animatable';
 
 //Components
 import {
@@ -20,7 +23,10 @@ import {
 } from 'react-native'
 
 import {
+    
   Colors,
+  CardDetails,
+  TextWrapper,
 } from '../Components/styles'
 
 
@@ -28,40 +34,98 @@ import {
 const MIN_HEIGHT = Platform.OS === 'ios' ? 90 :55
 const MAX_HEIGHT = 350  
 
+//Icons
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
 // Colors
 const { primary, white, darkLight, grey, black } = Colors
 
-const CardItemDetails = ({ route }): React.ReactElement => {
+const CardItemDetails = ({ route, navigation }): React.ReactElement => {
     const itemData = route.params.itemData
+    const navTitleView = useRef()
 
- 
+    const Foreground = () => {
+        return(
+            <View style={styles.titleContainer}>
+                <Text style={styles.imageTitle}>{itemData.title}</Text>
+            </View>
+        )
+    
+    }
+
+    const FixedForeground = () => {
+        return(
+            <Animatable.View style={styles.navTitleView} ref={navTitleView}>
+                <Text style={styles.navTitle}>{itemData.title}</Text>
+            </Animatable.View>
+        )
+    }
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: white }}>
-            <StatusBar barStyle="light-content" />
-
+        <SafeAreaView style={{flex: 1, backgroundColor: white}}>
             <ImageHeaderScrollView
-                maxHeight={200}
+                maxHeight={MAX_HEIGHT}
                 minHeight={MIN_HEIGHT}
+                maxOverlayOpacity={0.8}
+                minOverlayOpacity={0.3}
                 headerImage={require("../Assets/slider2.jpg")}
-                renderForeground={() => {
-                    return(
-                        <View style={{ height: 150, justifyContent: "center", alignItems: "center" }} >
-                            <TouchableOpacity onPress={() => console.log("tap!!")}>
-                                <Text style={{ backgroundColor: "transparent" }}>Tap Me!</Text>
-                            </TouchableOpacity>
-                        </View>
-                        )}
-                }         
+                renderForeground={Foreground}
+                renderFixedForeground={FixedForeground}
             >
-                <View style={{ height: 1000 }}>
-                    <TriggeringView onHide={() => console.log("text hidden")}>
-                        <Text>Scroll Me!</Text>
-                    </TriggeringView>
+                <TriggeringView 
+                    style={styles.section} 
+                    onHide={() => navTitleView.fadeInUp(200)}
+                    onDisplay={() => navTitleView.fadeOut(100)}
+                    >
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <Text style={styles.title}>Overview</Text>
+                        <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
+                            <FontAwesome  name='dollar' size={14} color={primary} />
+                            <Text style={{marginHorizontal: 8, fontWeight: 'bold'}}>{itemData.price + '/lb'}</Text>
+                            <Text style={{color: grey, marginLeft: 5}}>{'#' + itemData.id}</Text>
+                        </View>
+                    </View>
+                </TriggeringView>
+                <View style={[styles.section, styles.sectionLarge]}>
+                    <Text style={styles.sectionContent}>{itemData.description}</Text>
                 </View>
-            </ImageHeaderScrollView>
-        </SafeAreaView>
+                <View style={styles.section}>
+                    <TextWrapper>
+                        <Text style={styles.name}>Min Purchase:</Text>
+                        <Text>{itemData.minimumPurchase + ' Cases'}</Text>
+                    </TextWrapper>
+                    <TextWrapper>
+                        <Text style={styles.name}>Avg Weight/Case:</Text>
+                        <Text>{itemData.weight + ' lb'}</Text>
+                    </TextWrapper>
+                    <TextWrapper>
+                        <Text style={styles.name}>Shelf Life:</Text>
+                        <Text>{itemData.shelfLife + ' Days'}</Text>
+                    </TextWrapper>
+                </View>
+                <View style={styles.section}>
+                    <View style={styles.categories}>
+                        <View style={styles.categoryContainer}>
+                            <FontAwesome name='tag' size={16} color='#fff' />
+                            <Text style={styles.category}>Frozen</Text>
+                        </View>
+                        <View style={styles.categoryContainer}>
+                            <FontAwesome name='tag' size={16} color='#fff' />
+                            <Text style={styles.category}>Meat</Text>
+                        </View>
+                        <View style={styles.categoryContainer}>
+                        <FontAwesome name='tag' size={16} color='#fff' />
+                            <Text style={styles.category}>Pizza</Text>
+                        </View>
+
+                    </View>
+                </View>
+            
+        </ImageHeaderScrollView>
+    </SafeAreaView>
+
     )
 }
+
 
 
 export default CardItemDetails
@@ -77,10 +141,11 @@ const styles = StyleSheet.create({
       resizeMode: 'cover',
     },
     title: {
-      fontSize: 20,
+      fontSize: 18,
     },
     name: {
       fontWeight: 'bold',
+      marginVertical: 5,
     },
     section: {
       padding: 20,

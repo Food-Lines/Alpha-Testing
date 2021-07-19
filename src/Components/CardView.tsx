@@ -9,7 +9,8 @@ import {
   CardInfo, 
   TextWrapper, 
   CardTitle, 
-  CardDetails } from './styles'
+  CardDetails,
+  CardDetailsDark } from './styles'
 
 //react native elements
 import { Card } from 'react-native-elements'
@@ -52,11 +53,12 @@ const CardView = ({
             <CardTitle>{itemData.price + '/lb'}</CardTitle>
           </TextWrapper>
           <CardDetails>{'#' + itemData.id}</CardDetails>
-          <CardDetails style={{ marginTop: 5 }}>
-            {'Minimum Purchase Amount: ' + itemData.minimumPurchase}
-          </CardDetails>
-          <CardDetails>{'Average Weight per Case: ' + itemData.weight}</CardDetails>
-          <CardDetails>{'Shelf Life: ' + itemData.shelfLife}</CardDetails>
+          <CardDetailsDark style={{ marginTop: 5 }}>
+            {'Min Purchase Amount: ' + itemData.minimumPurchase + ' Cases'}
+          </CardDetailsDark>
+          <CardDetailsDark>{'Avg Weight/Case: ' + itemData.weight + 'lb'}</CardDetailsDark>
+          <CardDetailsDark>{'Shelf Life: ' + itemData.shelfLife + ' Days'}</CardDetailsDark>
+          <CardDetails numberOfLines={1}>{itemData.description}</CardDetails>
         </CardInfo>
       </Card>
     </TouchableOpacity>

@@ -45,9 +45,9 @@ const Home = ({ navigation }): React.ReactElement => {
   //Placeholder Variable
   const name = 'Bob'
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: white}}>
       <SafeAreaView
-        style={{ flex: 1, backgroundColor: white, alignContent: 'center' }}
+        style={{ flex: 1, backgroundColor: white, alignContent: 'center', marginTop: 10 }}
       >
         <ScrollView style={{ marginTop: 10 }}>
           <VerticalSwiper />
