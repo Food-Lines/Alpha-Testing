@@ -10,9 +10,9 @@ import { useReduxSelector } from '../Redux'
 import { selectUser } from '../Redux/slices/user'
 
 //Screens Auth
+import SplashScreen from '../Pages/SplashScreen'
 import SignIn from '../Pages/SignIn'
 import SignUp from '../Pages/SignUp'
-import Welcome from '../Pages/Welcome'
 import ConfirmEmail from '../Pages/ConfirmEmail'
 import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
@@ -21,7 +21,7 @@ import Confirmation from '../Pages/Confirmation'
 //Screens Main
 import NavBar from '../Pages/NavBar'
 
-const { primary, tertiary } = Colors
+const { primary, tertiary, white } = Colors
 
 const MainNavigation = (): React.ReactElement => {
   const user = useReduxSelector(selectUser)
@@ -33,24 +33,20 @@ const MainNavigation = (): React.ReactElement => {
           headerStyle: {
             backgroundColor: 'transparent',
           },
-          headerTintColor: tertiary,
+          headerTintColor: white,
           headerTransparent: true,
           headerTitle: '',
           headerLeftContainerStyle: {
             paddingLeft: 20,
           },
         }}
-        initialRouteName={MainRoutes.Home}
+        initialRouteName={MainRoutes.SplashScreen}
       >
         {user ? (
           <>
-            <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
-          </>
-        ) : (
-          <>
-            <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} />
-            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} />
-            <MainStack.Screen name={MainRoutes.Welcome} component={Welcome} />
+            <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
+            <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />
+            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} /> 
             <MainStack.Screen
               name={MainRoutes.ConfirmEmail}
               component={ConfirmEmail}
@@ -64,6 +60,12 @@ const MainNavigation = (): React.ReactElement => {
               name={MainRoutes.Confirmation}
               component={Confirmation}
             />
+             
+          </>
+        ) : (
+          <>
+          <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
+  
           </>
         )}
       </MainStack.Navigator>

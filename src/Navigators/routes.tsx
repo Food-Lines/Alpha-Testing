@@ -2,6 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import CardItemDetails from '../Pages/CardItemDetail'
 
 export enum MainRoutes {
+  SplashScreen = 'Splash Screen',
   SignIn = 'Sign In',
   SignUp = 'Sign Up',
   Welcome = 'Welcome',
@@ -14,12 +15,13 @@ export enum MainRoutes {
   NavBar = 'NavBar',
   Sysco = 'Sysco',
   UsFoods = 'UsFoods',
-  EditProfile = 'EditProfile',
-  CardListScreen = 'CardListScreen',
-  CardItemDetails = 'CardItemDetails',
+  EditProfile = 'Edit Profile',
+  CardListScreen = 'Card List',
+  CardItemDetails = 'Card Item Details',
 }
 
 export type MainStackParamList = {
+  [MainRoutes.SplashScreen]: undefined
   [MainRoutes.SignIn]: undefined
   [MainRoutes.SignUp]: undefined
   [MainRoutes.Welcome]: undefined

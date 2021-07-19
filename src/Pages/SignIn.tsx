@@ -39,7 +39,7 @@ import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
-const { brand, darkLight, primary } = Colors
+const { brand, darkLight, primary, white } = Colors
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
@@ -110,7 +110,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 </ExtraView>
                 <Line />
                 <StyledButton google onPress={handleSubmit}>
-                  <Fontisto name="google" color={primary} size={25} />
+                  <Fontisto name="google" color={white} size={25} />
                   <ButtonText google>Sign in with Google</ButtonText>
                 </StyledButton>
                 <ExtraView>

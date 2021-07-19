@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import Constants from 'expo-constants'
 
-import { Text, TouchableOpacity, View, TextInput } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, Image, Dimensions } from 'react-native'
 
 // Getting Status Bar Height
 const StatusBarHeight = Constants.statusBarHeight
+
+//Screen Dimensions
+const {height} = Dimensions.get("screen");
+const height_logo = height * 0.28;
 
 // colors
 export const Colors = {
@@ -20,7 +24,9 @@ export const Colors = {
   primary: '#FF6347',
   orangeLight: '#fdeae7',
   greyLight: '#dddddd',
-  greyDark: '#2a2a2a'
+  greyDark: '#2a2a2a',
+  blueDark: '#34495e',
+  blueLight: '#96ddd5',
 }
 
 const {
@@ -36,7 +42,9 @@ const {
   primary,
   orangeLight,
   greyLight,
-  greyDark
+  greyDark,
+  blueDark,
+  blueLight,
 } = Colors
 
 //Containers
@@ -506,5 +514,55 @@ export const EditProfileTextInput = styled.TextInput`
   flex: 1px;
   padding-left: 10px;
   color: ${black};
+`
+
+//Splash Screen Stuff
+
+export const SplashHeaderView = styled.View`
+    flex: 2;
+    justify-Content: center;
+    align-Items: center;
+`
+
+export const SplashFooter = styled.View`
+    flex: 1;
+    background-Color: ${white};
+    border-Top-Left-Radius: 30px;
+    border-Top-Right-Radius: 30px;
+    padding-Vertical: 50px;
+    padding-Horizontal: 30px;
+`
+
+export const SplashLogo = styled.Image`
+    width: ${height_logo}px;
+    height: ${height_logo}px;
+`
+
+export const SplashTitle = styled.Text`
+    color: ${red};
+    fontSize: 30px;
+    fontWeight: bold;
+`
+export const SplashText = styled.Text`
+    color: ${grey};
+    marginTop: 5px;
+`
+export const SplashButtonView = styled.View`
+
+    align-Items: flex-end;
+    margin-Top: 30px;
+`
+
+export const SplashSignIn = styled.View`
+    width: 150px;
+    height: 40px;
+    justify-Content: center;
+    align-items: center;
+    border-Radius: 50px;
+    flex-Direction: row;
+`
+export const SplashTextSign = styled.Text`
+    color: ${white};
+    fontWeight: bold;
 `
 
