@@ -144,7 +144,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
         <SignInHeader>
           <SignInTextHeader>Welcome!</SignInTextHeader>
         </SignInHeader>
-        <SignInFooter>
+        <Animatable.View style={styles.footer} animation="fadeInUpBig">
           <StyledFormArea>
             <EmailTextInput />
             <PasswordTextInput />
@@ -166,7 +166,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
               <SignInTextSign style={{color: primary}}>Sign Up</SignInTextSign>
             </TouchableOpacity>
           </StyledFormArea>
-        </SignInFooter>
+        </Animatable.View>
       </StyledContainerFullScreen>
     </KeyboardAvoidingWrapper>
 

@@ -46,7 +46,7 @@ const MainNavigation = (): React.ReactElement => {
           <>
             <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />
-            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} /> 
+            <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} options={{headerShown: false}} /> 
             <MainStack.Screen
               name={MainRoutes.ConfirmEmail}
               component={ConfirmEmail}

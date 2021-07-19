@@ -13,6 +13,7 @@ const KeyboardAvoidingWrapper = ({ children }): React.ReactElement => {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         {children}
