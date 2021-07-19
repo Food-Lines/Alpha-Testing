@@ -566,3 +566,66 @@ export const SplashTextSign = styled.Text`
     fontWeight: bold;
 `
 
+//Sign In Stuff
+
+export const StyledContainerFullScreen = styled.View`
+  flex: 1;
+  background-Color: ${primary};
+`
+export const SignInHeader = styled.View` 
+  flex: 1;
+  justify-Content: flex-end;
+  padding-Horizontal: 20px;
+  padding-Bottom: 50px;
+`
+export const SignInFooter= styled.View` 
+      flex: 3;
+      background-Color: ${white};
+      border-Top-Left-Radius: 30px;
+      border-Top-Right-Radius: 30px;
+      padding-Horizontal: 20px;
+      padding-Vertical: 30px;
+`
+export const SignInTextHeader = styled.Text`
+      color: ${white};
+      font-Weight: bold;
+      font-Size: 30px;
+`
+export const SignInTextFooter = styled.Text` 
+      color: #05375a;
+      font-Size: 18px;
+`
+export const SignInAction = styled.View`
+      flex-Direction: row;
+      margin-Top: 10;
+      border-Bottom-Width: 1px;
+      border-Bottom-Color: #f2f2f2;
+      padding-Bottom: 5px;
+`
+export const SignInActionError = styled.View`
+      flex-Direction: row;
+      margin-Top: 10px;
+      border-Bottom-Width: 1px;
+      border-Bottom-Color: #FF0000;
+      padding-Bottom: 5px;
+`
+export const ErrorMsg = styled.Text`
+      color: #FF0000;
+      font-Size: 14px;
+`
+export const SignInButton = styled.TouchableOpacity`
+  align-Items: center;
+  margin-Top: 50px;
+`
+
+export const SignInView = styled.View`
+      width: 100%;
+      height: 50px;
+      justify-Content: center;
+      align-Items: center;
+      border-Radius: 10px;
+`
+export const SignInTextSign = styled.Text`
+      font-Size: 18;
+      font-Weight: bold;
+`

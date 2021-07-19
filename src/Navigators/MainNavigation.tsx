@@ -21,7 +21,7 @@ import Confirmation from '../Pages/Confirmation'
 //Screens Main
 import NavBar from '../Pages/NavBar'
 
-const { primary, tertiary, white } = Colors
+const { primary, tertiary, white, black} = Colors
 
 const MainNavigation = (): React.ReactElement => {
   const user = useReduxSelector(selectUser)
@@ -33,7 +33,7 @@ const MainNavigation = (): React.ReactElement => {
           headerStyle: {
             backgroundColor: 'transparent',
           },
-          headerTintColor: white,
+          headerTintColor: black,
           headerTransparent: true,
           headerTitle: '',
           headerLeftContainerStyle: {
