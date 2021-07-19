@@ -40,10 +40,9 @@ import {
 // Colors
 const { primary, white, darkLight, grey, black } = Colors
 
-//Icons
-import { Ionicons, Fontisto } from '@expo/vector-icons'
 
-//Dimensions
+
+
 //Screen Dimensions
 const {height} = Dimensions.get("screen");
 const height_logo = height * 0.28;

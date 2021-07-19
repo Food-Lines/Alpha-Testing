@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Platform, StatusBar} from 'react-native'
+import { View, StyleSheet, Platform, StatusBar, TextInput, TouchableOpacity} from 'react-native'
 
 // icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Feather from 'react-native-vector-icons/Feather';
 
 //Routes
 import { MainRoutes } from '../Navigators/routes'
@@ -12,10 +14,6 @@ import { Formik } from 'formik'
 
 import {
   Colors,
-  LeftIcon,
-  RightIcon,
-  StyledTextInput,
-  StyledInputLabel,
   StyledContainerFullScreen,
   SignInAction,
   SignInActionError,
@@ -26,6 +24,7 @@ import {
   SignInTextHeader,
   SignInTextSign,
   SignInView,
+  StyledFormArea,
 
 } from '../Components/styles'
 
@@ -36,23 +35,140 @@ import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
-const { brand, darkLight, primary, white } = Colors
+const { brand, darkLight, primary, white, black, grey, red} = Colors
+
+//Gradient
+import { LinearGradient } from 'expo-linear-gradient';
+
+//Animations
+import * as Animatable from 'react-native-animatable';
+import { DataTable } from 'react-native-paper';
+
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
   const [hidePassword, setHidePassword] = useState(true)
+  const [data, setData] = useState({
+    email: '',
+    password:'',
+    check_textInputChange: false,
+    secureTextEntry: true,
+  })
+
+  //Handlers
+
+  const onEmailChangeHandler = (val) =>{
+    if (val.length === 0) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false
+      })
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true
+
+      })
+    }
+  }
+
+  const onPasswordChangeHandler = (val) =>{
+
+      setData({
+        ...data,
+        password: val
+    })
+  }
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry
+    })
+  }
+
+  const onSubmitHandler = () => {
+    console.log(data.email, data.password )
+  }
+
+  //Components
+  const EmailTextInput = () => {
+    return(
+    <View>
+      <SignInTextFooter>Email</SignInTextFooter>
+      <SignInAction>
+          <FontAwesome name="user-o" color={black} size={20} />
+          <TextInput style={styles.textInput} placeholder="user@provider.com" autoCapitalize="none" onChangeText={(val)=>onEmailChangeHandler(val)}/>
+          {data.check_textInputChange ?
+          <Animatable.View animation="bounceIn">
+            <Feather name="check-circle" color="green" size={20} />
+          </Animatable.View>
+          : null}
+      </SignInAction>
+    </View>
+    )
+  }
+
+  const PasswordTextInput = () => {
+    return(
+      <View>
+        <SignInTextFooter style={{marginTop: 35}}>Password</SignInTextFooter>
+        <SignInAction>
+          <FontAwesome name="lock" color={black} size={20} />
+            <TextInput 
+              style={styles.textInput} 
+              placeholder="* * * * * * * * *" 
+              autoCapitalize="none" 
+              secureTextEntry={data.secureTextEntry ? true: false} 
+              onChange={(val)=>onPasswordChangeHandler(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ?
+              <Feather name="eye-off" color={grey} size={20} />
+              : 
+              <Feather name="eye" color={grey} size={20} />
+              }
+            </TouchableOpacity>
+          </SignInAction>
+        </View>
+    )
+  }
+
+
   return (
-    <StyledContainerFullScreen>
-      <StatusBar barStyle="light-content" />
-      <SignInHeader>
-        <SignInTextHeader>Welcome!</SignInTextHeader>
-      </SignInHeader>
-      <SignInFooter>
-        <SignInTextFooter>Sign in!</SignInTextFooter>
-      </SignInFooter>
+    <KeyboardAvoidingWrapper>
+      <StyledContainerFullScreen>
+        <StatusBar barStyle="light-content" />
+        <SignInHeader>
+          <SignInTextHeader>Welcome!</SignInTextHeader>
+        </SignInHeader>
+        <SignInFooter>
+          <StyledFormArea>
+            <EmailTextInput />
+            <PasswordTextInput />
 
+            <SignInButton onPress={()=>onSubmitHandler}>
+              <LinearGradient
+                colors={['#FFA07A', '#FF6347']}
+                style={styles.signIn}
+                >
+                <SignInTextSign>Sign In</SignInTextSign>
+              </LinearGradient>
+            </SignInButton>
 
-    </StyledContainerFullScreen>
+            <TouchableOpacity onPress={()=>navigation.navigate(MainRoutes.SignUp)} style={[styles.signIn, {
+              borderColor: primary,
+              borderWidth: 1,
+              marginTop: 15, 
+              }]}>
+              <SignInTextSign style={{color: primary}}>Sign Up</SignInTextSign>
+            </TouchableOpacity>
+          </StyledFormArea>
+        </SignInFooter>
+      </StyledContainerFullScreen>
+    </KeyboardAvoidingWrapper>
 
 
     // <KeyboardAvoidingWrapper>
@@ -140,33 +256,29 @@ const SignIn = ({ navigation }): React.ReactElement => {
   )
 }
 
-const MyTextInput = ({
+const SignInTextInput = ({
   label,
-  icon,
+  iconLeft,
+  iconRight,
+  color,
   isPassword,
   hidePassword,
   setHidePassword,
-  ...props
-}) => {
+  ...props}) => {
   return (
     <View>
-      <LeftIcon>
-        <Octicons name={icon} size={30} color={brand} />
-      </LeftIcon>
-      <StyledInputLabel>{label}</StyledInputLabel>
-      <StyledTextInput {...props} />
-      {isPassword && (
-        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
-          <Ionicons
-            name={hidePassword ? 'md-eye-off' : 'md-eye'}
-            size={30}
-            color={darkLight}
-          />
-        </RightIcon>
-      )}
+      <SignInTextFooter>{label}</SignInTextFooter>
+      <SignInAction>
+        <FontAwesome name={iconLeft} color={black} size={20} />
+          <TextInput style={styles.textInput} {...props}/>
+          <Feather name={iconRight} color={color} size={20} />
+      </SignInAction>
     </View>
+
   )
 }
+
+
 
 export default SignIn
 
@@ -217,7 +329,7 @@ const styles = StyleSheet.create({
       flex: 1,
       marginTop: Platform.OS === 'ios' ? 0 : -12,
       paddingLeft: 10,
-      color: '#05375a',
+      color: black,
   },
   errorMsg: {
       color: '#FF0000',

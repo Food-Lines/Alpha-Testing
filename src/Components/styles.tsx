@@ -301,7 +301,7 @@ export const SubTitle = styled.Text`
 //Form Stuff
 
 export const StyledFormArea = styled.View`
-  width: 90%;
+  width: 100%;
 `
 
 export const StyledTextInput = styled.TextInput`
@@ -592,12 +592,12 @@ export const SignInTextHeader = styled.Text`
       font-Size: 30px;
 `
 export const SignInTextFooter = styled.Text` 
-      color: #05375a;
+      color: ${black};
       font-Size: 18px;
 `
 export const SignInAction = styled.View`
       flex-Direction: row;
-      margin-Top: 10;
+      margin-Top: 10px;
       border-Bottom-Width: 1px;
       border-Bottom-Color: #f2f2f2;
       padding-Bottom: 5px;
@@ -626,6 +626,7 @@ export const SignInView = styled.View`
       border-Radius: 10px;
 `
 export const SignInTextSign = styled.Text`
-      font-Size: 18;
+      font-Size: 18px;
       font-Weight: bold;
+      color: ${white};
 `
