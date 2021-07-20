@@ -30,8 +30,9 @@ import {
 
 // KeyboardAvoidingWrapper
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
-import { useReduxDispatch } from '../Redux'
 
+//Redux
+import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
@@ -42,7 +43,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 //Animations
 import * as Animatable from 'react-native-animatable';
-import { DataTable } from 'react-native-paper';
 
 
 const SignIn = ({ navigation }): React.ReactElement => {
@@ -253,28 +253,6 @@ const SignIn = ({ navigation }): React.ReactElement => {
     //     </InnerContainer>
     //   </StyledContainer>
     // </KeyboardAvoidingWrapper>
-  )
-}
-
-const SignInTextInput = ({
-  label,
-  iconLeft,
-  iconRight,
-  color,
-  isPassword,
-  hidePassword,
-  setHidePassword,
-  ...props}) => {
-  return (
-    <View>
-      <SignInTextFooter>{label}</SignInTextFooter>
-      <SignInAction>
-        <FontAwesome name={iconLeft} color={black} size={20} />
-          <TextInput style={styles.textInput} {...props}/>
-          <Feather name={iconRight} color={color} size={20} />
-      </SignInAction>
-    </View>
-
   )
 }
 
