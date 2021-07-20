@@ -566,6 +566,7 @@ export const SplashTextSign = styled.Text`
     fontWeight: bold;
 `
 
+
 //Sign In Stuff
 
 export const StyledContainerFullScreen = styled.View`
@@ -601,6 +602,7 @@ export const SignInAction = styled.View`
       border-Bottom-Width: 1px;
       border-Bottom-Color: #f2f2f2;
       padding-Bottom: 5px;
+      margin-bottom: 10px;
 `
 export const SignInActionError = styled.View`
       flex-Direction: row;
@@ -610,8 +612,8 @@ export const SignInActionError = styled.View`
       padding-Bottom: 5px;
 `
 export const ErrorMsg = styled.Text`
-      color: #FF0000;
-      font-Size: 14px;
+      color: ${red};
+      font-Size: 12px;
 `
 export const SignInButton = styled.TouchableOpacity`
   align-Items: center;
@@ -629,4 +631,9 @@ export const SignInTextSign = styled.Text`
       font-Size: 18px;
       font-Weight: bold;
       color: ${white};
+`
+
+export const ForgetPassword = styled.TouchableOpacity`
+  margin-top: 15px;   
+
 `

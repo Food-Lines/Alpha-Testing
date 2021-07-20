@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Platform, StatusBar, TextInput, TouchableOpacity} from 'react-native'
+import { View, StyleSheet, Platform, StatusBar, TextInput, TouchableOpacity, Text, Alert} from 'react-native'
 
 // icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
@@ -25,6 +25,8 @@ import {
   SignInTextSign,
   SignInView,
   StyledFormArea,
+  ForgetPassword,
+  ErrorMsg,
 
 } from '../Components/styles'
 
@@ -48,38 +50,54 @@ import * as Animatable from 'react-native-animatable';
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
   const [hidePassword, setHidePassword] = useState(true)
+
   const [data, setData] = useState({
     email: '',
     password:'',
-    check_textInputChange: false,
+    check_email: false,
     secureTextEntry: true,
+    isValidEmail: true,
+    isValidPassword: true,
   })
 
   //Handlers
 
   const onEmailChangeHandler = (val) =>{
-    if (val.length === 0) {
+    if (val.trim().length >= 6 && val.includes('@')) {
       setData({
         ...data,
         email: val,
-        check_textInputChange: false
+        check_email: true,
+        isValidEmail: true,
+        
       })
     } else {
       setData({
         ...data,
         email: val,
-        check_textInputChange: true
-
+        check_email: false,
+        isValidEmail: false,
       })
     }
   }
 
   const onPasswordChangeHandler = (val) =>{
-
+    if (val.trim().length >=8) {
       setData({
         ...data,
-        password: val
-    })
+        password: val,
+        isValidPassword: true
+      })
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false
+
+
+      })
+    }
+
   }
 
   const updateSecureTextEntry = () => {
@@ -89,50 +107,33 @@ const SignIn = ({ navigation }): React.ReactElement => {
     })
   }
 
-  const onSubmitHandler = () => {
-    console.log(data.email, data.password )
+
+
+  //Also Error Display if not correcet credentials - Put shit here Niel
+  const onSubmitHandler = (email, password) => {
+    if (email === "soleUsername@gmail.com" && password ==="password") {
+      navigation.navigate(MainRoutes.NavBar)
+    } else {
+      Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+        {text: "Okay"}
+      ])
+    }
+
+
+
   }
 
   //Components
-  const EmailTextInput = () => {
-    return(
-    <View>
-      <SignInTextFooter>Email</SignInTextFooter>
-      <SignInAction>
-          <FontAwesome name="user-o" color={black} size={20} />
-          <TextInput style={styles.textInput} placeholder="user@provider.com" autoCapitalize="none" onChangeText={(val)=>onEmailChangeHandler(val)}/>
-          {data.check_textInputChange ?
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
-          </Animatable.View>
-          : null}
-      </SignInAction>
-    </View>
-    )
-  }
 
-  const PasswordTextInput = () => {
-    return(
-      <View>
-        <SignInTextFooter style={{marginTop: 35}}>Password</SignInTextFooter>
-        <SignInAction>
-          <FontAwesome name="lock" color={black} size={20} />
-            <TextInput 
-              style={styles.textInput} 
-              placeholder="* * * * * * * * *" 
-              autoCapitalize="none" 
-              secureTextEntry={data.secureTextEntry ? true: false} 
-              onChange={(val)=>onPasswordChangeHandler(val)}
-            />
-            <TouchableOpacity onPress={updateSecureTextEntry}>
-              {data.secureTextEntry ?
-              <Feather name="eye-off" color={grey} size={20} />
-              : 
-              <Feather name="eye" color={grey} size={20} />
-              }
-            </TouchableOpacity>
-          </SignInAction>
-        </View>
+  const SignOutButton = () => {
+    return (
+      <TouchableOpacity onPress={()=>navigation.navigate(MainRoutes.SignUp)} style={[styles.signIn, {
+        borderColor: primary,
+        borderWidth: 1,
+        marginTop: 15, 
+        }]}>
+          <SignInTextSign style={{color: primary}}>Sign Up</SignInTextSign>
+      </TouchableOpacity>
     )
   }
 
@@ -146,10 +147,58 @@ const SignIn = ({ navigation }): React.ReactElement => {
         </SignInHeader>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
           <StyledFormArea>
-            <EmailTextInput />
-            <PasswordTextInput />
+            <SignInTextFooter>Email</SignInTextFooter>
 
-            <SignInButton onPress={()=>onSubmitHandler}>
+            <SignInAction>
+              <FontAwesome name="user-o" color={black} size={20} />
+              <TextInput 
+                style={styles.textInput} 
+                placeholder="user@provider.com" 
+                autoCapitalize="none" 
+                onChangeText={(val)=>onEmailChangeHandler(val)} 
+                keyboardType='email-address'
+              />
+              {data.check_email ?
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+              : null}
+            </SignInAction>
+            {data.isValidEmail ? null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a Valid Email.</ErrorMsg>
+            </Animatable.View>
+            }   
+
+            <SignInTextFooter style={{marginTop: 35}}>Password</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="lock" color={black} size={20} />
+              <TextInput 
+                style={styles.textInput} 
+                placeholder="* * * * * * * * *" 
+                autoCapitalize="none" 
+                secureTextEntry={data.secureTextEntry ? true: false} 
+                onChangeText={(val)=>onPasswordChangeHandler(val)}
+              />
+              <TouchableOpacity onPress={updateSecureTextEntry}>
+                {data.secureTextEntry ?
+                <Feather name="eye-off" color={grey} size={20} />
+                : 
+                <Feather name="eye" color={grey} size={20} />
+                }
+              </TouchableOpacity>
+            </SignInAction>
+            {data.isValidPassword ? null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Password must be at least 8 characters long.</ErrorMsg>
+            </Animatable.View>
+            }
+
+            <ForgetPassword onPress={()=>navigation.navigate(MainRoutes.ConfirmEmail)}>
+              <Text style={{fontSize: 14, color: primary}}>Forgot Password?</Text>
+            </ForgetPassword>
+
+            <SignInButton onPress={()=>onSubmitHandler(data.email, data.password)}>
               <LinearGradient
                 colors={['#FFA07A', '#FF6347']}
                 style={styles.signIn}
@@ -157,14 +206,9 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 <SignInTextSign>Sign In</SignInTextSign>
               </LinearGradient>
             </SignInButton>
+            <SignOutButton />
 
-            <TouchableOpacity onPress={()=>navigation.navigate(MainRoutes.SignUp)} style={[styles.signIn, {
-              borderColor: primary,
-              borderWidth: 1,
-              marginTop: 15, 
-              }]}>
-              <SignInTextSign style={{color: primary}}>Sign Up</SignInTextSign>
-            </TouchableOpacity>
+            
           </StyledFormArea>
         </Animatable.View>
       </StyledContainerFullScreen>
@@ -286,7 +330,7 @@ const styles = StyleSheet.create({
       fontSize: 30
   },
   text_footer: {
-      color: '#05375a',
+      color: black,
       fontSize: 18
   },
   action: {

@@ -14,6 +14,7 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
+  Text,
 } from 'react-native'
 
 //Components
@@ -30,6 +31,7 @@ import {
   SignInTextSign,
   SignInView,
   StyledFormArea,
+  ErrorMsg,
 } from '../Components/styles'
 
 // icons
@@ -59,35 +61,93 @@ const SignUp = ({ navigation }): React.ReactElement => {
   const [data, setData] = useState({
     email: '',
     password:'',
-    check_textInputChange: false,
+    confirmPassword: '',
+    bday: '',
+    check_email: false, //For green animation
+    check_bday: false, //For green animation
     secureTextEntry: true,
+    confirmSecureTextEntry: true,
+    isValidEmail: true,
+    isValidDOB: true, 
+    isValidPassword: true,
+    isValidConfirmPassword: true,
   })
 
   //Handlers
 
   const onEmailChangeHandler = (val) =>{
-    if (val.length === 0) {
+    if (val.length >= 6 && val.includes('@') && val.includes('.')) {
       setData({
         ...data,
         email: val,
-        check_textInputChange: false
+        check_email: true,
+        isValidEmail: true,
       })
     } else {
       setData({
         ...data,
         email: val,
-        check_textInputChange: true
+        check_email: false,
+        isValidEmail: false,
 
       })
     }
   }
 
   const onPasswordChangeHandler = (val) =>{
-
+    if (val.trim().length >=8) {
       setData({
         ...data,
-        password: val
-    })
+        password: val,
+        isValidPassword: true
+      })
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false
+
+
+      })
+    }
+
+  }
+
+  const onConfirmPasswordChangeHandler = (val) =>{
+    if (val.trim() === data.password) {
+      setData({
+        ...data,
+        confirmPassword: val,
+        isValidConfirmPassword: true
+      })
+    } else {
+      setData({
+        ...data,
+        confirmPassword: val,
+        isValidConfirmPassword: false
+
+
+      })
+    }
+}
+
+  const onBdayChangeHandler = (val) => {
+    if (val.length === 10 && val.includes('/')) { 
+      setData({
+        ...data,
+        bday: val,
+        check_bday: true,
+        isValidDOB: true,
+      })
+    } else {
+      setData({
+        ...data,
+        bday: val,
+        check_bday: false,
+        isValidDOB: true,
+      })
+    }
+
   }
 
   const updateSecureTextEntry = () => {
@@ -100,7 +160,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
   const updateConfirmSecureTextEntry = () => {
     setData({
       ...data,
-      secureTextEntry: !data.secureTextEntry
+      confirmSecureTextEntry: !data.confirmSecureTextEntry
     })
   }
 
@@ -108,66 +168,32 @@ const SignUp = ({ navigation }): React.ReactElement => {
     console.log(data.email, data.password )
   }
 
-  //Components
-  const EmailTextInput = () => {
-    return(
-    <View>
-      <SignInTextFooter>Email</SignInTextFooter>
-      <SignInAction>
-          <FontAwesome name="user-o" color={black} size={20} />
-          <TextInput style={styles.textInput} placeholder="user@provider.com" autoCapitalize="none" onChangeText={(val)=>onEmailChangeHandler(val)}/>
-          {data.check_textInputChange ?
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
-          </Animatable.View>
-          : null}
-      </SignInAction>
-    </View>
-    )
-  }
-  const BdayTextInput = () => {
-    return(
-    <View>
-      <SignInTextFooter style={{marginTop: 35}}>Date of Birth</SignInTextFooter>
-      <SignInAction>
-          <FontAwesome name="calendar-o" color={black} size={20} />
-          <TextInput style={styles.textInput} placeholder="08/30/2003" autoCapitalize="none" onChangeText={(val)=>onEmailChangeHandler(val)}/>
-          {data.check_textInputChange ?
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
-          </Animatable.View>
-          : null}
-      </SignInAction>
-    </View>
-    )
-  }
+//Components
+const RegisterButton = () => {
+  return (
+    <TouchableOpacity onPress={()=>onSubmitHandler} style={[styles.signIn, {marginTop: 30}]}>
+      <LinearGradient
+        colors={['#FFA07A', '#FF6347']}
+        style={styles.signIn}
+                >
+        <SignInTextSign>Register</SignInTextSign>
+      </LinearGradient>
+    </TouchableOpacity>
 
-  const PasswordTextInput = (
-    {label}
-  ) => {
-    return(
-      <View>
-        <SignInTextFooter style={{marginTop: 35}}>{label}</SignInTextFooter>
-        <SignInAction>
-          <FontAwesome name="lock" color={black} size={20} />
-            <TextInput 
-              style={styles.textInput} 
-              placeholder="* * * * * * * * *" 
-              autoCapitalize="none" 
-              secureTextEntry={data.secureTextEntry ? true: false} 
-              onChange={(val)=>onPasswordChangeHandler(val)}
-            />
-            <TouchableOpacity onPress={updateSecureTextEntry}>
-              {data.secureTextEntry ?
-              <Feather name="eye-off" color={grey} size={20} />
-              : 
-              <Feather name="eye" color={grey} size={20} />
-              }
-            </TouchableOpacity>
-          </SignInAction>
-        </View>
-    )
-  }
+  )
+}
+
+const SignInButton = () => {
+  return (
+    <TouchableOpacity onPress={()=>navigation.goBack()} style={[styles.signIn, {
+      borderColor: primary,
+      borderWidth: 1,
+      marginTop: 15, 
+      }]}>
+        <SignInTextSign style={{color: primary}}>Sign In</SignInTextSign>
+    </TouchableOpacity>
+  )
+}
 
 
 
@@ -180,27 +206,107 @@ const SignUp = ({ navigation }): React.ReactElement => {
         </SignInHeader>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
           <StyledFormArea>
-            <EmailTextInput />
-            <BdayTextInput/>
-            <PasswordTextInput label="Password"/>
-            <PasswordTextInput label="Confirm Password"/>
 
-            <SignInButton onPress={()=>onSubmitHandler}>
-              <LinearGradient
-                colors={['#FFA07A', '#FF6347']}
-                style={styles.signIn}
-                >
-                <SignInTextSign>Register</SignInTextSign>
-              </LinearGradient>
-            </SignInButton>
+            <SignInTextFooter>Email</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="user-o" color={black} size={20} />
+              <TextInput 
+              style={styles.textInput} 
+              placeholder="user@provider.com" autoCapitalize="none" 
+              onChangeText={(val)=>onEmailChangeHandler(val)} 
+              keyboardType='email-address'
+              />
+              {data.check_email ?
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            : null}
+            </SignInAction>
+            {data.isValidEmail ?  null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a Valid Email</ErrorMsg>
+            </Animatable.View>
+            }
 
-            <TouchableOpacity onPress={()=>navigation.goBack()} style={[styles.signIn, {
-              borderColor: primary,
-              borderWidth: 1,
-              marginTop: 15, 
-              }]}>
-              <SignInTextSign style={{color: primary}}>Sign In</SignInTextSign>
-            </TouchableOpacity>
+            <SignInTextFooter style={{marginTop: 35}}>Date of Birth</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="calendar-o" color={black} size={20} />
+              <TextInput 
+              style={styles.textInput} 
+              placeholder="08/30/2003" autoCapitalize="none" 
+              onChangeText={(val)=>onBdayChangeHandler(val)} />
+              {data.check_bday ?
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+              : null}
+            </SignInAction>
+            {data.isValidDOB ?  null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a birthday.</ErrorMsg>
+            </Animatable.View>
+            }
+
+            <SignInTextFooter style={{marginTop: 35}}>Password</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="lock" color={black} size={20} />
+              <TextInput 
+                style={styles.textInput} 
+                placeholder="* * * * * * * * *" 
+                autoCapitalize="none" 
+                secureTextEntry={data.secureTextEntry ? true: false} 
+                onChangeText={(val)=>onPasswordChangeHandler(val)}
+              />
+              <TouchableOpacity onPress={updateSecureTextEntry}>
+                {data.secureTextEntry ?
+                <Feather name="eye-off" color={grey} size={20} />
+                : 
+                <Feather name="eye" color={grey} size={20} />
+                }
+              </TouchableOpacity>
+            </SignInAction>
+            {data.isValidPassword ?  null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Password must be at least 8 characters long.</ErrorMsg>
+            </Animatable.View>
+            }
+
+            <SignInTextFooter style={{marginTop: 35}}>Confirm Password</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="lock" color={black} size={20} />
+              <TextInput 
+                style={styles.textInput} 
+                placeholder="* * * * * * * * *" 
+                autoCapitalize="none" 
+                secureTextEntry={data.confirmSecureTextEntry ? true: false} 
+                onChangeText={(val)=>onConfirmPasswordChangeHandler(val)}
+              />
+              <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+                {data.confirmSecureTextEntry ?
+                <Feather name="eye-off" color={grey} size={20} />
+                : 
+                <Feather name="eye" color={grey} size={20} />
+                }
+              </TouchableOpacity>
+            </SignInAction>
+            {data.isValidConfirmPassword ?  null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must match password.</ErrorMsg>
+            </Animatable.View>
+            }
+
+            <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>
+                    By signing up you agree to our
+                </Text>
+                <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Terms of service</Text>
+                <Text style={styles.color_textPrivate}>{" "}and</Text>
+                <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>Privacy policy</Text>
+            </View>
+
+            <RegisterButton />
+            <SignInButton />
+
           </StyledFormArea>
         </Animatable.View>
       </StyledContainerFullScreen>
@@ -344,34 +450,27 @@ const styles = StyleSheet.create({
       paddingBottom: 50
   },
   footer: {
-      flex: 3,
-      backgroundColor: '#fff',
+      flex: Platform.OS === 'ios' ? 3 : 5,
+      backgroundColor: white,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
       paddingHorizontal: 20,
       paddingVertical: 30
   },
   text_header: {
-      color: '#fff',
+      color: white,
       fontWeight: 'bold',
       fontSize: 30
   },
   text_footer: {
-      color: '#05375a',
+      color: black,
       fontSize: 18
   },
   action: {
       flexDirection: 'row',
       marginTop: 10,
       borderBottomWidth: 1,
-      borderBottomColor: '#f2f2f2',
-      paddingBottom: 5
-  },
-  actionError: {
-      flexDirection: 'row',
-      marginTop: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#FF0000',
+      borderBottomColor: grey,
       paddingBottom: 5
   },
   textInput: {
@@ -379,10 +478,6 @@ const styles = StyleSheet.create({
       marginTop: Platform.OS === 'ios' ? 0 : -12,
       paddingLeft: 10,
       color: black,
-  },
-  errorMsg: {
-      color: '#FF0000',
-      fontSize: 14,
   },
   button: {
       alignItems: 'center',
@@ -398,6 +493,13 @@ const styles = StyleSheet.create({
   textSign: {
       fontSize: 18,
       fontWeight: 'bold'
+  },
+  textPrivate: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: 20
+  },
+  color_textPrivate: {
+      color: grey
   }
-});
-
+})
