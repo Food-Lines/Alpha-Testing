@@ -23,7 +23,6 @@ import {
   StyledContainerFullScreen,
   SignInAction,
   SignInActionError,
-  SignInButton,
   SignInFooter,
   SignInHeader,
   SignInTextFooter,
@@ -65,11 +64,11 @@ const SignUp = ({ navigation }): React.ReactElement => {
     bday: '',
     fullName: '',
     check_email: false, //For green animation
-    check_bday: false, //For green animation
+    check_name: false, //For green animation
     secureTextEntry: true,
     confirmSecureTextEntry: true,
     isValidEmail: true,
-    isValidDOB: true, 
+    isValidName: true, 
     isValidPassword: true,
     isValidConfirmPassword: true,
   })
@@ -132,30 +131,28 @@ const SignUp = ({ navigation }): React.ReactElement => {
     }
 }
 
-  const onBdayChangeHandler = (val) => {
-    if (val.length === 10 && val.includes('/')) { 
+  
+  const onNameChangeHandler = (val) => {
+    if (val.trim().length > 1 && val.includes(' ')) {
       setData({
         ...data,
-        bday: val,
-        check_bday: true,
-        isValidDOB: true,
+        fullName: val,
+        check_name: true,
+        isValidName: true,
+
       })
     } else {
       setData({
         ...data,
-        bday: val,
-        check_bday: false,
-        isValidDOB: false,
+        fullName: val,
+        check_name: false,
+        isValidName: false,
       })
-    }
+      
+      
 
-  }
-  
-  const onNameChangeHandler = (val) => {
-    setData({
-      ...data,
-      fullName: val,
-    })
+    }
+    
   }
 
   const updateSecureTextEntry = () => {
@@ -244,12 +241,12 @@ const SignInButton = () => {
             </Animatable.View>
             }
 
-            <SignInTextFooter>Full Name</SignInTextFooter>
+            <SignInTextFooter style={{marginTop: 25}}>Full Name</SignInTextFooter>
             <SignInAction>
               <FontAwesome name="user-o" color={black} size={20}/>
               <TextInput 
               style={styles.textInput} 
-              placeholder="First Last" autoCapitalize="none" 
+              placeholder="Full Name"
               onChangeText={(val)=>onNameChangeHandler(val)} 
               />
               {data.fullName ?
@@ -258,30 +255,11 @@ const SignInButton = () => {
               </Animatable.View>
             : null}
             </SignInAction>
-            {/* {data.isValidEmail ?  null :
+             {data.isValidName ?  null :
             <Animatable.View animation="fadeInLeft" duration={500}>
-              <ErrorMsg>Must be a Valid Email</ErrorMsg>
+              <ErrorMsg>Must include First and Last Name</ErrorMsg>
             </Animatable.View>
-            } */}
-
-            <SignInTextFooter style={{marginTop: 35}}>Date of Birth</SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="calendar-o" color={black} size={20} />
-              <TextInput 
-              style={styles.textInput} 
-              placeholder="08/30/2003" autoCapitalize="none" 
-              onChangeText={(val)=>onBdayChangeHandler(val)} />
-              {data.check_bday ?
-              <Animatable.View animation="bounceIn">
-                <Feather name="check-circle" color="green" size={20} />
-              </Animatable.View>
-              : null}
-            </SignInAction>
-            {data.isValidDOB ?  null :
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <ErrorMsg>Must be a Valid Birthday</ErrorMsg>
-            </Animatable.View>
-            }
+            } 
 
             <SignInTextFooter style={{marginTop: 25}}>Password</SignInTextFooter>
             <SignInAction>
@@ -347,127 +325,7 @@ const SignInButton = () => {
         </Animatable.View>
       </StyledContainerFullScreen>
     </KeyboardAvoidingWrapper>
-    // <KeyboardAvoidingView
-    //   style={{ flex: 1 }}
-    //   behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    // >
-    //   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    //     <ScrollView style={{ backgroundColor: '#ffffff' }}>
-    //       <StyledContainer>
-    //         <StatusBar style="dark" />
-    //         <InnerContainer>
-    //           <PageLogo
-    //             resizeMode="cover"
-    //             source={require('../Assets/mockLogo.png')}
-    //           />
-    //           <PageTitle>Food Lines</PageTitle>
-    //           <SubTitle>Account Sign Up</SubTitle>
-    //           <Formik
-    //             initialValues={{
-    //               fullName: '',
-    //               email: '',
-    //               username: '',
-    //               password: '',
-    //               confirmPassword: '',
-    //             }}
-    //             onSubmit={async (values) => {
-    //               const resultAction = await dispatch(signup({ ...values }))
-    //               if (signup.fulfilled.match(resultAction)) {
-    //                 // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
-    //                 const user = resultAction.payload
-    //                 alert('Success')
-    //               } else {
-    //                 alert(`Fail: ${resultAction.payload}`)
-    //               }
-    //               console.log(values)
-    //             }}
-    //           >
-    //             {({ handleChange, handleBlur, handleSubmit, values }) => (
-    //               <StyledFormArea>
-    //                 <MyTextInput
-    //                   label="Full Name"
-    //                   icon="person"
-    //                   placeholder="John Smith"
-    //                   placeholderTextColor={darkLight}
-    //                   onChangeText={handleChange('fullName')}
-    //                   onBlur={handleBlur('fullName')}
-    //                   value={values.fullName}
-    //                   isPassword={false}
-    //                   hidePassword={false}
-    //                   setHidePassword={false}
-    //                 />
-
-    //                 <MyTextInput
-    //                   label="Email"
-    //                   icon="mail"
-    //                   placeholder="greendog21@gmail.com"
-    //                   placeholderTextColor={darkLight}
-    //                   onChangeText={handleChange('email')}
-    //                   onBlur={handleBlur('email')}
-    //                   value={values.email}
-    //                   isPassword={false}
-    //                   hidePassword={false}
-    //                   setHidePassword={false}
-    //                 />
-
-    //                 {/* <MyTextInput
-    //                   label="Username"
-    //                   icon="person"
-    //                   placeholder="greendog21"
-    //                   placeholderTextColor={darkLight}
-    //                   onChangeText={handleChange('username')}
-    //                   onBlur={handleBlur('username')}
-    //                   value={values.username}
-    //                   isPassword={false}
-    //                   hidePassword={false}
-    //                   setHidePassword={false}
-    //                 /> */}
-    //                 <MyTextInput
-    //                   label="Password"
-    //                   icon="lock"
-    //                   placeholder="* * * * * * * *"
-    //                   placeholderTextColor={darkLight}
-    //                   onChangeText={handleChange('password')}
-    //                   onBlur={handleBlur('password')}
-    //                   value={values.password}
-    //                   secureTextEntry={hidePassword}
-    //                   isPassword
-    //                   hidePassword={hidePassword}
-    //                   setHidePassword={setHidePassword}
-    //                 />
-    //                 <MyTextInput
-    //                   label="Confirm Password"
-    //                   icon="lock"
-    //                   placeholder="* * * * * * * *"
-    //                   placeholderTextColor={darkLight}
-    //                   onChangeText={handleChange('confirmPassword')}
-    //                   onBlur={handleBlur('confirmPassword')}
-    //                   value={values.confirmPassword}
-    //                   secureTextEntry={hidePassword}
-    //                   isPassword
-    //                   hidePassword={hidePassword}
-    //                   setHidePassword={setHidePassword}
-    //                 />
-    //                 <StyledButton onPress={handleSubmit} title="Submit">
-    //                   <ButtonText>Register</ButtonText>
-    //                 </StyledButton>
-    //                 <Line />
-    //                 <ExtraView>
-    //                   <ExtraText>Have an acount already?</ExtraText>
-    //                   <TextLink
-    //                     onPress={() => navigation.navigate(MainRoutes.SignIn)}
-    //                   >
-    //                     <TextLinkContent> Log In</TextLinkContent>
-    //                   </TextLink>
-    //                 </ExtraView>
-    //               </StyledFormArea>
-    //             )}
-    //           </Formik>
-    //         </InnerContainer>
-    //       </StyledContainer>
-    //     </ScrollView>
-    //   </TouchableWithoutFeedback>
-    // </KeyboardAvoidingView>
+    
   )
 }
 

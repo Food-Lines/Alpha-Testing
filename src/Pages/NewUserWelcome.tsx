@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-
 //Animations
 import * as Animatable from 'react-native-animatable';
 
+//Components
 import { StatusBar, Dimensions, StyleSheet, Platform } from 'react-native'
 import {
   StyledContainer,
@@ -30,7 +30,7 @@ const height_logo = height * 0.20;
 import { LinearGradient } from 'expo-linear-gradient';
 import { MainRoutes } from '../Navigators/routes';
 
-const Confirmation = ({ navigation }): React.ReactElement => {
+const NewUserWelcome = ({ navigation }): React.ReactElement => {
   const onSubmitHandler = () => {
     navigation.navigate(MainRoutes.NavBar)
   }
@@ -66,7 +66,7 @@ const Confirmation = ({ navigation }): React.ReactElement => {
   )
 }
 
-export default Confirmation
+export default NewUserWelcome
 
 const styles = StyleSheet.create({
 

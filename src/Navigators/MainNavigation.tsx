@@ -17,6 +17,8 @@ import ConfirmEmail from '../Pages/ConfirmEmail'
 import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
+import NewUserWelcome from '../Pages/NewUserWelcome'
+
 import {
   getAuth
 } from 'firebase/auth'
@@ -53,7 +55,7 @@ const MainNavigation = (): React.ReactElement => {
           headerTransparent: true,
           headerTitle: '',
           headerLeftContainerStyle: {
-            paddingLeft: 20,
+            paddingLeft: 10,
           },
         }}
         initialRouteName={MainRoutes.SplashScreen}
@@ -63,14 +65,18 @@ const MainNavigation = (): React.ReactElement => {
             <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />
             <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} options={{headerShown: false}} /> 
+            <MainStack.Screen name={MainRoutes.NewUserWelcome} component={NewUserWelcome} options={{headerShown: false}} /> 
             <MainStack.Screen
               name={MainRoutes.ConfirmEmail}
               component={ConfirmEmail}
+              options={{headerTintColor: white}}
             />
             <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
             <MainStack.Screen
               name={MainRoutes.ResetPassword}
               component={ResetPassword}
+              options={{headerShown: true}}
+
             />
             <MainStack.Screen
               name={MainRoutes.Confirmation}
@@ -89,30 +95,4 @@ const MainNavigation = (): React.ReactElement => {
   )
 }
 
-// const MainNavigation = (): React.ReactElement => {
-//   const isLoggedIn = useReduxSelector(selectUser)
-
-//   return (
-//     <NavigationContainer>
-//       <MainStack.Navigator
-//         screenOptions={{
-//           headerStyle: {
-//             backgroundColor: 'transparent',
-//           },
-//           headerTintColor: tertiary,
-//           headerTransparent: true,
-//           headerTitle: '',
-//           headerLeftContainerStyle: {
-//             paddingLeft: 20,
-//           },
-//         }}
-//         initialRouteName={MainRoutes.NavBar}
-//       >
-//         <>
-//           <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
-//         </>
-//       </MainStack.Navigator>
-//     </NavigationContainer>
-//   )
-// }
 export default MainNavigation

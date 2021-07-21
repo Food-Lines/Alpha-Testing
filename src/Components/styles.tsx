@@ -261,7 +261,7 @@ export const PageTitle = styled.Text`
   font-size: 30px;
   text-align: center;
   font-weight: bold;
-  color: ${brand};
+  color: ${white};
   padding: 10px;
 
   ${(props) =>

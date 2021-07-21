@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, StyleSheet, Platform, StatusBar, TextInput, TouchableOpacity, Text, Alert} from 'react-native'
 
 // icons
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -214,92 +213,9 @@ const SignIn = ({ navigation }): React.ReactElement => {
     </KeyboardAvoidingWrapper>
 
 
-    // <KeyboardAvoidingWrapper>
-    //   <StyledContainer>
-    //     <StatusBar style="dark" />
-    //     <InnerContainer>
-    //       <PageLogo
-    //         resizeMode="cover"
-    //         source={require('../Assets/mockLogo.png')}
-    //       />
-    //       <PageTitle>Food Lines</PageTitle>
-    //       <SubTitle>Account Login</SubTitle>
-    //       <Formik
-    //         initialValues={{ email: '', password: '' }}
-    //         onSubmit={async (values) => {
-    //           const resultAction = await dispatch(login({ ...values }))
-    //           if (login.fulfilled.match(resultAction)) {
-    //             // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
-    //             const user = resultAction.payload
-    //             alert('Success')
-    //           } else {
-    //             alert(`Fail: ${resultAction.payload}`)
-    //           }
-    //           console.log(values)
-    //         }}
-    //       >
-    //         {({ handleChange, handleBlur, handleSubmit, values }) => (
-    //           <StyledFormArea>
-    //             <View>
-    //               <LeftIcon>
-    //                 <Octicons name="person" size={30} color={brand} />
-    //               </LeftIcon>
-    //               <StyledInputLabel>Email</StyledInputLabel>
-    //               <StyledTextInput
-    //                 name="email"
-    //                 label="Email"
-    //                 placeholder="greendog21@foodlines.com"
-    //                 placeholderTextColor={darkLight}
-    //                 onChangeText={handleChange('email')}
-    //                 onBlur={handleBlur('email')}
-    //                 value={values.email}
-    //               />
-    //             </View>
-    //             <MyTextInput
-    //               label="Password"
-    //               icon="lock"
-    //               placeholder="* * * * * * * *"
-    //               placeholderTextColor={darkLight}
-    //               onChangeText={handleChange('password')}
-    //               onBlur={handleBlur('password')}
-    //               value={values.password}
-    //               secureTextEntry={hidePassword}
-    //               isPassword
-    //               hidePassword={hidePassword}
-    //               setHidePassword={setHidePassword}
-    //             />
-    //             <StyledButton onPress={handleSubmit} title="Submit">
-    //               <ButtonText>Login</ButtonText>
-    //             </StyledButton>
-    //             <ExtraView>
-    //               <ExtraText>Forgot Password?</ExtraText>
-    //               <TextLink onPress={() => navigation.navigate('ConfirmEmail')}>
-    //                 <TextLinkContent> Reset</TextLinkContent>
-    //               </TextLink>
-    //             </ExtraView>
-    //             <Line />
-    //             <StyledButton google onPress={handleSubmit}>
-    //               <Fontisto name="google" color={white} size={25} />
-    //               <ButtonText google>Sign in with Google</ButtonText>
-    //             </StyledButton>
-    //             <ExtraView>
-    //               <ExtraText>Don't have an account already?</ExtraText>
-    //               <TextLink
-    //                 onPress={() => navigation.navigate(MainRoutes.SignUp)}
-    //               >
-    //                 <TextLinkContent> Sign up</TextLinkContent>
-    //               </TextLink>
-    //             </ExtraView>
-    //           </StyledFormArea>
-    //         )}
-    //       </Formik>
-    //     </InnerContainer>
-    //   </StyledContainer>
-    // </KeyboardAvoidingWrapper>
+  
   )
 }
-
-
 
 export default SignIn
 
