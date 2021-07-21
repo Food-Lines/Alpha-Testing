@@ -109,17 +109,16 @@ const SignIn = ({ navigation }): React.ReactElement => {
 
 
 
-  //Also Error Display if not correcet credentials - Put shit here Niel
-  const onSubmitHandler = (email, password) => {
-    if (email === "soleUsername@gmail.com" && password ==="password") {
-      navigation.navigate(MainRoutes.NavBar)
+  const onSubmitHandler = async() => {
+    const { email, password } = data
+    const resultAction = await dispatch(login({email, password }))
+    if (login.fulfilled.match(resultAction)) {
+      // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+      // const user = resultAction.payload
+      alert('Success')
     } else {
-      Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-        {text: "Okay"}
-      ])
+      alert(`Fail: ${resultAction.payload}`)
     }
-
-
 
   }
 
@@ -198,7 +197,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
               <Text style={{fontSize: 14, color: primary}}>Forgot Password?</Text>
             </ForgetPassword>
 
-            <SignInButton onPress={()=>onSubmitHandler(data.email, data.password)}>
+            <SignInButton onPress={onSubmitHandler}>
               <LinearGradient
                 colors={['#FFA07A', '#FF6347']}
                 style={styles.signIn}

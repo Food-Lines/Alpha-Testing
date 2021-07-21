@@ -6,7 +6,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Colors } from '../Components/styles'
 import { MainStack, MainRoutes } from './routes'
-import { useReduxSelector } from '../Redux'
+import { useReduxDispatch, useReduxSelector } from '../Redux'
 import { selectUser } from '../Redux/slices/user'
 
 //Screens Auth
@@ -17,11 +17,27 @@ import ConfirmEmail from '../Pages/ConfirmEmail'
 import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
+import {
+  getAuth
+} from 'firebase/auth'
+import Firebase from '../../config/Firebase.js'
+
+
 
 //Screens Main
 import NavBar from '../Pages/NavBar'
 
 const { primary, tertiary, white, black} = Colors
+import  userSlice  from '../Redux/slices/user'
+
+const loggedIn = (): boolean => {
+  const user = getAuth(Firebase).currentUser
+  const reduxUser = useReduxSelector(selectUser)
+  if (user && reduxUser.uid === user.uid) return true
+  else if (user && reduxUser.uid !== user.uid) {userSlice.actions.setUser(user); return true}
+  else if (!user && reduxUser.uid) {userSlice.actions.setUser({email: null as string, fullName: null as string, uid: null as string}); return false}
+  else return false
+}
 
 const MainNavigation = (): React.ReactElement => {
   const user = useReduxSelector(selectUser)
@@ -42,7 +58,7 @@ const MainNavigation = (): React.ReactElement => {
         }}
         initialRouteName={MainRoutes.SplashScreen}
       >
-        {user ? (
+        {!user.uid ? (
           <>
             <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />

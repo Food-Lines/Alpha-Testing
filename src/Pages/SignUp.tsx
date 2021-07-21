@@ -63,6 +63,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
     password:'',
     confirmPassword: '',
     bday: '',
+    fullName: '',
     check_email: false, //For green animation
     check_bday: false, //For green animation
     secureTextEntry: true,
@@ -149,6 +150,13 @@ const SignUp = ({ navigation }): React.ReactElement => {
     }
 
   }
+  
+  const onNameChangeHandler = (val) => {
+    setData({
+      ...data,
+      fullName: val,
+    })
+  }
 
   const updateSecureTextEntry = () => {
     setData({
@@ -164,14 +172,22 @@ const SignUp = ({ navigation }): React.ReactElement => {
     })
   }
 
-  const onSubmitHandler = () => {
-    console.log(data.email, data.password )
+  const onSubmitHandler = async () => {
+    const { email, password, fullName } = data
+    const resultAction = await dispatch(signup({email, password, fullName}))
+    if (signup.fulfilled.match(resultAction)) {
+      // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+      // const user = resultAction.payload
+      alert('Success')
+    } else {
+      alert(`Fail: ${resultAction.payload}`)
+    }
   }
 
 //Components
 const RegisterButton = () => {
   return (
-    <TouchableOpacity onPress={()=>onSubmitHandler} style={[styles.signIn, {marginTop: 30}]}>
+    <TouchableOpacity onPress={onSubmitHandler} style={[styles.signIn, {marginTop: 30}]}>
       <LinearGradient
         colors={['#FFA07A', '#FF6347']}
         style={styles.signIn}
@@ -209,7 +225,7 @@ const SignInButton = () => {
 
             <SignInTextFooter>Email</SignInTextFooter>
             <SignInAction>
-              <FontAwesome name="user-o" color={black} size={20} />
+              <FontAwesome name="envelope-o" color={black} size={20} />
               <TextInput 
               style={styles.textInput} 
               placeholder="user@provider.com" autoCapitalize="none" 
@@ -227,6 +243,26 @@ const SignInButton = () => {
               <ErrorMsg>Must be a Valid Email</ErrorMsg>
             </Animatable.View>
             }
+
+            <SignInTextFooter>Full Name</SignInTextFooter>
+            <SignInAction>
+              <FontAwesome name="user-o" color={black} size={20}/>
+              <TextInput 
+              style={styles.textInput} 
+              placeholder="First Last" autoCapitalize="none" 
+              onChangeText={(val)=>onNameChangeHandler(val)} 
+              />
+              {data.fullName ?
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            : null}
+            </SignInAction>
+            {/* {data.isValidEmail ?  null :
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a Valid Email</ErrorMsg>
+            </Animatable.View>
+            } */}
 
             <SignInTextFooter style={{marginTop: 35}}>Date of Birth</SignInTextFooter>
             <SignInAction>

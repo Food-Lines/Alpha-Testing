@@ -1,6 +1,9 @@
 import React from 'react'
 import { SafeAreaView, Text, View } from 'react-native'
 import { MainRoutes } from '../Navigators/routes'
+//Redux
+import { useReduxDispatch } from '../Redux'
+import { logout } from '../Redux/slices/user'
 
 //Components
 import {
@@ -30,7 +33,10 @@ const { greyLight, white, darkLight, grey, primary, black } = Colors
 import { Ionicons, Fontisto } from '@expo/vector-icons'
 import { flex } from 'styled-system'
 
+
+
 const Profile = ({ navigation }): React.ReactElement => {
+  const dispatch = useReduxDispatch()
   return (
     <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
       <UserInfoSection>
@@ -106,6 +112,12 @@ const Profile = ({ navigation }): React.ReactElement => {
           <MenuItem>
             <Ionicons name="cog-outline" size={25} color={primary} />
             <MenuItemText>Settings</MenuItemText>
+          </MenuItem>
+        </TouchableRipple>
+        <TouchableRipple onPress={async() => {await dispatch(logout())}}>
+          <MenuItem>
+            <Ionicons name="cog-outline" size={25} color={primary} />
+            <MenuItemText>Log Out</MenuItemText>
           </MenuItem>
         </TouchableRipple>
       </MenuWrapper>
