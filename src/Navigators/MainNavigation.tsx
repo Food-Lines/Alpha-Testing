@@ -18,6 +18,7 @@ import OTP from '../Pages/OTP'
 import ResetPassword from '../Pages/ResetPassword'
 import Confirmation from '../Pages/Confirmation'
 import NewUserWelcome from '../Pages/NewUserWelcome'
+import FoodAccounts from '../Pages/FoodAccounts'
 
 import {
   getAuth
@@ -65,7 +66,10 @@ const MainNavigation = (): React.ReactElement => {
             <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />
             <MainStack.Screen name={MainRoutes.SignUp} component={SignUp} options={{headerShown: false}} /> 
-            <MainStack.Screen name={MainRoutes.NewUserWelcome} component={NewUserWelcome} options={{headerShown: false}} /> 
+            <MainStack.Screen name={MainRoutes.NewUserWelcome} component={NewUserWelcome} options={{headerShown: true}} />
+            <MainStack.Screen name={MainRoutes.FoodAccounts} component={FoodAccounts} options={{headerShown: true}} /> 
+            
+            
             <MainStack.Screen
               name={MainRoutes.ConfirmEmail}
               component={ConfirmEmail}
@@ -82,6 +86,7 @@ const MainNavigation = (): React.ReactElement => {
               name={MainRoutes.Confirmation}
               component={Confirmation}
             />
+             
              
           </>
         ) : (

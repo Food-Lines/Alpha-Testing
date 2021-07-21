@@ -18,7 +18,8 @@ export enum MainRoutes {
   EditProfile = 'Edit Profile',
   CardListScreen = 'Card List',
   CardItemDetails = 'Card Item Details',
-  NewUserWelcome = 'New User Welcome'
+  NewUserWelcome = 'New User Welcome',
+  FoodAccounts = 'Food Account'
 }
 
 export type MainStackParamList = {
@@ -39,6 +40,7 @@ export type MainStackParamList = {
   [MainRoutes.CardListScreen]: undefined
   [MainRoutes.CardItemDetails]: undefined
   [MainRoutes.NewUserWelcome]: undefined
+  [MainRoutes.FoodAccounts]: undefined
   
 }
 
