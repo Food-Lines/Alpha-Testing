@@ -145,7 +145,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
         ...data,
         bday: val,
         check_bday: false,
-        isValidDOB: true,
+        isValidDOB: false,
       })
     }
 
@@ -279,11 +279,11 @@ const SignInButton = () => {
             </SignInAction>
             {data.isValidDOB ?  null :
             <Animatable.View animation="fadeInLeft" duration={500}>
-              <ErrorMsg>Must be a birthday.</ErrorMsg>
+              <ErrorMsg>Must be a Valid Birthday</ErrorMsg>
             </Animatable.View>
             }
 
-            <SignInTextFooter style={{marginTop: 35}}>Password</SignInTextFooter>
+            <SignInTextFooter style={{marginTop: 25}}>Password</SignInTextFooter>
             <SignInAction>
               <FontAwesome name="lock" color={black} size={20} />
               <TextInput 
@@ -307,7 +307,7 @@ const SignInButton = () => {
             </Animatable.View>
             }
 
-            <SignInTextFooter style={{marginTop: 35}}>Confirm Password</SignInTextFooter>
+            <SignInTextFooter style={{marginTop: 25}}>Confirm Password</SignInTextFooter>
             <SignInAction>
               <FontAwesome name="lock" color={black} size={20} />
               <TextInput 
