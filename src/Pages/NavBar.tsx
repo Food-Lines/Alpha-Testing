@@ -99,7 +99,7 @@ const HomeStackScreen = ({ navigation }) => {
               onPress={() => navigation.openDrawer()}
             />
           ),
-          headerRightContainerStyle: { marginRight: 20 },
+          headerRightContainerStyle: { marginRight: 10 },
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <SearchIcon />
