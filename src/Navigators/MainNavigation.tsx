@@ -59,9 +59,12 @@ const MainNavigation = (): React.ReactElement => {
             paddingLeft: 10,
           },
         }}
-        initialRouteName={MainRoutes.SplashScreen}
+        initialRouteName={MainRoutes.NavBar}
       >
-        {!user.uid ? (
+        <>
+          <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
+        </>
+        {/* {!user.uid ? (
           <>
             <MainStack.Screen name={MainRoutes.SplashScreen} component={SplashScreen} />
             <MainStack.Screen name={MainRoutes.SignIn} component={SignIn} options={{headerShown: false}} />
@@ -94,7 +97,7 @@ const MainNavigation = (): React.ReactElement => {
           <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
   
           </>
-        )}
+        )} */}
       </MainStack.Navigator>
     </NavigationContainer>
   )

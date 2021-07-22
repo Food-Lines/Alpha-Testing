@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 
 //Screens
 import Home from './Home'
@@ -26,7 +26,7 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors, ProfilePicture } from '../Components/styles'
-import { flex, marginTop } from 'styled-system'
+
 
 const { primary, white, black } = Colors
 
@@ -75,7 +75,7 @@ export default NavBar
 
 const HomeStackScreen = ({navigation}) => {
   return(
-    <SafeAreaView style={{flex: 1, backgroundColor: white}}>
+    
       <HomeStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -93,13 +93,20 @@ const HomeStackScreen = ({navigation}) => {
             title: 'Home',
             headerLeftContainerStyle: {marginLeft: 20},
             headerLeft: () => (
-            <ProfilePictureComp
-              navigation={navigation}
-            />
+              <Icon.Button
+                name="ios-menu"
+                size={25}
+                backgroundColor={white}
+                color={black}
+                onPress={() => navigation.openDrawer()}
+              />
           ),
           headerRightContainerStyle: {marginRight: 20},
           headerRight: () => (
-            <SearchIcon/>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <ProfilePictureComp navigation={navigation}/>
+              <SearchIcon/>
+            </View>
           )
         }}
       />
@@ -124,15 +131,12 @@ const HomeStackScreen = ({navigation}) => {
 
         })} />
       </HomeStack.Navigator>
-    </SafeAreaView>
-
   )
 
 }
 
 const ProfileStackScreen = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: white }}>
       <ProfileStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -148,7 +152,8 @@ const ProfileStackScreen = ({ navigation }) => {
           component={Profile}
           options={{
             title: '',
-            headerStyle: { borderBottomColor: white },
+            headerStyle: { borderBottomColor: white, },
+            headerLeftContainerStyle : {marginLeft: 15},
             headerLeft: () => (
               <Icon.Button
                 name="ios-menu"
@@ -175,7 +180,6 @@ const ProfileStackScreen = ({ navigation }) => {
           component={EditProfile}
         />
       </ProfileStack.Navigator>
-    </SafeAreaView>
   )
 }
 
@@ -213,7 +217,7 @@ const UsFoodsStackScreen = ({ navigation }) => {
 
 const ProfilePictureComp = ({ navigation }) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)}>
+    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)} style={{marginHorizontal: 20}}>
       <ProfilePicture
         source={require('../Assets/mockPFP.jpg')}
         resizeMode="cover"
@@ -229,3 +233,4 @@ const SearchIcon = () => {
     </TouchableOpacity>
   )
 }
+

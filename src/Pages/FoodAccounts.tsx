@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 //Routes
 import { MainRoutes } from '../Navigators/routes'
 
-// formik
-import { Formik } from 'formik'
 
 import {
   View,
