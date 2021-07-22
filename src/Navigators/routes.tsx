@@ -19,7 +19,8 @@ export enum MainRoutes {
   CardListScreen = 'Card List',
   CardItemDetails = 'Card Item Details',
   NewUserWelcome = 'New User Welcome',
-  FoodAccounts = 'Food Account'
+  FoodAccounts = 'Food Account',
+  Favorites = 'Favorites',
 }
 
 export type MainStackParamList = {
@@ -41,7 +42,7 @@ export type MainStackParamList = {
   [MainRoutes.CardItemDetails]: undefined
   [MainRoutes.NewUserWelcome]: undefined
   [MainRoutes.FoodAccounts]: undefined
-  
+  [MainRoutes.Favorites]: undefined
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()

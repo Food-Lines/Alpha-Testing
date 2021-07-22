@@ -21,14 +21,9 @@ import MeatData from '../Data/MeatData'
 const { greyLight, white, darkLight, grey, primary, black } = Colors
 
 //Icons
-import { Ionicons, Fontisto } from '@expo/vector-icons'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import Feather from 'react-native-vector-icons/Feather'
-import { Icon } from 'react-native-elements/dist/icons/Icon'
-import { marginBottom, padding } from 'styled-system'
-import { Item } from 'react-native-paper/lib/typescript/components/List/List'
 
-const CardListScreen = ({ navigation }): React.ReactElement => {
+const Favorites = ({ navigation }): React.ReactElement => {
   const renderItem = ({ item }) => {
     return (
       <CardView
@@ -52,4 +47,4 @@ const CardListScreen = ({ navigation }): React.ReactElement => {
   )
 }
 
-export default CardListScreen
+export default Favorites

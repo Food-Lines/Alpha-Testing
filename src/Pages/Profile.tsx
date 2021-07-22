@@ -23,17 +23,12 @@ import {
 import { TouchableOpacity } from 'react-native'
 import { TouchableRipple } from 'react-native-paper'
 
-//react native elements
-import { Card, Header } from 'react-native-elements'
-
 // Colors
 const { greyLight, white, darkLight, grey, primary, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
 import { flex } from 'styled-system'
-
-
 
 const Profile = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
@@ -98,12 +93,6 @@ const Profile = ({ navigation }): React.ReactElement => {
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <MenuItem>
-            <Ionicons name="arrow-undo-outline" size={25} color={primary} />
-            <MenuItemText>Tell Your Friends</MenuItemText>
-          </MenuItem>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <MenuItem>
             <Ionicons name="people-outline" size={25} color={primary} />
             <MenuItemText>Customer Support</MenuItemText>
           </MenuItem>
@@ -112,12 +101,6 @@ const Profile = ({ navigation }): React.ReactElement => {
           <MenuItem>
             <Ionicons name="cog-outline" size={25} color={primary} />
             <MenuItemText>Settings</MenuItemText>
-          </MenuItem>
-        </TouchableRipple>
-        <TouchableRipple onPress={async() => {await dispatch(logout())}}>
-          <MenuItem>
-            <Ionicons name="cog-outline" size={25} color={primary} />
-            <MenuItemText>Log Out</MenuItemText>
           </MenuItem>
         </TouchableRipple>
       </MenuWrapper>

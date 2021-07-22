@@ -9,6 +9,7 @@ import UsFood from './UsFood'
 import EditProfile from './EditProfile'
 import CardListScreen from './CardListScreen'
 import CardItemDetails from './CardItemDetail'
+import Favorites from './Favorites'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -26,7 +27,6 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors, ProfilePicture } from '../Components/styles'
-
 
 const { primary, white, black } = Colors
 
@@ -73,113 +73,123 @@ const NavBar = (): React.ReactElement => {
 
 export default NavBar
 
-const HomeStackScreen = ({navigation}) => {
-  return(
-    
-      <HomeStack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: white,
-            shadowColor: white, // iOS
-            elevation: 0, // Android
-          },
-          headerTintColor: black,
-        }}
-        >
-          <HomeStack.Screen
-            name={MainRoutes.Home}
-            component={Home}
-            options={{
-            title: 'Home',
-            headerLeftContainerStyle: {marginLeft: 20},
-            headerLeft: () => (
-              <Icon.Button
-                name="ios-menu"
-                size={25}
-                backgroundColor={white}
-                color={black}
-                onPress={() => navigation.openDrawer()}
-              />
+const HomeStackScreen = ({ navigation }) => {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: white,
+          shadowColor: white, // iOS
+          elevation: 0, // Android
+        },
+        headerTintColor: black,
+      }}
+    >
+      <HomeStack.Screen
+        name={MainRoutes.Home}
+        component={Home}
+        options={{
+          title: 'Home',
+          headerLeftContainerStyle: { marginLeft: 10 },
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor={white}
+              color={black}
+              onPress={() => navigation.openDrawer()}
+            />
           ),
-          headerRightContainerStyle: {marginRight: 20},
+          headerRightContainerStyle: { marginRight: 20 },
           headerRight: () => (
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <ProfilePictureComp navigation={navigation}/>
-              <SearchIcon/>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <ProfilePictureComp navigation={navigation} />
+              <SearchIcon />
             </View>
-          )
+          ),
         }}
       />
-      <HomeStack.Screen 
-        name={MainRoutes.CardListScreen} 
+      <HomeStack.Screen
+        name={MainRoutes.CardListScreen}
         component={CardListScreen}
-        options={({route}) => ({
-          title: route.params.title , 
+        options={({ route }) => ({
+          title: route.params.title,
           headerBackTitleVisible: false,
-          headerLeftContainerStyle: {marginLeft: 20},
-        })} />
-      <HomeStack.Screen 
-        name={MainRoutes.CardItemDetails} 
-        
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
+      <HomeStack.Screen
+        name={MainRoutes.Favorites}
+        component={Favorites}
+        options={{
+          title: 'Your Favorites',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
+      />
+      <HomeStack.Screen
+        name={MainRoutes.CardItemDetails}
         component={CardItemDetails}
-        options={({route}) => ({
+        options={({ route }) => ({
           title: '',
           headerBackTitleVisible: false,
           headerTransparent: true,
           headerTintColor: white,
-          headerLeftContainerStyle: {marginLeft: 20},
-
-        })} />
-      </HomeStack.Navigator>
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
+    </HomeStack.Navigator>
   )
-
 }
 
 const ProfileStackScreen = ({ navigation }) => {
   return (
-      <ProfileStack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: white,
-            shadowColor: white, // iOS
-            elevation: 0, // Android
-          },
-          headerTintColor: black,
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: white,
+          shadowColor: white, // iOS
+          elevation: 0, // Android
+        },
+        headerTintColor: black,
+      }}
+    >
+      <ProfileStack.Screen
+        name={MainRoutes.Profile}
+        component={Profile}
+        options={{
+          title: '',
+          headerStyle: { borderBottomColor: white },
+          headerLeftContainerStyle: { marginLeft: 15 },
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor={white}
+              color={black}
+              onPress={() => navigation.openDrawer()}
+            />
+          ),
+          headerRight: () => (
+            <MaterialCommunityIcons.Button
+              name="account-edit"
+              size={25}
+              backgroundColor={white}
+              color={black}
+              onPress={() => navigation.navigate(MainRoutes.EditProfile)}
+            />
+          ),
         }}
-      >
-        <ProfileStack.Screen
-          name={MainRoutes.Profile}
-          component={Profile}
-          options={{
-            title: '',
-            headerStyle: { borderBottomColor: white, },
-            headerLeftContainerStyle : {marginLeft: 15},
-            headerLeft: () => (
-              <Icon.Button
-                name="ios-menu"
-                size={25}
-                backgroundColor={white}
-                color={black}
-                onPress={() => navigation.openDrawer()}
-              />
-            ),
-            headerRight: () => (
-              <MaterialCommunityIcons.Button
-                name="account-edit"
-                size={25}
-                backgroundColor={white}
-                color={black}
-                onPress={() => navigation.navigate(MainRoutes.EditProfile)}
-              />
-            ),
-          }}
-        />
-        <ProfileStack.Screen
-          name={MainRoutes.EditProfile}
-          options={{ title: 'Edit Profile' }}
-          component={EditProfile}
-        />
-      </ProfileStack.Navigator>
+      />
+      <ProfileStack.Screen
+        name={MainRoutes.EditProfile}
+        options={{
+          title: 'Edit Profile',
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
+        component={EditProfile}
+      />
+    </ProfileStack.Navigator>
   )
 }
 
@@ -217,7 +227,10 @@ const UsFoodsStackScreen = ({ navigation }) => {
 
 const ProfilePictureComp = ({ navigation }) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Profile)} style={{marginHorizontal: 20}}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(MainRoutes.Profile)}
+      style={{ marginHorizontal: 20 }}
+    >
       <ProfilePicture
         source={require('../Assets/mockPFP.jpg')}
         resizeMode="cover"
@@ -233,4 +246,3 @@ const SearchIcon = () => {
     </TouchableOpacity>
   )
 }
-

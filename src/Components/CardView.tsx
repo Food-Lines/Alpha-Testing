@@ -1,28 +1,37 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 
 //Components
-import { 
-  Colors,  
-  CardImageWrapper, 
-  CardImage, 
-  CardInfo, 
-  TextWrapper, 
-  CardTitle, 
+import {
+  Colors,
+  CardImageWrapper,
+  CardImage,
+  CardInfo,
+  TextWrapper,
+  CardTitle,
   CardDetails,
-  CardDetailsDark } from './styles'
+  CardDetailsDark,
+} from './styles'
 
 //react native elements
 import { Card } from 'react-native-elements'
-import { TouchableOpacity } from 'react-native'
+import { Touchable, TouchableOpacity } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 // Colors
-const { grey } = Colors
+const { grey, primary } = Colors
 
-const CardView = ({
-  itemData, 
-  onPress,
-}) => {
+const CardView = ({ itemData, onPress }) => {
+  const [data, setData] = useState({
+    isFav: false,
+  })
+
+  const onPressHandler = () => {
+    setData({
+      ...data,
+      isFav: !data.isFav,
+    })
+  }
+
   return (
     <TouchableOpacity onPress={onPress}>
       <Card
@@ -42,22 +51,44 @@ const CardView = ({
         wrapperStyle={{ flexDirection: 'row' }}
       >
         <CardImageWrapper>
-          <CardImage
-            source={itemData.image}
-            resizeMode="cover"
-          />
+          <CardImage source={itemData.image} resizeMode="cover" />
         </CardImageWrapper>
         <CardInfo>
           <TextWrapper>
             <CardTitle>{itemData.title}</CardTitle>
-            <CardTitle>{itemData.price + '/lb'}</CardTitle>
+            <TouchableOpacity onPress={onPressHandler}>
+              {data.isFav ? (
+                <FontAwesome
+                  name="heart"
+                  size={15}
+                  style={{ marginRight: 5 }}
+                  color={primary}
+                />
+              ) : (
+                <FontAwesome
+                  name="heart-o"
+                  size={15}
+                  style={{ marginRight: 5 }}
+                />
+              )}
+            </TouchableOpacity>
           </TextWrapper>
-          <CardDetails>{'#' + itemData.id}</CardDetails>
+          <TextWrapper style={{ justifyContent: 'flex-start' }}>
+            <CardTitle style={{ marginRight: 8 }}>
+              {itemData.price + '/lb'}
+            </CardTitle>
+            <CardDetails>{'#' + itemData.id}</CardDetails>
+          </TextWrapper>
+
           <CardDetailsDark style={{ marginTop: 5 }}>
             {'Min Purchase Amount: ' + itemData.minimumPurchase + ' Cases'}
           </CardDetailsDark>
-          <CardDetailsDark>{'Avg Weight/Case: ' + itemData.weight + 'lb'}</CardDetailsDark>
-          <CardDetailsDark>{'Shelf Life: ' + itemData.shelfLife + ' Days'}</CardDetailsDark>
+          <CardDetailsDark>
+            {'Avg Weight/Case: ' + itemData.weight + 'lb'}
+          </CardDetailsDark>
+          <CardDetailsDark>
+            {'Shelf Life: ' + itemData.shelfLife + ' Days'}
+          </CardDetailsDark>
           <CardDetails numberOfLines={1}>{itemData.description}</CardDetails>
         </CardInfo>
       </Card>
