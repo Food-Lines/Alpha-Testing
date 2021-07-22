@@ -54,10 +54,7 @@ export const signup = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'users/logout',
-  async (
-    arg,
-    { rejectWithValue }: any
-  ) => {
+  async (arg, { rejectWithValue }: any) => {
     return signOut(getAuth(Firebase))
       .then(() => {
         return {
@@ -72,19 +69,21 @@ export const logout = createAsyncThunk(
   }
 )
 
-
 const initialState = {
-  user: { email: null as string, fullName: null as string, uid: null as string },
+  user: {
+    email: null as string,
+    fullName: null as string,
+    uid: null as string,
+  },
   error: null as any,
 }
-
-
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<any>) => state.user = action.payload,
+    setUser: (state, action: PayloadAction<any>) =>
+      (state.user = action.payload),
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators

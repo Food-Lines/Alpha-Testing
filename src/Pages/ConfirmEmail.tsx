@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Platform, StatusBar, TextInput, Text, Dimensions} from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  TextInput,
+  Text,
+  Dimensions,
+} from 'react-native'
 
 // icons
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from 'react-native-vector-icons/Feather'
 
 //Routes
 import { MainRoutes } from '../Navigators/routes'
@@ -31,19 +39,17 @@ import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
-const { brand, darkLight, primary, white, black, grey, greyLight} = Colors
+const { brand, darkLight, primary, white, black, grey, greyLight } = Colors
 
 //Gradient
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient'
 
 //Animations
-import * as Animatable from 'react-native-animatable';
-
+import * as Animatable from 'react-native-animatable'
 
 //Screen Dimensions
-const {height} = Dimensions.get("screen");
-const height_logo = height * 0.20;
-
+const { height } = Dimensions.get('screen')
+const height_logo = height * 0.2
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
@@ -54,19 +60,17 @@ const SignIn = ({ navigation }): React.ReactElement => {
     check_email: false,
     isValidEmail: true,
     password: '', //temp
-
   })
 
   //Handlers
 
-  const onEmailChangeHandler = (val) =>{
+  const onEmailChangeHandler = (val) => {
     if (val.trim().length >= 6 && val.includes('@')) {
       setData({
         ...data,
         email: val,
         check_email: true,
         isValidEmail: true,
-        
       })
     } else {
       setData({
@@ -78,64 +82,74 @@ const SignIn = ({ navigation }): React.ReactElement => {
     }
   }
 
-
-  const onSubmitHandler = async() => { //Prob Not Correct but whatever
+  const onSubmitHandler = async () => {
+    //Prob Not Correct but whatever
     navigation.navigate(MainRoutes.ResetPassword)
-
   }
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <View style={styles.header}>
-          <Animatable.Image 
-            style={[styles.logo, {marginBottom: -50}]}
-            source={require('../Assets/lock.png')} 
+          <Animatable.Image
+            style={[styles.logo, { marginBottom: -50 }]}
+            source={require('../Assets/lock.png')}
             resizeMode="cover"
             animation="bounceIn"
-            duration={1500}/>
-          <Animatable.View animation="fadeInLeft" duration={500} style={{marginTop: 20 }}> 
+            duration={1500}
+          />
+          <Animatable.View
+            animation="fadeInLeft"
+            duration={500}
+            style={{ marginTop: 20 }}
+          >
             <SignInTextHeader>Step 1:</SignInTextHeader>
             <Text style={styles.text_headerDetail}>Account Email</Text>
           </Animatable.View>
-          
         </View>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
           <StyledFormArea>
-          <View style={[styles.textPrivate, {marginTop: -2}]}>
-                <Text style={styles.color_textPrivate}>
-                    Provide your account's email for which you want to rest your password. A
-                    <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Dynamic Link</Text> will be sent to your email.</Text>
+            <View style={[styles.textPrivate, { marginTop: -2 }]}>
+              <Text style={styles.color_textPrivate}>
+                Provide your account's email for which you want to rest your
+                password. A
+                <Text
+                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
+                >
+                  {' '}
+                  Dynamic Link
+                </Text>{' '}
+                will be sent to your email.
+              </Text>
             </View>
 
-            <SignInTextFooter style={{marginTop: 20}}>Email</SignInTextFooter>
+            <SignInTextFooter style={{ marginTop: 20 }}>Email</SignInTextFooter>
             <SignInAction>
               <FontAwesome name="user-o" color={black} size={20} />
-              <TextInput 
-                style={styles.textInput} 
-                placeholder="user@provider.com" 
-                autoCapitalize="none" 
-                onChangeText={(val)=>onEmailChangeHandler(val)} 
-                keyboardType='email-address'
+              <TextInput
+                style={styles.textInput}
+                placeholder="user@provider.com"
+                autoCapitalize="none"
+                onChangeText={(val) => onEmailChangeHandler(val)}
+                keyboardType="email-address"
               />
-              {data.check_email ?
-              <Animatable.View animation="bounceIn">
-                <Feather name="check-circle" color="green" size={20} />
-              </Animatable.View>
-              : null}
+              {data.check_email ? (
+                <Animatable.View animation="bounceIn">
+                  <Feather name="check-circle" color="green" size={20} />
+                </Animatable.View>
+              ) : null}
             </SignInAction>
-            {data.isValidEmail ? null :
-            <Animatable.View animation="fadeInLeft" duration={500}>
-              <ErrorMsg>Must be a Valid Email.</ErrorMsg>
-            </Animatable.View>
-            }   
-
+            {data.isValidEmail ? null : (
+              <Animatable.View animation="fadeInLeft" duration={500}>
+                <ErrorMsg>Must be a Valid Email.</ErrorMsg>
+              </Animatable.View>
+            )}
 
             <SignInButton onPress={onSubmitHandler}>
               <LinearGradient
                 colors={['#FFA07A', '#FF6347']}
                 style={styles.signIn}
-                >
+              >
                 <SignInTextSign>Next</SignInTextSign>
               </LinearGradient>
             </SignInButton>
@@ -143,21 +157,16 @@ const SignIn = ({ navigation }): React.ReactElement => {
         </Animatable.View>
       </StyledContainerFullScreen>
     </KeyboardAvoidingWrapper>
-
-
-  
   )
 }
 
 export default SignIn
 
-
 const styles = StyleSheet.create({
-
   text_headerDetail: {
-      color: white,
-      fontWeight: 'bold',
-      fontSize: 20
+    color: white,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   logo: {
     width: height_logo,
@@ -167,67 +176,66 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1, 
-    backgroundColor: '#FF6347'
+    flex: 1,
+    backgroundColor: '#FF6347',
   },
   header: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      paddingHorizontal: 20,
-      paddingBottom: 50
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    paddingBottom: 50,
   },
   footer: {
-      flex: Platform.OS === 'ios' ? 2 : 3,
-      backgroundColor: white,
-      borderTopLeftRadius: 30,
-      borderTopRightRadius: 30,
-      paddingHorizontal: 20,
-      paddingVertical: 30
+    flex: Platform.OS === 'ios' ? 2 : 3,
+    backgroundColor: white,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
   },
   text_header: {
-      color: white,
-      fontWeight: 'bold',
-      fontSize: 30
+    color: white,
+    fontWeight: 'bold',
+    fontSize: 30,
   },
   text_footer: {
-      color: black,
-      fontSize: 18
+    color: black,
+    fontSize: 18,
   },
   action: {
-      flexDirection: 'row',
-      marginTop: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: grey,
-      paddingBottom: 5
+    flexDirection: 'row',
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: grey,
+    paddingBottom: 5,
   },
   textInput: {
-      flex: 1,
-      marginTop: Platform.OS === 'ios' ? 0 : -12,
-      paddingLeft: 10,
-      color: black,
+    flex: 1,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    paddingLeft: 10,
+    color: black,
   },
   button: {
-      alignItems: 'center',
-      marginTop: 50
+    alignItems: 'center',
+    marginTop: 50,
   },
   signIn: {
-      width: '100%',
-      height: 50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 10
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
   textSign: {
-      fontSize: 18,
-      fontWeight: 'bold'
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   textPrivate: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      marginTop: 20
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 20,
   },
   color_textPrivate: {
-      color: grey
-  }
-  
-});
+    color: grey,
+  },
+})

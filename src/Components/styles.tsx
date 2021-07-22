@@ -1,14 +1,21 @@
 import styled from 'styled-components'
 import Constants from 'expo-constants'
 
-import { Text, TouchableOpacity, View, TextInput, Image, Dimensions } from 'react-native'
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  TextInput,
+  Image,
+  Dimensions,
+} from 'react-native'
 
 // Getting Status Bar Height
 const StatusBarHeight = Constants.statusBarHeight
 
 //Screen Dimensions
-const {height} = Dimensions.get("screen");
-const height_logo = height * 0.28;
+const { height } = Dimensions.get('screen')
+const height_logo = height * 0.28
 
 // colors
 export const Colors = {
@@ -491,8 +498,8 @@ export const PanelButton = styled.TouchableOpacity`
   margin-vertical: 7px;
 `
 export const PanelButtonTitle = styled.Text`
-  font-Size: 17px;
-  font-Weight: bold;
+  font-size: 17px;
+  font-weight: bold;
   color: ${white};
 `
 export const Action = styled.View`
@@ -519,121 +526,118 @@ export const EditProfileTextInput = styled.TextInput`
 //Splash Screen Stuff
 
 export const SplashHeaderView = styled.View`
-    flex: 2;
-    justify-Content: center;
-    align-Items: center;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
 `
 
 export const SplashFooter = styled.View`
-    flex: 1;
-    background-Color: ${white};
-    border-Top-Left-Radius: 30px;
-    border-Top-Right-Radius: 30px;
-    padding-Vertical: 50px;
-    padding-Horizontal: 30px;
+  flex: 1;
+  background-color: ${white};
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-vertical: 50px;
+  padding-horizontal: 30px;
 `
 
 export const SplashLogo = styled.Image`
-    width: ${height_logo}px;
-    height: ${height_logo}px;
+  width: ${height_logo}px;
+  height: ${height_logo}px;
 `
 
 export const SplashTitle = styled.Text`
-    color: ${red};
-    fontSize: 30px;
-    fontWeight: bold;
+  color: ${red};
+  fontsize: 30px;
+  fontweight: bold;
 `
 export const SplashText = styled.Text`
-    color: ${grey};
-    marginTop: 5px;
+  color: ${grey};
+  margintop: 5px;
 `
 export const SplashButtonView = styled.View`
-
-    align-Items: flex-end;
-    margin-Top: 30px;
+  align-items: flex-end;
+  margin-top: 30px;
 `
 
 export const SplashSignIn = styled.View`
-    width: 150px;
-    height: 40px;
-    justify-Content: center;
-    align-items: center;
-    border-Radius: 50px;
-    flex-Direction: row;
+  width: 150px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  flex-direction: row;
 `
 export const SplashTextSign = styled.Text`
-    color: ${white};
-    fontWeight: bold;
+  color: ${white};
+  fontweight: bold;
 `
-
 
 //Sign In Stuff
 
 export const StyledContainerFullScreen = styled.View`
   flex: 1;
-  background-Color: ${primary};
+  background-color: ${primary};
 `
-export const SignInHeader = styled.View` 
+export const SignInHeader = styled.View`
   flex: 1;
-  justify-Content: flex-end;
-  padding-Horizontal: 20px;
-  padding-Bottom: 50px;
+  justify-content: flex-end;
+  padding-horizontal: 20px;
+  padding-bottom: 50px;
 `
-export const SignInFooter= styled.View` 
-      flex: 3;
-      background-Color: ${white};
-      border-Top-Left-Radius: 30px;
-      border-Top-Right-Radius: 30px;
-      padding-Horizontal: 20px;
-      padding-Vertical: 30px;
+export const SignInFooter = styled.View`
+  flex: 3;
+  background-color: ${white};
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-horizontal: 20px;
+  padding-vertical: 30px;
 `
 export const SignInTextHeader = styled.Text`
-      color: ${white};
-      font-Weight: bold;
-      font-Size: 30px;
+  color: ${white};
+  font-weight: bold;
+  font-size: 30px;
 `
-export const SignInTextFooter = styled.Text` 
-      color: ${black};
-      font-Size: 18px;
+export const SignInTextFooter = styled.Text`
+  color: ${black};
+  font-size: 18px;
 `
 export const SignInAction = styled.View`
-      flex-Direction: row;
-      margin-Top: 10px;
-      border-Bottom-Width: 1px;
-      border-Bottom-Color: #f2f2f2;
-      padding-Bottom: 5px;
-      margin-bottom: 10px;
+  flex-direction: row;
+  margin-top: 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: #f2f2f2;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 `
 export const SignInActionError = styled.View`
-      flex-Direction: row;
-      margin-Top: 10px;
-      border-Bottom-Width: 1px;
-      border-Bottom-Color: #FF0000;
-      padding-Bottom: 5px;
+  flex-direction: row;
+  margin-top: 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: #ff0000;
+  padding-bottom: 5px;
 `
 export const ErrorMsg = styled.Text`
-      color: ${red};
-      font-Size: 12px;
+  color: ${red};
+  font-size: 12px;
 `
 export const SignInButton = styled.TouchableOpacity`
-  align-Items: center;
-  margin-Top: 50px;
+  align-items: center;
+  margin-top: 50px;
 `
 
 export const SignInView = styled.View`
-      width: 100%;
-      height: 50px;
-      justify-Content: center;
-      align-Items: center;
-      border-Radius: 10px;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 `
 export const SignInTextSign = styled.Text`
-      font-Size: 18px;
-      font-Weight: bold;
-      color: ${white};
+  font-size: 18px;
+  font-weight: bold;
+  color: ${white};
 `
 
 export const ForgetPassword = styled.TouchableOpacity`
-  margin-top: 15px;   
-
+  margin-top: 15px;
 `
