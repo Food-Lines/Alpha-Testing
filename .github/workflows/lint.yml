@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Prep Firebase for Install
+        run: sed -i 's/@firebase/firebase/g' package.json
+
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: rm -rf node_modules && yarn install --frozen-lockfile
@@ -32,3 +35,6 @@ jobs:
           prettier: true
           auto_fix: true
           git_email: "lint-action@foodlines.com"
+
+      - name: Remove Firebase Prep
+        run: sed -i 's/firebase/@firebase/g' package.json
