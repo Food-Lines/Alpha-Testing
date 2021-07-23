@@ -277,6 +277,14 @@ export const PageTitle = styled.Text`
     font-size:35px;
   `}
 `
+export const WelcomeTitle = styled.Text`
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  color: ${white};
+  padding: 10px;
+`
+
 export const StyledTitle = styled.Text`
   font-size: 24px;
   font-weight: bold;
