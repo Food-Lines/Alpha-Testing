@@ -19,9 +19,9 @@ const Drawer = createDrawerNavigator()
 
 const App = (): React.ReactElement => {
   return (
-      <Provider store={store}>
-        <RootStack/>
-      </Provider>
+    <Provider store={store}>
+      <RootStack />
+    </Provider>
   )
 }
 
