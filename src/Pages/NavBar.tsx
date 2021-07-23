@@ -27,6 +27,7 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors, ProfilePicture } from '../Components/styles'
+import { DrawerActions } from '@react-navigation/native'
 
 const { primary, white, black } = Colors
 
@@ -35,9 +36,9 @@ const HomeStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
 const UsFoodsStack = createStackNavigator()
 
-const NavBar = (): React.ReactElement => {
+const NavBar = ({ navigation }): React.ReactElement => {
   const Tab = createBottomTabNavigator()
-
+  console.log(navigation)
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

@@ -28,6 +28,8 @@ import NavBar from '../Pages/NavBar'
 
 const { primary, tertiary, white, black } = Colors
 import userSlice from '../Redux/slices/user'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { DrawerContent } from '../Components/DrawerContent'
 
 const loggedIn = (): boolean => {
   const user = getAuth(Firebase).currentUser
@@ -46,11 +48,20 @@ const loggedIn = (): boolean => {
   } else return false
 }
 
-const MainNavigation = (): React.ReactElement => {
-  const user = useReduxSelector(selectUser)
+const HomeNavigator = (): React.ReactElement => {
+  const Drawer = createDrawerNavigator()
+  return (<NavigationContainer>
+      <Drawer.Navigator
+            drawerContent={(props) => <DrawerContent {...props} />}
+      >
+        <Drawer.Screen name={MainRoutes.NavBar} component={NavBar} />
+      </Drawer.Navigator>
+    </NavigationContainer>)
+}
 
+const AuthNavigator = (): React.ReactElement => {
   return (
-    <NavigationContainer>
+  <NavigationContainer>
       <MainStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -65,11 +76,6 @@ const MainNavigation = (): React.ReactElement => {
         }}
         initialRouteName={MainRoutes.NavBar}
       >
-        {/* <>
-          <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
-        </> */}
-        {!user.uid ? (
-          <>
             <MainStack.Screen
               name={MainRoutes.SplashScreen}
               component={SplashScreen}
@@ -110,15 +116,19 @@ const MainNavigation = (): React.ReactElement => {
               name={MainRoutes.Confirmation}
               component={Confirmation}
             />
-          </>
-        ) : (
-          <>
-            <MainStack.Screen name={MainRoutes.NavBar} component={NavBar} />
-          </>
-        )}
-      </MainStack.Navigator>
+      </MainStack.Navigator> 
     </NavigationContainer>
   )
+}
+
+const MainNavigator = (): React.ReactElement => {
+  const user = useReduxSelector(selectUser)
+  if (!user.uid) return <AuthNavigator />
+  else return <HomeNavigator />
+}
+
+const MainNavigation = (): React.ReactElement => {
+  return (<MainNavigator></MainNavigator>)
 }
 
 export default MainNavigation
