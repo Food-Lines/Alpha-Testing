@@ -34,6 +34,9 @@ jobs:
       - name: Run Custom ESLint
         run: yarn fix
 
+      - name: Git Diff
+        run: git diff
+        
       - name: Run linters
         uses: wearerequired/lint-action@v1.10.0
         with:
