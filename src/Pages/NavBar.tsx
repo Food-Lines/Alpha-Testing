@@ -13,7 +13,6 @@ import Favorites from './Favorites'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -101,11 +100,11 @@ const HomeStackScreen = ({ navigation }) => {
               onPress={() => navigation.openDrawer()}
             />
           ),
-          headerRightContainerStyle: { marginRight: 20 },
+          headerRightContainerStyle: { marginRight: 10 },
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <ProfilePictureComp navigation={navigation} />
               <SearchIcon />
+              <ProfilePictureComp navigation={navigation} />
             </View>
           ),
         }}

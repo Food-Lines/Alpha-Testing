@@ -3,13 +3,10 @@ import { Provider } from 'react-redux'
 
 import { NavigationContainer } from '@react-navigation/native'
 
-
 //Drawer
 
 //temporary
 const LoggedIn = true
-
-
 
 // React Navigation stack
 import RootStack from './src/Navigators/MainNavigation'
