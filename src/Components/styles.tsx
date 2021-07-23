@@ -547,12 +547,12 @@ export const SplashLogo = styled.Image`
 
 export const SplashTitle = styled.Text`
   color: ${red};
-  fontsize: 30px;
-  fontweight: bold;
+  font-size: 30px;
+  font-weight: bold;
 `
 export const SplashText = styled.Text`
   color: ${grey};
-  margintop: 5px;
+  margin-top: 5px;
 `
 export const SplashButtonView = styled.View`
   align-items: flex-end;
@@ -569,7 +569,7 @@ export const SplashSignIn = styled.View`
 `
 export const SplashTextSign = styled.Text`
   color: ${white};
-  fontweight: bold;
+  font-weight: bold;
 `
 
 //Sign In Stuff

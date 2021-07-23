@@ -23,13 +23,8 @@ import FoodAccounts from '../Pages/FoodAccounts'
 import { getAuth } from 'firebase/auth'
 import Firebase from '../../config/Firebase.js'
 
-//Drawer Navigation
-import { createDrawerNavigator } from '@react-navigation/drawer'
+//Screens Main
 import NavBar from '../Pages/NavBar'
-
-//Drawer
-const Drawer = createDrawerNavigator()
-import { DrawerContent } from '../Components/DrawerContent'
 
 const { primary, tertiary, white, black } = Colors
 import userSlice from '../Redux/slices/user'
