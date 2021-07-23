@@ -30,11 +30,13 @@ jobs:
       
       - name: Remove Firebase Prep
         run: sed -i 's/firebase/\@firebase/g' package.json && cat package.json
-
+      
+      - name: Run Custom ESLint
+        run: yarn fix
+        
       - name: Run linters
         uses: wearerequired/lint-action@v1
         with:
-          eslint: true
           prettier: true
           auto_fix: true
           git_email: "lint-action@foodlines.com"
