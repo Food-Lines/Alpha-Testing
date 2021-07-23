@@ -50,18 +50,18 @@ const loggedIn = (): boolean => {
 
 const HomeNavigator = (): React.ReactElement => {
   const Drawer = createDrawerNavigator()
-  return (<NavigationContainer>
-      <Drawer.Navigator
-            drawerContent={(props) => <DrawerContent {...props} />}
-      >
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name={MainRoutes.NavBar} component={NavBar} />
       </Drawer.Navigator>
-    </NavigationContainer>)
+    </NavigationContainer>
+  )
 }
 
 const AuthNavigator = (): React.ReactElement => {
   return (
-  <NavigationContainer>
+    <NavigationContainer>
       <MainStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -76,47 +76,47 @@ const AuthNavigator = (): React.ReactElement => {
         }}
         initialRouteName={MainRoutes.NavBar}
       >
-            <MainStack.Screen
-              name={MainRoutes.SplashScreen}
-              component={SplashScreen}
-            />
-            <MainStack.Screen
-              name={MainRoutes.SignIn}
-              component={SignIn}
-              options={{ headerShown: false }}
-            />
-            <MainStack.Screen
-              name={MainRoutes.SignUp}
-              component={SignUp}
-              options={{ headerShown: false }}
-            />
-            <MainStack.Screen
-              name={MainRoutes.NewUserWelcome}
-              component={NewUserWelcome}
-              options={{ headerShown: true }}
-            />
-            <MainStack.Screen
-              name={MainRoutes.FoodAccounts}
-              component={FoodAccounts}
-              options={{ headerShown: true }}
-            />
+        <MainStack.Screen
+          name={MainRoutes.SplashScreen}
+          component={SplashScreen}
+        />
+        <MainStack.Screen
+          name={MainRoutes.SignIn}
+          component={SignIn}
+          options={{ headerShown: false }}
+        />
+        <MainStack.Screen
+          name={MainRoutes.SignUp}
+          component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <MainStack.Screen
+          name={MainRoutes.NewUserWelcome}
+          component={NewUserWelcome}
+          options={{ headerShown: true }}
+        />
+        <MainStack.Screen
+          name={MainRoutes.FoodAccounts}
+          component={FoodAccounts}
+          options={{ headerShown: true }}
+        />
 
-            <MainStack.Screen
-              name={MainRoutes.ConfirmEmail}
-              component={ConfirmEmail}
-              options={{ headerTintColor: white }}
-            />
-            <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
-            <MainStack.Screen
-              name={MainRoutes.ResetPassword}
-              component={ResetPassword}
-              options={{ headerShown: true }}
-            />
-            <MainStack.Screen
-              name={MainRoutes.Confirmation}
-              component={Confirmation}
-            />
-      </MainStack.Navigator> 
+        <MainStack.Screen
+          name={MainRoutes.ConfirmEmail}
+          component={ConfirmEmail}
+          options={{ headerTintColor: white }}
+        />
+        <MainStack.Screen name={MainRoutes.OTP} component={OTP} />
+        <MainStack.Screen
+          name={MainRoutes.ResetPassword}
+          component={ResetPassword}
+          options={{ headerShown: true }}
+        />
+        <MainStack.Screen
+          name={MainRoutes.Confirmation}
+          component={Confirmation}
+        />
+      </MainStack.Navigator>
     </NavigationContainer>
   )
 }
@@ -128,7 +128,7 @@ const MainNavigator = (): React.ReactElement => {
 }
 
 const MainNavigation = (): React.ReactElement => {
-  return (<MainNavigator></MainNavigator>)
+  return <MainNavigator></MainNavigator>
 }
 
 export default MainNavigation
