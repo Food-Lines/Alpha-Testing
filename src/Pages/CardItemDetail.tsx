@@ -35,7 +35,7 @@ const MAX_HEIGHT = 350
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 // Colors
-const { primary, white, darkLight, grey, black } = Colors
+const { primary, white, grey, black } = Colors
 
 const CardItemDetails = ({ route, navigation }): React.ReactElement => {
   const itemData = route.params.itemData

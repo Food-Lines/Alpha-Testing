@@ -17,9 +17,6 @@ import Feather from 'react-native-vector-icons/Feather'
 //Routes
 import { MainRoutes } from '../Navigators/routes'
 
-// formik
-import { Formik } from 'formik'
-
 import {
   Colors,
   StyledContainerFullScreen,
@@ -45,7 +42,7 @@ import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
-const { brand, darkLight, primary, white, black, grey, greyLight } = Colors
+const { primary, white, black, grey, greyLight } = Colors
 
 //Gradient
 import { LinearGradient } from 'expo-linear-gradient'

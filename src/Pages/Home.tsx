@@ -32,7 +32,7 @@ import {
 import VerticalSwiper from '../Components/VerticalSwiper'
 
 // Colors
-const { primary, white, darkLight, grey, black } = Colors
+const { primary, white, grey, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'

@@ -31,7 +31,7 @@ import {
 import { TouchableOpacity } from 'react-native'
 
 // Colors
-const { greyLight, white, darkLight, grey, primary, black } = Colors
+const { greyLight, white, grey, primary, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
@@ -115,7 +115,7 @@ const EditProfile = ({ navigation }): React.ReactElement => {
 const SearchIcon = () => {
   return (
     <TouchableOpacity onPress={() => {}}>
-      <Ionicons name={'search'} size={30} color={darkLight} />
+      <Ionicons name={'search'} size={30} color={greyLight} />
     </TouchableOpacity>
   )
 }

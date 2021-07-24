@@ -10,6 +10,7 @@ import EditProfile from './EditProfile'
 import CardListScreen from './CardListScreen'
 import CardItemDetails from './CardItemDetail'
 import Favorites from './Favorites'
+import Support from './Support'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -135,6 +136,15 @@ const HomeStackScreen = ({ navigation }) => {
           headerBackTitleVisible: false,
           headerTransparent: true,
           headerTintColor: white,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
+      <HomeStack.Screen
+        component={Support}
+        name={MainRoutes.Support}
+        options={({ route }) => ({
+          title: '',
+          headerBackTitleVisible: false,
           headerLeftContainerStyle: { marginLeft: 10 },
         })}
       />
