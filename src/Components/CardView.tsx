@@ -51,7 +51,6 @@ const CardView = ({ itemData, onPress }) => {
         containerStyle={{
           borderRadius: 8,
           height: 100,
-          marginVertical: 10,
           shadowColor: grey,
           shadowOffset: { width: 1, height: 1 },
           shadowRadius: 2,
@@ -60,6 +59,8 @@ const CardView = ({ itemData, onPress }) => {
           padding: 0,
           marginLeft: 0,
           width: '100%',
+          marginBottom: 10,
+          marginVertical: 10,
         }}
         wrapperStyle={{ flexDirection: 'row' }}
       >

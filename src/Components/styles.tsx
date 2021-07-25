@@ -639,3 +639,78 @@ export const SignInTextSign = styled.Text`
 export const ForgetPassword = styled.TouchableOpacity`
   margin-top: 15px;
 `
+
+// US Food and Sysco Components
+
+export const CompanyTitle = styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+  color: ${black};
+`
+
+export const HorizontalScroll = styled.View`
+  flex-direction: row;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  justify-content: flex-start;
+`
+export const SearchBarContainer = styled.View`
+  background-color: ${greyLight};
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  flex-direction: row;
+`
+export const CompanySlogan = styled.Text`
+  font-size: 14px;
+  font-weight: 300;
+`
+export const CategoryTitle = styled.Text`
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px;
+  padding-bottom: 10px;
+`
+
+export const FoodButton = styled.TouchableOpacity`
+  margin-horizontal: 15px;
+  align-items: center;
+`
+
+export const SearchText = styled.Text`
+  color: ${greyDark}
+  font-weight: 300;
+  margin-horizontal: 10px;
+`
+export const SearchContainer = styled.View`
+  background-color: ${greyLight};
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  flex-direction: row;
+`
+export const SearchButton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+`
+
+export const FilterContainer = styled.TouchableOpacity`
+  align-items: center;
+  margin-right: 10px;
+`
+export const CompanyLogo = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border-width: 1px;
+`

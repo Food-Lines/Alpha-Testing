@@ -5,17 +5,18 @@ import Swiper from 'react-native-swiper'
 
 //Components
 import { Colors, SliderContainer, Slide, SliderImage } from './styles'
+import { Text } from 'react-native'
 
 // Colors
 const { primary, white, grey, highlight } = Colors
 
-const VerticalSwiper = () => {
+const HorizontalSwiper = () => {
   return (
-    <SliderContainer>
+    <SliderContainer style={{ width: '100%' }}>
       <Swiper
         autoplay
-        height={200}
-        horizontal={false}
+        height={300}
+        horizontal={true}
         activeDotColor={highlight}
       >
         <Slide>
@@ -23,6 +24,7 @@ const VerticalSwiper = () => {
             resizeMode="cover"
             source={require('../Assets/slider1.jpg')}
           />
+          <Text style={{ position: 'absolute' }}>Hello</Text>
         </Slide>
         <Slide>
           <SliderImage
@@ -47,4 +49,4 @@ const VerticalSwiper = () => {
   )
 }
 
-export default VerticalSwiper
+export default HorizontalSwiper

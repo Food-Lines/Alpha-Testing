@@ -40,29 +40,29 @@ export function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="home-outline" color={color} size={size} />
-              )}
-              label="Home"
-              onPress={() => {
-                props.navigation.navigate(MainRoutes.Home)
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="account-outline" color={color} size={size} />
-              )}
-              label="Profile"
-              onPress={() => {
-                props.navigation.navigate(MainRoutes.Profile)
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
                 <Icon name="heart-outline" color={color} size={size} />
               )}
               label="Favorites"
               onPress={() => {
                 props.navigation.navigate(MainRoutes.Favorites)
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon name="credit-card-outline" color={color} size={size} />
+              )}
+              label="Payment"
+              onPress={() => {
+                props.navigation.navigate(MainRoutes.Payment)
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon name="information-outline" color={color} size={size} />
+              )}
+              label="About"
+              onPress={() => {
+                props.navigation.navigate(MainRoutes.About)
               }}
             />
             <DrawerItem

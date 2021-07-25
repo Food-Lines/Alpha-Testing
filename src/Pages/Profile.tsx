@@ -28,7 +28,6 @@ const { greyLight, white, grey, primary, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
-import { flex } from 'styled-system'
 
 const Profile = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
@@ -87,8 +86,8 @@ const Profile = ({ navigation }): React.ReactElement => {
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <MenuItem>
-            <Ionicons name="cog-outline" size={25} color={primary} />
-            <MenuItemText>Settings</MenuItemText>
+            <Ionicons name="information-circle" size={25} color={primary} />
+            <MenuItemText>About</MenuItemText>
           </MenuItem>
         </TouchableRipple>
       </MenuWrapper>

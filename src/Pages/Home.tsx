@@ -9,7 +9,14 @@ import CardView from '../Components/CardView'
 import RecentlyViewed from '../Data/RecentlyViewed'
 
 //Components
-import { SafeAreaView, Text, View, ScrollView, FlatList } from 'react-native'
+import {
+  SafeAreaView,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Image,
+} from 'react-native'
 
 import {
   Colors,
@@ -61,44 +68,14 @@ const Home = ({ navigation }): React.ReactElement => {
       >
         <VerticalSwiper />
         <CategoryContainer>
-          <Categories
-            label="Meat"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Meat"
-          />
-          <Categories
-            label="Seafood"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Seafood"
-          />
-          <Categories
-            label="Poultry"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Poultry"
-          />
+          <Categories label="Meat" navigation={navigation} title="Meat" />
+          <Categories label="Seafood" navigation={navigation} title="Seafood" />
+          <Categories label="Poultry" navigation={navigation} title="Poultry" />
         </CategoryContainer>
         <CategoryContainer>
-          <Categories
-            label="Produce"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Produce"
-          />
-          <Categories
-            label="Frozen"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Frozen"
-          />
-          <Categories
-            label="Dairy"
-            icon="restaurant-outline"
-            navigation={navigation}
-            title="Dairy"
-          />
+          <Categories label="Produce" navigation={navigation} title="Produce" />
+          <Categories label="Frozen" navigation={navigation} title="Frozen" />
+          <Categories label="Dairy" navigation={navigation} title="Dairy" />
         </CategoryContainer>
 
         <Text style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>
@@ -121,7 +98,7 @@ const Home = ({ navigation }): React.ReactElement => {
   )
 }
 
-const Categories = ({ label, icon, navigation, title }) => {
+const Categories = ({ label, navigation, title }) => {
   return (
     <CategoryButton
       onPress={() =>
@@ -129,11 +106,63 @@ const Categories = ({ label, icon, navigation, title }) => {
       }
     >
       <CategoryIcon>
-        <Ionicons name={icon} size={35} color={primary} />
+        <IconImage label={label} />
       </CategoryIcon>
       <CategoryButtonText>{label}</CategoryButtonText>
     </CategoryButton>
   )
+}
+
+const IconImage = ({ label }) => {
+  if (label === 'Meat') {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/meatOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  } else if (label === 'Seafood') {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/seafoodOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  } else if (label === 'Poultry') {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/poultryOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  } else if (label === 'Produce') {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/produceOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  } else if (label === 'Frozen') {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/frozenOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  } else {
+    return (
+      <Image
+        source={require('../Assets/FoodIcons/dairyOutline.png')}
+        resizeMode="center"
+        style={{ width: 25, height: 25, tintColor: primary }}
+      />
+    )
+  }
 }
 
 export default Home

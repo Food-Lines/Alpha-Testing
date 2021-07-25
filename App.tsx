@@ -24,7 +24,7 @@ const App = (): React.ReactElement => {
 
   setTimeout(() => {
     setAnimationDone(true)
-  }, 6000)
+  }, 4000)
 
   return (
     <Provider store={store}>

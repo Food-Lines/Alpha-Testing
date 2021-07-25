@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   footer: {
-    flex: Platform.OS === 'ios' ? 2 : 3,
+    flex: Platform.OS === 'ios' ? 2 : 2,
     backgroundColor: white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

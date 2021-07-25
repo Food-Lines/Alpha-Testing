@@ -11,6 +11,9 @@ import CardListScreen from './CardListScreen'
 import CardItemDetails from './CardItemDetail'
 import Favorites from './Favorites'
 import Support from './Support'
+import About from './About'
+import Payment from './Payment'
+import Search from './Search'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -27,7 +30,7 @@ import { MainRoutes } from './../Navigators/routes'
 
 //Colors
 import { Colors, ProfilePicture } from '../Components/styles'
-import { DrawerActions } from '@react-navigation/native'
+import { DrawerActions, NavigationContainer } from '@react-navigation/native'
 
 const { primary, white, black } = Colors
 
@@ -35,9 +38,9 @@ const { primary, white, black } = Colors
 const HomeStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
 const UsFoodsStack = createStackNavigator()
+const Tab = createBottomTabNavigator()
 
 const NavBar = ({ navigation }): React.ReactElement => {
-  const Tab = createBottomTabNavigator()
   console.log(navigation)
   return (
     <Tab.Navigator
@@ -50,9 +53,9 @@ const NavBar = ({ navigation }): React.ReactElement => {
           } else if (route.name === 'Profile') {
             iconName = focused ? 'person' : 'person-outline'
           } else if (route.name === 'Sysco') {
-            iconName = focused ? 'fast-food' : 'fast-food-outline'
-          } else if (route.name === 'UsFoods') {
-            iconName = focused ? 'pizza' : 'pizza-outline'
+            iconName = focused ? 'business' : 'business-outline'
+          } else if (route.name === 'US Foods') {
+            iconName = focused ? 'business' : 'business-outline'
           }
 
           // You can return any component that you like here!
@@ -104,7 +107,7 @@ const HomeStackScreen = ({ navigation }) => {
           headerRightContainerStyle: { marginRight: 10 },
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <SearchIcon />
+              <SearchIcon navigation={navigation} />
               <ProfilePictureComp navigation={navigation} />
             </View>
           ),
@@ -142,11 +145,40 @@ const HomeStackScreen = ({ navigation }) => {
       <HomeStack.Screen
         component={Support}
         name={MainRoutes.Support}
-        options={({ route }) => ({
-          title: '',
+        options={{
+          title: 'Customer Support',
           headerBackTitleVisible: false,
           headerLeftContainerStyle: { marginLeft: 10 },
-        })}
+        }}
+      />
+      <HomeStack.Screen
+        component={Payment}
+        name={MainRoutes.Payment}
+        options={{
+          title: 'Payment',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
+      />
+
+      <HomeStack.Screen
+        component={About}
+        name={MainRoutes.About}
+        options={{
+          title: 'About',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
+      />
+
+      <HomeStack.Screen
+        component={Search}
+        name={MainRoutes.Search}
+        options={{
+          title: 'What do you need?',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
       />
     </HomeStack.Navigator>
   )
@@ -220,6 +252,7 @@ const UsFoodsStackScreen = ({ navigation }) => {
         component={UsFood}
         options={{
           title: '',
+          headerShown: false,
           headerLeft: () => (
             <Icon.Button
               name="ios-menu"
@@ -249,9 +282,9 @@ const ProfilePictureComp = ({ navigation }) => {
   )
 }
 
-const SearchIcon = () => {
+const SearchIcon = ({ navigation }) => {
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Search)}>
       <Ionicons name={'search'} size={30} color={black} />
     </TouchableOpacity>
   )
