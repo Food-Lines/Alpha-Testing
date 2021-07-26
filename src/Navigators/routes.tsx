@@ -26,6 +26,8 @@ export enum MainRoutes {
   About = 'About',
   Payment = 'Payment',
   Search = 'Search',
+  SearchUSFood = 'Search US Foods',
+  SearchSysco = 'Search Sysco',
 }
 
 export type MainStackParamList = {
@@ -52,6 +54,8 @@ export type MainStackParamList = {
   [MainRoutes.About]: undefined
   [MainRoutes.Payment]: undefined
   [MainRoutes.Search]: undefined
+  [MainRoutes.SearchUSFood]: undefined
+  [MainRoutes.SearchSysco]: undefined
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()

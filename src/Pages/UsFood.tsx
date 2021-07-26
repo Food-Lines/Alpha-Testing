@@ -185,7 +185,9 @@ const UsFood = ({ navigation }): React.ReactElement => {
           </FoodButton>
         </ScrollView>
         <SearchBarContainer>
-          <SearchButton onPress={() => navigation.navigate(MainRoutes.Search)}>
+          <SearchButton
+            onPress={() => navigation.navigate(MainRoutes.SearchUSFood)}
+          >
             <SearchIcon />
             <SearchText>What are you craving?</SearchText>
           </SearchButton>

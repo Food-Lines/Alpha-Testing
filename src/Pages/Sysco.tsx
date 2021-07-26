@@ -35,12 +35,10 @@ import FrequentlyPurchased from '../Data/FrequentlyPurchased'
 
 // icons
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { Ionicons, Fontisto } from '@expo/vector-icons'
 
 // Colors
 const { primary, white, grey, black, greyDark, greyLight } = Colors
-
-//Icons
-import { Ionicons, Fontisto } from '@expo/vector-icons'
 
 //Slider
 import HorizontalSwiper from '../Components/HorizontalSwiper'
@@ -184,7 +182,9 @@ const Sysco = ({ navigation }): React.ReactElement => {
           </FoodButton>
         </ScrollView>
         <SearchBarContainer>
-          <SearchButton onPress={() => navigation.navigate(MainRoutes.Search)}>
+          <SearchButton
+            onPress={() => navigation.navigate(MainRoutes.SearchSysco)}
+          >
             <SearchIcon />
             <SearchText>What are you craving?</SearchText>
           </SearchButton>

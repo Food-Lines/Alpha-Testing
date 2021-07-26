@@ -14,6 +14,8 @@ import Support from './Support'
 import About from './About'
 import Payment from './Payment'
 import Search from './Search'
+import SearchUSFood from './SearchUSFood'
+import SearchSysco from './SearchSysco'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -38,6 +40,7 @@ const { primary, white, black } = Colors
 const HomeStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
 const UsFoodsStack = createStackNavigator()
+const SyscoStack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const NavBar = ({ navigation }): React.ReactElement => {
@@ -68,7 +71,7 @@ const NavBar = ({ navigation }): React.ReactElement => {
       }}
     >
       <Tab.Screen name={MainRoutes.Home} component={HomeStackScreen} />
-      <Tab.Screen name={MainRoutes.Sysco} component={Sysco} />
+      <Tab.Screen name={MainRoutes.Sysco} component={SyscoStackScreen} />
       <Tab.Screen name={MainRoutes.UsFoods} component={UsFoodsStackScreen} />
       <Tab.Screen name={MainRoutes.Profile} component={ProfileStackScreen} />
     </Tab.Navigator>
@@ -241,8 +244,8 @@ const UsFoodsStackScreen = ({ navigation }) => {
       screenOptions={{
         headerStyle: {
           backgroundColor: white,
-          shadowColor: black, // iOS
-          elevation: 0, // Android
+          shadowColor: white, // iOS
+          elevation: 1, // Android
         },
         headerTintColor: black,
       }}
@@ -253,18 +256,51 @@ const UsFoodsStackScreen = ({ navigation }) => {
         options={{
           title: '',
           headerShown: false,
-          headerLeft: () => (
-            <Icon.Button
-              name="ios-menu"
-              size={25}
-              backgroundColor={white}
-              color={black}
-              onPress={() => navigation.openDrawer()}
-            />
-          ),
+        }}
+      />
+      <UsFoodsStack.Screen
+        name={MainRoutes.SearchUSFood}
+        component={SearchUSFood}
+        options={{
+          title: 'What do you need?',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
         }}
       />
     </UsFoodsStack.Navigator>
+  )
+}
+
+const SyscoStackScreen = ({ navigation }) => {
+  return (
+    <SyscoStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: white,
+          shadowColor: white, // iOS
+          elevation: 1, // Android
+        },
+        headerTintColor: black,
+      }}
+    >
+      <SyscoStack.Screen
+        name={MainRoutes.Sysco}
+        component={Sysco}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
+      />
+      <SyscoStack.Screen
+        name={MainRoutes.SearchSysco}
+        component={SearchSysco}
+        options={{
+          title: 'What do you need?',
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        }}
+      />
+    </SyscoStack.Navigator>
   )
 }
 

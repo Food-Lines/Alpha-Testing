@@ -46,7 +46,7 @@ const CardListScreen = ({ navigation }): React.ReactElement => {
         data={MeatData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        style={{ padding: 20, flex: 1, paddingBottom: 50 }}
+        style={{ padding: 20, flex: 1 }}
       />
     </SafeAreaView>
   )
