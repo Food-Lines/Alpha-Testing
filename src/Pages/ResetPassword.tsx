@@ -161,9 +161,13 @@ const SignIn = ({ route, navigation }): React.ReactElement => {
   }
 
   const onSubmitHandler = async () => {
-    let resultAction = await dispatch(resetPass({code: route.params.oobCode, password: data.password}))
+    let resultAction = await dispatch(
+      resetPass({ code: route.params.oobCode, password: data.password })
+    )
     if (resetPass.fulfilled.match(resultAction)) {
-      let loginAction = await dispatch(login({email: reduxUser.email, password: data.password}))
+      let loginAction = await dispatch(
+        login({ email: reduxUser.email, password: data.password })
+      )
     }
   }
   return (

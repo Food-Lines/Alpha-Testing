@@ -23,19 +23,19 @@ const height_logo = height * 0.32
 
 const App = (): React.ReactElement => {
   const [animationDone, setAnimationDone] = useState(false)
-  
+
   const config = {
     screens: {
-      'Reset Password': 'action'
-    }
+      'Reset Password': 'action',
+    },
   }
 
-  const prefix = Linking.createURL('/');
+  const prefix = Linking.createURL('/')
 
   const linking = {
     prefixes: ['https://food-lines-40c3c.firebaseapp.com/__/auth/', prefix],
-    config
-  };
+    config,
+  }
 
   setTimeout(() => {
     setAnimationDone(true)

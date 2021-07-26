@@ -1,26 +1,23 @@
 {
-    "expo": {
-        "name": "Food Lines",
-        "slug": "food-lines",
-        "scheme": "foodlines",
-        "android": {
-            "package": "com.foodlines",
-            "intentFilters": [
-                {
-                  "action": "VIEW",
-                  "autoVerify": true,
-                  "data": [
-                    {
-                      "scheme": "https",
-                      "host": "food-lines-40c3c.firebaseapp.com"
-                    }
-                  ],
-                  "category": [
-                    "BROWSABLE",
-                    "DEFAULT"
-                  ]
-                }
-              ]
+  "expo": {
+    "name": "Food Lines",
+    "slug": "food-lines",
+    "scheme": "foodlines",
+    "android": {
+      "package": "com.foodlines",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "food-lines-40c3c.firebaseapp.com"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
         }
+      ]
     }
+  }
 }

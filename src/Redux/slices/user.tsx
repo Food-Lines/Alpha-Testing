@@ -8,7 +8,7 @@ import {
   updateProfile,
   signOut,
   sendPasswordResetEmail,
-  confirmPasswordReset
+  confirmPasswordReset,
 } from 'firebase/auth'
 import * as Linking from 'expo-linking'
 
@@ -74,38 +74,41 @@ export const logout = createAsyncThunk(
 
 export const sendReset = createAsyncThunk(
   'user/sendReset',
-  async (email:string, { rejectWithValue }: any) => {
+  async (email: string, { rejectWithValue }: any) => {
     var actionCodeSettings = {
       url: 'https://food-lines-40c3c.firebaseapp.com/__/auth/action',
       android: {
         packageName: 'com.foodlines',
         installApp: false,
       },
-      handleCodeInApp: true
-    };
+      handleCodeInApp: true,
+    }
     //console.log(actionCodeSettings);
     return sendPasswordResetEmail(getAuth(Firebase), email, actionCodeSettings)
-        .then( () =>{
-          return {
-            email: email,
-            fullName: null,
-            uid: null,
-          }
-        })
-        .catch(function(error) {
-          return rejectWithValue(error)
-        });
-      }
+      .then(() => {
+        return {
+          email: email,
+          fullName: null,
+          uid: null,
+        }
+      })
+      .catch(function (error) {
+        return rejectWithValue(error)
+      })
+  }
 )
 
 export const resetPass = createAsyncThunk(
   'user/resetPass',
-  async (data: {code: string, password:string}, { rejectWithValue }: any) => {
+  async (
+    data: { code: string; password: string },
+    { rejectWithValue }: any
+  ) => {
     confirmPasswordReset(getAuth(Firebase), data.code, data.password)
       .then()
-      .catch(function(error) {
+      .catch(function (error) {
         return rejectWithValue(error)
-      });
+      })
   }
 )
 
