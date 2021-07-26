@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import CardItemDetails from '../Pages/CardItemDetail'
+import { resetParams } from './MainNavigation'
 
 export enum MainRoutes {
   SplashScreen = 'Splash Screen',
@@ -31,7 +32,7 @@ export type MainStackParamList = {
   [MainRoutes.Home]: { update: boolean } | undefined // just an example, "update" will later be used for version checks
   [MainRoutes.ConfirmEmail]: undefined
   [MainRoutes.OTP]: undefined
-  [MainRoutes.ResetPassword]: undefined
+  [MainRoutes.ResetPassword]: resetParams
   [MainRoutes.Confirmation]: undefined
   [MainRoutes.Profile]: undefined
   [MainRoutes.NavBar]: undefined

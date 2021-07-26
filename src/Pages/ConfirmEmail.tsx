@@ -36,7 +36,7 @@ import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 //Redux
 import { useReduxDispatch } from '../Redux'
-import { login } from '../Redux/slices/user'
+import { login, sendReset } from '../Redux/slices/user'
 
 // Colors
 const { brand, darkLight, primary, white, black, grey, greyLight } = Colors
@@ -84,7 +84,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
 
   const onSubmitHandler = async () => {
     //Prob Not Correct but whatever
-    navigation.navigate(MainRoutes.ResetPassword)
+    const resultAction = await dispatch(sendReset(data.email))
   }
   return (
     <KeyboardAvoidingWrapper>

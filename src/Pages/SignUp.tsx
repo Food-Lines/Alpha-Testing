@@ -159,13 +159,13 @@ const SignUp = ({ navigation }): React.ReactElement => {
   const onSubmitHandler = async () => {
     const { email, password, fullName } = data
     const resultAction = await dispatch(signup({ email, password, fullName }))
-    if (signup.fulfilled.match(resultAction)) {
-      // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
-      // const user = resultAction.payload
-      alert('Success')
-    } else {
-      alert(`Fail: ${resultAction.payload}`)
-    }
+    // if (signup.fulfilled.match(resultAction)) {
+    //   // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+    //   // const user = resultAction.payload
+    //   alert('Success')
+    // } else {
+    //   alert(`Fail: ${resultAction.payload}`)
+    // }
   }
 
   //Components

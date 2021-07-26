@@ -16,9 +16,12 @@ import { MainRoutes } from '../Navigators/routes'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useReduxDispatch } from '../Redux'
+import { logout } from '../Redux/slices/user'
 
 export function DrawerContent(props) {
   const paperTheme = useTheme()
+  const dispatch = useReduxDispatch()
 
   return (
     <View style={{ flex: 1 }}>
@@ -104,7 +107,7 @@ export function DrawerContent(props) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
-          onPress={() => {}}
+          onPress={async() => {await dispatch(logout())}}
         />
       </Drawer.Section>
     </View>

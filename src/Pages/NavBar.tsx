@@ -37,7 +37,6 @@ const UsFoodsStack = createStackNavigator()
 
 const NavBar = ({ navigation }): React.ReactElement => {
   const Tab = createBottomTabNavigator()
-  console.log(navigation)
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import * as Linking from 'expo-linking';
 
 // Colors
 
@@ -31,37 +32,22 @@ import userSlice from '../Redux/slices/user'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { DrawerContent } from '../Components/DrawerContent'
 
-const loggedIn = (): boolean => {
-  const user = getAuth(Firebase).currentUser
-  const reduxUser = useReduxSelector(selectUser)
-  if (user && reduxUser.uid === user.uid) return true
-  else if (user && reduxUser.uid !== user.uid) {
-    userSlice.actions.setUser(user)
-    return true
-  } else if (!user && reduxUser.uid) {
-    userSlice.actions.setUser({
-      email: null as string,
-      fullName: null as string,
-      uid: null as string,
-    })
-    return false
-  } else return false
+export type resetParams = {
+  mode: string,
+  oobCode: string,
 }
 
 const HomeNavigator = (): React.ReactElement => {
   const Drawer = createDrawerNavigator()
   return (
-    <NavigationContainer>
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
         <Drawer.Screen name={MainRoutes.NavBar} component={NavBar} />
       </Drawer.Navigator>
-    </NavigationContainer>
   )
 }
 
-const AuthNavigator = (): React.ReactElement => {
+const AuthNavigator = () : React.ReactElement => {
   return (
-    <NavigationContainer>
       <MainStack.Navigator
         screenOptions={{
           headerStyle: {
@@ -74,7 +60,7 @@ const AuthNavigator = (): React.ReactElement => {
             paddingLeft: 10,
           },
         }}
-        initialRouteName={MainRoutes.NavBar}
+        initialRouteName={MainRoutes.SplashScreen}
       >
         <MainStack.Screen
           name={MainRoutes.SplashScreen}
@@ -117,18 +103,32 @@ const AuthNavigator = (): React.ReactElement => {
           component={Confirmation}
         />
       </MainStack.Navigator>
-    </NavigationContainer>
   )
 }
 
 const MainNavigator = (): React.ReactElement => {
-  const user = useReduxSelector(selectUser)
-  if (!user.uid) return <AuthNavigator />
+  const reduxUser = useReduxSelector(selectUser)
+  let auth = true
+  const user = getAuth(Firebase).currentUser
+  if (user && reduxUser.uid === user.uid) auth = true
+  else if (user && reduxUser.uid !== user.uid) {
+    userSlice.actions.setUser(user)
+    auth = true
+  } else if (!user && reduxUser.uid) {
+    userSlice.actions.setUser({
+      email: null as string,
+      fullName: null as string,
+      uid: null as string,
+    })
+    auth= false
+  } else auth = false
+
+  if (!auth) return <AuthNavigator/>
   else return <HomeNavigator />
 }
 
 const MainNavigation = (): React.ReactElement => {
-  return <MainNavigator></MainNavigator>
+  return <MainNavigator ></MainNavigator>
 }
 
 export default MainNavigation

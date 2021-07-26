@@ -7,7 +7,10 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signOut,
+  sendPasswordResetEmail,
+  confirmPasswordReset
 } from 'firebase/auth'
+import * as Linking from 'expo-linking'
 
 export const login = createAsyncThunk(
   'users/login',
@@ -69,6 +72,43 @@ export const logout = createAsyncThunk(
   }
 )
 
+export const sendReset = createAsyncThunk(
+  'user/sendReset',
+  async (email:string, { rejectWithValue }: any) => {
+    var actionCodeSettings = {
+      url: 'https://food-lines-40c3c.firebaseapp.com/__/auth/action',
+      android: {
+        packageName: 'com.foodlines',
+        installApp: false,
+      },
+      handleCodeInApp: true
+    };
+    //console.log(actionCodeSettings);
+    return sendPasswordResetEmail(getAuth(Firebase), email, actionCodeSettings)
+        .then( () =>{
+          return {
+            email: email,
+            fullName: null,
+            uid: null,
+          }
+        })
+        .catch(function(error) {
+          return rejectWithValue(error)
+        });
+      }
+)
+
+export const resetPass = createAsyncThunk(
+  'user/resetPass',
+  async (data: {code: string, password:string}, { rejectWithValue }: any) => {
+    confirmPasswordReset(getAuth(Firebase), data.code, data.password)
+      .then()
+      .catch(function(error) {
+        return rejectWithValue(error)
+      });
+  }
+)
+
 const initialState = {
   user: {
     email: null as string,
@@ -111,6 +151,24 @@ const userSlice = createSlice({
       state.user = payload
     })
     builder.addCase(logout.rejected, (state, action) => {
+      console.log(action.payload)
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload
+      }
+    })
+    builder.addCase(sendReset.fulfilled, (state, { payload }) => {
+      state.user = payload
+    })
+    builder.addCase(sendReset.rejected, (state, action) => {
+      console.log(action.payload)
+      if (action.payload) {
+        // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.
+        state.error = action.payload
+      }
+    })
+    builder.addCase(resetPass.fulfilled, (state, { payload }) => {})
+    builder.addCase(resetPass.rejected, (state, action) => {
       console.log(action.payload)
       if (action.payload) {
         // Being that we passed in ValidationErrors to rejectType in `createAsyncThunk`, the payload will be available here.

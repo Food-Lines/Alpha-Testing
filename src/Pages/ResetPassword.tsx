@@ -41,8 +41,8 @@ import {
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 //Redux
-import { useReduxDispatch } from '../Redux'
-import { login } from '../Redux/slices/user'
+import { useReduxDispatch, useReduxSelector } from '../Redux'
+import { login, resetPass, selectUser, sendReset } from '../Redux/slices/user'
 
 // Colors
 const { brand, darkLight, primary, white, black, grey, greyLight } = Colors
@@ -58,9 +58,10 @@ import { alignSelf } from 'styled-system'
 const { height } = Dimensions.get('screen')
 const height_logo = height * 0.18
 
-const SignIn = ({ navigation }): React.ReactElement => {
+const SignIn = ({ route, navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
   const [hidePassword, setHidePassword] = useState(true)
+  const reduxUser = useReduxSelector(selectUser)
 
   const [data, setData] = useState({
     email: '',
@@ -163,8 +164,10 @@ const SignIn = ({ navigation }): React.ReactElement => {
   }
 
   const onSubmitHandler = async () => {
-    //Prob Not Correct but whatever
-    navigation.navigate(MainRoutes.NewUserWelcome)
+    let resultAction = await dispatch(resetPass({code: route.params.oobCode, password: data.password}))
+    if (resetPass.fulfilled.match(resultAction)) {
+      let loginAction = await dispatch(login({email: reduxUser.email, password: data.password}))
+    }
   }
   return (
     <KeyboardAvoidingWrapper>

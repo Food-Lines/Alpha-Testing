@@ -15,21 +15,40 @@ import LottieView from 'lottie-react-native'
 import RootStack from './src/Navigators/MainNavigation'
 import store from './src/Redux'
 
+import * as Linking from 'expo-linking'
+
 //Screen Dimensions
 const { height } = Dimensions.get('screen')
 const height_logo = height * 0.32
 
 const App = (): React.ReactElement => {
   const [animationDone, setAnimationDone] = useState(false)
+  
+  const config = {
+    screens: {
+      'Reset Password': 'action'
+    }
+  }
+
+  const prefix = Linking.createURL('/');
+
+  const linking = {
+    prefixes: ['https://food-lines-40c3c.firebaseapp.com/__/auth/', prefix],
+    config
+  };
 
   setTimeout(() => {
     setAnimationDone(true)
   }, 6000)
 
+  console.disableYellowBox = true
+
   return (
     <Provider store={store}>
       {animationDone ? (
-        <RootStack />
+        <NavigationContainer linking={linking}>
+          <RootStack />
+        </NavigationContainer>
       ) : (
         <View style={styles.animationContainer}>
           <LottieView
