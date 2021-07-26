@@ -117,7 +117,7 @@ export const Row = styled.View`
 
 export const SliderContainer = styled.View`
   height: 200px;
-  width: 90%;
+  width: 100%;
   margin-top: 10px;
   justify-content: center;
   align-self: center;
@@ -140,7 +140,7 @@ export const SliderImage = styled.Image`
 
 export const CategoryContainer = styled.View`
   flex-direction: row;
-  width: 90%;
+  width: 100%;
   align-self: center;
   justify-content: center;
   margin-top: 25px;

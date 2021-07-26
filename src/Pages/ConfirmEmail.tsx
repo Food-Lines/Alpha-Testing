@@ -89,7 +89,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
         <StatusBar barStyle="light-content" />
         <View style={styles.header}>
           <Animatable.Image
-            style={[styles.logo, { marginBottom: -50 }]}
+            style={[styles.logo, { marginBottom: -60 }]}
             source={require('../Assets/lock.png')}
             resizeMode="cover"
             animation="bounceIn"

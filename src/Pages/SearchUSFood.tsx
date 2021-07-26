@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   SafeAreaView,
   Text,
@@ -17,20 +17,8 @@ import { logout } from '../Redux/slices/user'
 import USFoodsData from '../Data/USFoodsData'
 
 //Components
-import {
-  Colors,
-  Avatar,
-  UserInfoSection,
-  StyledTitle,
-  Caption,
-  Row,
-  InfoBoxWrapper,
-  InfoBox,
-  CategoryButtonText,
-  MenuWrapper,
-  MenuItem,
-  MenuItemText,
-} from '../Components/styles'
+import { Colors } from '../Components/styles'
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 import CardView from '../Components/CardView'
 
@@ -44,8 +32,15 @@ import { paddingRight } from 'styled-system'
 const SearchUSFood = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
 
-  const [filteedData, setFilteredData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
   const [masterData, setMasterData] = useState([])
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    setFilteredData(USFoodsData)
+    setMasterData(USFoodsData)
+    return () => {}
+  }, [])
 
   const renderItem = ({ item }) => {
     return (
@@ -58,44 +53,64 @@ const SearchUSFood = ({ navigation }): React.ReactElement => {
     )
   }
 
+  const searchFilter = (text) => {
+    if (text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase()
+        const textData = text.toUpperCase()
+        return itemData.indexOf(textData) > -1
+      })
+      setFilteredData(newData)
+      setSearch(text)
+    } else {
+      setFilteredData(masterData)
+      setSearch(text)
+    }
+  }
+
   return (
-    <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
-      <View style={{ padding: 20 }}>
-        <SearchBar />
+    <KeyboardAvoidingWrapper>
+      <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
+        <View style={{ padding: 20 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              backgroundColor: greyLight,
+              borderColor: grey,
+              borderWidth: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+            }}
+          >
+            <Ionicons
+              name="search-outline"
+              size={25}
+              style={{ marginHorizontal: 10 }}
+            />
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Search Here"
+              value={search}
+              underlineColorAndroid="trasparent"
+              onChangeText={(text) => searchFilter(text)}
+            />
+          </View>
+        </View>
         <FlatList
-          data={USFoodsData}
+          data={filteredData}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => index.toString()}
+          style={{ paddingHorizontal: 20 }}
         />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingWrapper>
   )
 }
 
 export default SearchUSFood
-
-const SearchBar = () => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: greyLight,
-        borderColor: grey,
-        borderWidth: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-      }}
-    >
-      <Ionicons
-        name="search-outline"
-        size={25}
-        style={{ marginHorizontal: 10 }}
-      />
-      <TextInput style={styles.textInputStyle} />
-    </View>
-  )
-}
 
 const styles = StyleSheet.create({
   textInputStyle: {

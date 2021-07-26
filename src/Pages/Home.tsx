@@ -56,16 +56,9 @@ const Home = ({ navigation }): React.ReactElement => {
     )
   }
 
-  return (
-    <View style={{ flex: 1, backgroundColor: white }}>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: white,
-          alignContent: 'center',
-          marginTop: 10,
-        }}
-      >
+  const aboveFlatList = () => {
+    return (
+      <View>
         <VerticalSwiper />
         <CategoryContainer>
           <Categories label="Meat" navigation={navigation} title="Meat" />
@@ -81,20 +74,31 @@ const Home = ({ navigation }): React.ReactElement => {
         <Text style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>
           Recently Viewed
         </Text>
-        <FlatList
-          data={RecentlyViewed}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          style={{
-            paddingLeft: 20,
-            paddingRight: 20,
-            flex: 1,
-            paddingBottom: 50,
-            marginTop: 10,
-          }}
-        />
-      </SafeAreaView>
-    </View>
+      </View>
+    )
+  }
+
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: white,
+        alignContent: 'center',
+      }}
+    >
+      <FlatList
+        data={RecentlyViewed}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={aboveFlatList}
+        style={{
+          paddingHorizontal: 20,
+          flex: 1,
+          paddingBottom: 50,
+          marginTop: 10,
+        }}
+      />
+    </SafeAreaView>
   )
 }
 

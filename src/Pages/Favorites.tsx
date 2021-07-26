@@ -1,29 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   SafeAreaView,
   Text,
   View,
-  ImageBackground,
   FlatList,
-  ScrollView,
+  TextInput,
+  StyleSheet,
 } from 'react-native'
 import { MainRoutes } from '../Navigators/routes'
 
-//Components
-import { Colors } from '../Components/styles'
-
-import CardView from '../Components/CardView'
+//Redux
+import { useReduxDispatch } from '../Redux'
+import { logout } from '../Redux/slices/user'
 
 //Data
-import MeatData from '../Data/MeatData'
+import FavoritesData from '../Data/FavoritesData'
+
+//Components
+import { Colors } from '../Components/styles'
+import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
+
+import CardView from '../Components/CardView'
 
 // Colors
 const { greyLight, white, grey, primary, black } = Colors
 
 //Icons
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { Ionicons, Fontisto } from '@expo/vector-icons'
+import { paddingRight } from 'styled-system'
 
 const Favorites = ({ navigation }): React.ReactElement => {
+  const dispatch = useReduxDispatch()
+
+  const [filteredData, setFilteredData] = useState([])
+  const [masterData, setMasterData] = useState([])
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    setFilteredData(FavoritesData)
+    setMasterData(FavoritesData)
+    return () => {}
+  }, [])
+
   const renderItem = ({ item }) => {
     return (
       <CardView
@@ -35,16 +53,72 @@ const Favorites = ({ navigation }): React.ReactElement => {
     )
   }
 
+  const searchFilter = (text) => {
+    if (text) {
+      const newData = masterData.filter((item) => {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase()
+        const textData = text.toUpperCase()
+        return itemData.indexOf(textData) > -1
+      })
+      setFilteredData(newData)
+      setSearch(text)
+    } else {
+      setFilteredData(masterData)
+      setSearch(text)
+    }
+  }
+
   return (
-    <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
-      <FlatList
-        data={MeatData}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        style={{ padding: 20, flex: 1, paddingBottom: 50 }}
-      />
-    </SafeAreaView>
+    <KeyboardAvoidingWrapper>
+      <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
+        <View style={{ padding: 20 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              backgroundColor: greyLight,
+              borderColor: grey,
+              borderWidth: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+            }}
+          >
+            <Ionicons
+              name="search-outline"
+              size={25}
+              style={{ marginHorizontal: 10 }}
+            />
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Search Here"
+              value={search}
+              underlineColorAndroid="trasparent"
+              onChangeText={(text) => searchFilter(text)}
+            />
+          </View>
+        </View>
+        <FlatList
+          data={filteredData}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          style={{ paddingHorizontal: 20 }}
+        />
+      </SafeAreaView>
+    </KeyboardAvoidingWrapper>
   )
 }
 
 export default Favorites
+
+const styles = StyleSheet.create({
+  textInputStyle: {
+    height: 50,
+    width: '85%',
+    borderColor: grey,
+    backgroundColor: greyLight,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+})

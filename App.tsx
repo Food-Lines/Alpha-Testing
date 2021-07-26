@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
-import { Button, StyleSheet, View, Dimensions } from 'react-native'
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Dimensions,
+  Platform,
+} from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -19,7 +25,6 @@ import * as Linking from 'expo-linking'
 
 //Screen Dimensions
 const { height } = Dimensions.get('screen')
-const height_logo = height * 0.32
 
 const App = (): React.ReactElement => {
   const [animationDone, setAnimationDone] = useState(false)
@@ -39,7 +44,7 @@ const App = (): React.ReactElement => {
 
   setTimeout(() => {
     setAnimationDone(true)
-  }, 4000)
+  }, 5000)
 
   console.disableYellowBox = true
 
@@ -50,15 +55,18 @@ const App = (): React.ReactElement => {
           <RootStack />
         </NavigationContainer>
       ) : (
-        <View style={styles.animationContainer}>
+        <SafeAreaView style={styles.animationContainer}>
           <LottieView
-            style={{ height: height_logo, width: height_logo }}
+            style={{
+              height: Platform.OS === 'ios' ? height * 0.3 : height * 0.4,
+              width: Platform.OS === 'ios' ? height * 0.3 : height * 0.4,
+            }}
             source={require('./src/Assets/foodAnimation.json')}
             autoPlay
             loop
           />
           <WelcomeTitle style={{ color: white }}>Food Lines</WelcomeTitle>
-        </View>
+        </SafeAreaView>
       )}
     </Provider>
   )

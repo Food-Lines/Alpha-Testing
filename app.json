@@ -5,6 +5,9 @@
     "scheme": "foodlines",
     "android": {
       "package": "com.foodlines",
+      "androidNavigationBar": {
+        "backgroundColor": "#000000"
+      },
       "intentFilters": [
         {
           "action": "VIEW",
