@@ -30,9 +30,7 @@ export function DrawerContent(props) {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Avatar.Image
-                source={{
-                  uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
-                }}
+                source={require('../Assets/mockPFP.jpg')}
                 size={50}
               />
               <View style={{ marginLeft: 15, flexDirection: 'column' }}>
@@ -45,24 +43,6 @@ export function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="home-outline" color={color} size={size} />
-              )}
-              label="Home"
-              onPress={() => {
-                props.navigation.navigate(MainRoutes.Home)
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="account-outline" color={color} size={size} />
-              )}
-              label="Profile"
-              onPress={() => {
-                props.navigation.navigate(MainRoutes.Profile)
-              }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
                 <Icon name="heart-outline" color={color} size={size} />
               )}
               label="Favorites"
@@ -72,11 +52,20 @@ export function DrawerContent(props) {
             />
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="cog-outline" color={color} size={size} />
+                <Icon name="credit-card-outline" color={color} size={size} />
               )}
-              label="Settings"
+              label="Payment"
               onPress={() => {
-                props.navigation.navigate('SettingScreen')
+                props.navigation.navigate(MainRoutes.Payment)
+              }}
+            />
+            <DrawerItem
+              icon={({ color, size }) => (
+                <Icon name="information-outline" color={color} size={size} />
+              )}
+              label="About"
+              onPress={() => {
+                props.navigation.navigate(MainRoutes.About)
               }}
             />
             <DrawerItem
@@ -85,7 +74,7 @@ export function DrawerContent(props) {
               )}
               label="Support"
               onPress={() => {
-                props.navigation.navigate('SupportScreen')
+                props.navigation.navigate(MainRoutes.Support)
               }}
             />
           </Drawer.Section>

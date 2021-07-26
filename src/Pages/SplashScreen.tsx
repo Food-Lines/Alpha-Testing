@@ -36,7 +36,7 @@ import {
 } from '../Components/styles'
 
 // Colors
-const { primary, white, darkLight, grey, black } = Colors
+const { primary, white, grey, black } = Colors
 
 //Screen Dimensions
 const { height } = Dimensions.get('screen')

@@ -18,7 +18,7 @@ import CardView from '../Components/CardView'
 import MeatData from '../Data/MeatData'
 
 // Colors
-const { greyLight, white, darkLight, grey, primary, black } = Colors
+const { greyLight, white, grey, primary, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'

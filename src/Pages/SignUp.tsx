@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 //Routes
 import { MainRoutes } from '../Navigators/routes'
 
-// formik
-import { Formik } from 'formik'
-
 import {
   View,
   TouchableOpacity,
@@ -44,7 +41,7 @@ import { useReduxDispatch } from '../Redux'
 import { signup } from '../Redux/slices/user'
 
 // Colors
-const { brand, darkLight, primary, white, black, grey, red } = Colors
+const { primary, white, black, grey, red } = Colors
 
 //Gradient
 import { LinearGradient } from 'expo-linear-gradient'

@@ -14,7 +14,7 @@ import {
 
 //react native elements
 import { Card } from 'react-native-elements'
-import { Touchable, TouchableOpacity } from 'react-native'
+import { Alert, Platform, ToastAndroid, TouchableOpacity } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
 // Colors
@@ -30,6 +30,19 @@ const CardView = ({ itemData, onPress }) => {
       ...data,
       isFav: !data.isFav,
     })
+    if (data.isFav) {
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Removed from to Favorites', ToastAndroid.SHORT)
+      } else {
+        Alert.alert('Removed from Favorites')
+      }
+    } else {
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT)
+      } else {
+        Alert.alert('Added to Favorites')
+      }
+    }
   }
 
   return (
@@ -38,7 +51,6 @@ const CardView = ({ itemData, onPress }) => {
         containerStyle={{
           borderRadius: 8,
           height: 100,
-          marginVertical: 10,
           shadowColor: grey,
           shadowOffset: { width: 1, height: 1 },
           shadowRadius: 2,
@@ -47,6 +59,8 @@ const CardView = ({ itemData, onPress }) => {
           padding: 0,
           marginLeft: 0,
           width: '100%',
+          marginBottom: 10,
+          marginVertical: 10,
         }}
         wrapperStyle={{ flexDirection: 'row' }}
       >

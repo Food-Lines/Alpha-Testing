@@ -24,11 +24,10 @@ import { TouchableOpacity } from 'react-native'
 import { TouchableRipple } from 'react-native-paper'
 
 // Colors
-const { greyLight, white, darkLight, grey, primary, black } = Colors
+const { greyLight, white, grey, primary, black } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
-import { flex } from 'styled-system'
 
 const Profile = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
@@ -81,38 +80,18 @@ const Profile = ({ navigation }): React.ReactElement => {
       <MenuWrapper>
         <TouchableRipple onPress={() => {}}>
           <MenuItem>
-            <Ionicons name="heart-outline" size={25} color={primary} />
-            <MenuItemText>Your Favorites</MenuItemText>
-          </MenuItem>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <MenuItem>
             <Ionicons name="card-outline" size={25} color={primary} />
             <MenuItemText>Payment</MenuItemText>
           </MenuItem>
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <MenuItem>
-            <Ionicons name="people-outline" size={25} color={primary} />
-            <MenuItemText>Customer Support</MenuItemText>
-          </MenuItem>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <MenuItem>
-            <Ionicons name="cog-outline" size={25} color={primary} />
-            <MenuItemText>Settings</MenuItemText>
+            <Ionicons name="information-circle" size={25} color={primary} />
+            <MenuItemText>About</MenuItemText>
           </MenuItem>
         </TouchableRipple>
       </MenuWrapper>
     </SafeAreaView>
-  )
-}
-
-const SearchIcon = () => {
-  return (
-    <TouchableOpacity onPress={() => {}}>
-      <Ionicons name={'search'} size={30} color={darkLight} />
-    </TouchableOpacity>
   )
 }
 

@@ -15,13 +15,17 @@ export enum MainRoutes {
   Profile = 'Profile',
   NavBar = 'NavBar',
   Sysco = 'Sysco',
-  UsFoods = 'UsFoods',
+  UsFoods = 'US Foods',
   EditProfile = 'Edit Profile',
   CardListScreen = 'Card List',
   CardItemDetails = 'Card Item Details',
   NewUserWelcome = 'New User Welcome',
   FoodAccounts = 'Food Account',
   Favorites = 'Favorites',
+  Support = 'Support',
+  About = 'About',
+  Payment = 'Payment',
+  Search = 'Search',
 }
 
 export type MainStackParamList = {
@@ -44,6 +48,10 @@ export type MainStackParamList = {
   [MainRoutes.NewUserWelcome]: undefined
   [MainRoutes.FoodAccounts]: undefined
   [MainRoutes.Favorites]: undefined
+  [MainRoutes.Support]: undefined
+  [MainRoutes.About]: undefined
+  [MainRoutes.Payment]: undefined
+  [MainRoutes.Search]: undefined
 }
 
 export const MainStack = createStackNavigator<MainStackParamList>()

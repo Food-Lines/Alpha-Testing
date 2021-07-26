@@ -22,7 +22,7 @@ import {
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 // Colors
-const { brand, darkLight, primary, black } = Colors
+const { primary, black } = Colors
 
 const OTP = ({ navigation }): React.ReactElement => {
   const [otp, setOTP] = useState('')

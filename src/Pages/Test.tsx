@@ -1,26 +1,11 @@
 import React from 'react'
-import { Button, TextInput, View, Text } from 'react-native'
-import { Formik } from 'formik'
+import { Button, TextInput, View, Text, SafeAreaView } from 'react-native'
 
 const Test = (): React.ReactElement => {
   return (
-    <Formik
-      initialValues={{ password: '' }}
-      onSubmit={(values) => console.log(values)}
-    >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text>Lable This</Text>
-          <TextInput
-            placeholder="PlaceHolder"
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-          />
-          <Button onPress={() => handleSubmit} title="Submit" />
-        </View>
-      )}
-    </Formik>
+    <SafeAreaView>
+      <Text>Text</Text>
+    </SafeAreaView>
   )
 }
 

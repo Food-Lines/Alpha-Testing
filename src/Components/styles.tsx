@@ -20,38 +20,28 @@ const height_logo = height * 0.28
 // colors
 export const Colors = {
   white: '#ffffff',
-  secondary: '#E5E7EB',
-  tertiary: '#1F2937',
-  darkLight: '#9CA3AF',
-  brand: '#6D28D9',
-  green: '#10B981',
+  primary: '#FF6347',
+  secondary: '#f36b69',
+  highlight: '#f6c949',
   red: '#EF4444',
   black: '#000000',
   grey: '#999',
-  primary: '#FF6347',
   orangeLight: '#fdeae7',
   greyLight: '#dddddd',
   greyDark: '#2a2a2a',
-  blueDark: '#34495e',
-  blueLight: '#96ddd5',
 }
 
 const {
   white,
+  primary,
   secondary,
-  tertiary,
-  darkLight,
-  brand,
-  green,
+  highlight,
   grey,
   red,
   black,
-  primary,
   orangeLight,
   greyLight,
   greyDark,
-  blueDark,
-  blueLight,
 } = Colors
 
 //Containers
@@ -303,7 +293,7 @@ export const SubTitle = styled.Text`
   margin-bottom: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  color: ${tertiary};
+  color: ${black};
 
   ${(props) =>
     props.welcome &&
@@ -333,7 +323,7 @@ export const StyledTextInput = styled.TextInput`
 `
 
 export const StyledInputLabel = styled.Text`
-  color: ${tertiary};
+  color: ${black};
   font-size: 13px;
   text-align: left;
 `
@@ -358,7 +348,7 @@ export const RightIcon = styled.TouchableOpacity`
 
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
-  background-color: ${brand};
+  background-color: ${primary};
   justify-content: center;
   align-items: center;
   border-radius: 5px;
@@ -369,7 +359,7 @@ export const StyledButton = styled.TouchableOpacity`
   ${(props) =>
     props.google === true &&
     `
-  background-color: ${green};
+  background-color: ${highlight};
   flex-direction: row; 
   `}
 `
@@ -401,7 +391,7 @@ export const MsgBox = styled.Text`
 export const Line = styled.View`
   height: 1px;
   width: 100%;
-  background-color: ${darkLight};
+  background-color: ${greyDark};
   margin-vertical: 10px;
 `
 
@@ -416,7 +406,7 @@ export const ExtraText = styled.Text`
   justify-content: center;
   align-content: center;
   text-align: center;
-  color: ${tertiary};
+  color: ${black};
   font-size: 15px;
 `
 
@@ -426,7 +416,7 @@ export const TextLink = styled.TouchableOpacity`
 `
 
 export const TextLinkContent = styled.Text`
-  color: ${brand};
+  color: ${highlight};
   font-size: 15px;
 `
 
@@ -648,4 +638,79 @@ export const SignInTextSign = styled.Text`
 
 export const ForgetPassword = styled.TouchableOpacity`
   margin-top: 15px;
+`
+
+// US Food and Sysco Components
+
+export const CompanyTitle = styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+  color: ${black};
+`
+
+export const HorizontalScroll = styled.View`
+  flex-direction: row;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  justify-content: flex-start;
+`
+export const SearchBarContainer = styled.View`
+  background-color: ${greyLight};
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  flex-direction: row;
+`
+export const CompanySlogan = styled.Text`
+  font-size: 14px;
+  font-weight: 300;
+`
+export const CategoryTitle = styled.Text`
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px;
+  padding-bottom: 10px;
+`
+
+export const FoodButton = styled.TouchableOpacity`
+  margin-horizontal: 15px;
+  align-items: center;
+`
+
+export const SearchText = styled.Text`
+  color: ${greyDark}
+  font-weight: 300;
+  margin-horizontal: 10px;
+`
+export const SearchContainer = styled.View`
+  background-color: ${greyLight};
+  border-radius: 20px;
+  margin-top: 5px;
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  flex-direction: row;
+`
+export const SearchButton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+`
+
+export const FilterContainer = styled.TouchableOpacity`
+  align-items: center;
+  margin-right: 10px;
+`
+export const CompanyLogo = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border-width: 1px;
 `
