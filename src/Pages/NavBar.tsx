@@ -149,8 +149,10 @@ const HomeStackScreen = ({ navigation }) => {
         component={Support}
         name={MainRoutes.Support}
         options={{
-          title: 'Customer Support',
+          title: '',
           headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
           headerLeftContainerStyle: { marginLeft: 10 },
         }}
       />
@@ -168,9 +170,11 @@ const HomeStackScreen = ({ navigation }) => {
         component={About}
         name={MainRoutes.About}
         options={{
-          title: 'About',
+          title: '',
           headerBackTitleVisible: false,
           headerLeftContainerStyle: { marginLeft: 10 },
+          headerTransparent: true,
+          headerTintColor: white,
         }}
       />
 

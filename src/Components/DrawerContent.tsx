@@ -54,10 +54,8 @@ export function DrawerContent(props) {
               icon={({ color, size }) => (
                 <Icon name="credit-card-outline" color={color} size={size} />
               )}
-              label="Payment"
-              onPress={() => {
-                props.navigation.navigate(MainRoutes.Payment)
-              }}
+              label="Payment (Beta)"
+              onPress={() => {}}
             />
             <DrawerItem
               icon={({ color, size }) => (
