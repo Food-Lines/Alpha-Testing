@@ -29,6 +29,8 @@ export const Colors = {
   orangeLight: '#fdeae7',
   greyLight: '#dddddd',
   greyDark: '#2a2a2a',
+  blueSysco: '#008cd2',
+  greenUSFood: '#548711',
 }
 
 const {
@@ -42,6 +44,8 @@ const {
   orangeLight,
   greyLight,
   greyDark,
+  blueSysco,
+  greenUSFood,
 } = Colors
 
 //Containers

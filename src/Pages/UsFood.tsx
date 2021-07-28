@@ -37,7 +37,7 @@ import FrequentlyPurchased from '../Data/FrequentlyPurchased'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 // Colors
-const { primary, white, grey, black, greyDark, greyLight } = Colors
+const { primary, white, grey, black, greenUSFood, greyLight } = Colors
 
 //Icons
 import { Ionicons, Fontisto } from '@expo/vector-icons'
@@ -62,7 +62,7 @@ const UsFood = ({ navigation }): React.ReactElement => {
       <View>
         <View style={{ padding: 0 }}>
           <TextWrapper>
-            <CompanyTitle style={{ color: '#548711' }}>US Foods</CompanyTitle>
+            <CompanyTitle style={{ color: greenUSFood }}>US Foods</CompanyTitle>
             <CompanyLogo
               source={require('../Assets/USfoods.png')}
               resizeMode="center"

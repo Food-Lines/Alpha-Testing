@@ -38,7 +38,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { Ionicons, Fontisto } from '@expo/vector-icons'
 
 // Colors
-const { primary, white, grey, black, greyDark, greyLight } = Colors
+const { primary, white, grey, black, greyDark, blueSysco } = Colors
 
 //Slider
 import HorizontalSwiper from '../Components/HorizontalSwiper'
@@ -60,7 +60,7 @@ const Sysco = ({ navigation }): React.ReactElement => {
       <View>
         <View>
           <TextWrapper>
-            <CompanyTitle style={{ color: '#008cd2' }}>Sysco</CompanyTitle>
+            <CompanyTitle style={{ color: blueSysco }}>Sysco</CompanyTitle>
             <CompanyLogo
               source={require('../Assets/Sysco.png')}
               resizeMode="center"

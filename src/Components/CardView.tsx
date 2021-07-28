@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //Components
 import {
@@ -16,13 +16,15 @@ import {
 import { Card } from 'react-native-elements'
 import { Alert, Platform, ToastAndroid, TouchableOpacity } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
+import UsFood from '../Pages/UsFood'
 
 // Colors
-const { grey, primary } = Colors
+const { grey, primary, greenUSFood, blueSysco } = Colors
 
 const CardView = ({ itemData, onPress }) => {
   const [data, setData] = useState({
     isFav: false,
+    isSysco: itemData.supplier === 'Sysco' ? true : false,
   })
 
   const onPressHandler = () => {
@@ -88,8 +90,13 @@ const CardView = ({ itemData, onPress }) => {
             </TouchableOpacity>
           </TextWrapper>
           <TextWrapper style={{ justifyContent: 'flex-start' }}>
-            <CardTitle style={{ marginRight: 8 }}>
-              {itemData.price + '/lb'}
+            <CardTitle
+              style={{
+                marginRight: 8,
+                color: data.isSysco ? blueSysco : greenUSFood,
+              }}
+            >
+              {itemData.supplier}
             </CardTitle>
             <CardDetails>{'#' + itemData.id}</CardDetails>
           </TextWrapper>

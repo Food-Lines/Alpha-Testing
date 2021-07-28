@@ -16,6 +16,7 @@ import Payment from './Payment'
 import Search from './Search'
 import SearchUSFood from './SearchUSFood'
 import SearchSysco from './SearchSysco'
+import PriceComparison from './PriceComparison'
 
 //Tab
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -267,6 +268,7 @@ export default NavBar
 const HomeStackScreen = ({ navigation }) => {
   return (
     <HomeStack.Navigator
+      initialRouteName={MainRoutes.Home}
       screenOptions={{
         headerStyle: {
           backgroundColor: white,
@@ -370,6 +372,18 @@ const HomeStackScreen = ({ navigation }) => {
           headerBackTitleVisible: false,
           headerLeftContainerStyle: { marginLeft: 10 },
         }}
+      />
+
+      <HomeStack.Screen
+        name={MainRoutes.PriceComparison}
+        component={PriceComparison}
+        options={({ route }) => ({
+          title: '',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
       />
     </HomeStack.Navigator>
   )

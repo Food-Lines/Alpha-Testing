@@ -42,7 +42,7 @@ import { useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
-const { primary, white, black, grey, red } = Colors
+const { primary, white, black, grey, red, greyLight } = Colors
 
 //Gradient
 import { LinearGradient } from 'expo-linear-gradient'
@@ -60,6 +60,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
     secureTextEntry: true,
     isValidEmail: true,
     isValidPassword: true,
+    correctUserPassword: true,
   })
 
   //Handlers
@@ -71,6 +72,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
         email: val,
         check_email: true,
         isValidEmail: true,
+        correctUserPassword: true,
       })
     } else {
       setData({
@@ -108,13 +110,22 @@ const SignIn = ({ navigation }): React.ReactElement => {
   const onSubmitHandler = async () => {
     const { email, password } = data
     const resultAction = await dispatch(login({ email, password }))
-    // if (login.fulfilled.match(resultAction)) {
-    //   // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
-    //   // const user = resultAction.payload
-    //   alert('Success')
-    // } else {
-    //   alert(`Fail: ${resultAction.payload}`)
-    // }
+    if (login.fulfilled.match(resultAction)) {
+      // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+      // const user = resultAction.payload
+      console.log('Success')
+      setData({
+        ...data,
+        correctUserPassword: true,
+      })
+    } else {
+      setData({
+        ...data,
+        correctUserPassword: false,
+        check_email: false,
+        isValidEmail: false,
+      })
+    }
   }
 
   //Components
@@ -148,7 +159,12 @@ const SignIn = ({ navigation }): React.ReactElement => {
           <StyledFormArea>
             <SignInTextFooter>Email</SignInTextFooter>
 
-            <SignInAction>
+            <SignInAction
+              style={{
+                borderBottomColor: data.correctUserPassword ? greyLight : red,
+                borderBottomWidth: data.correctUserPassword ? 1 : 2,
+              }}
+            >
               <FontAwesome name="user-o" color={black} size={20} />
               <TextInput
                 style={styles.textInput}
@@ -165,14 +181,23 @@ const SignIn = ({ navigation }): React.ReactElement => {
             </SignInAction>
             {data.isValidEmail ? null : (
               <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must be a Valid Email.</ErrorMsg>
+                {data.correctUserPassword ? (
+                  <ErrorMsg>Must be a Valid Email.</ErrorMsg>
+                ) : (
+                  <ErrorMsg>Username or Password Invalid.</ErrorMsg>
+                )}
               </Animatable.View>
             )}
 
             <SignInTextFooter style={{ marginTop: 35 }}>
               Password
             </SignInTextFooter>
-            <SignInAction>
+            <SignInAction
+              style={{
+                borderBottomColor: data.correctUserPassword ? greyLight : red,
+                borderBottomWidth: data.correctUserPassword ? 1 : 2,
+              }}
+            >
               <FontAwesome name="lock" color={black} size={20} />
               <TextInput
                 style={styles.textInput}

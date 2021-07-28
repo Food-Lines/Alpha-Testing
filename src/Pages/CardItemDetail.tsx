@@ -37,9 +37,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 // Colors
 const { primary, white, grey, black } = Colors
 
-const CardItemDetails = ({ route, navigation }): React.ReactElement => {
+const CardItemDetails = ({
+  route,
+  navigation,
+  onPress,
+}): React.ReactElement => {
   const itemData = route.params.itemData
   const navTitleView = useRef()
+
+  const PriceEffectiveNess = itemData.price - 8.99
 
   const Foreground = () => {
     return (
@@ -88,9 +94,9 @@ const CardItemDetails = ({ route, navigation }): React.ReactElement => {
                 alignItems: 'center',
               }}
             >
-              <FontAwesome name="dollar" size={14} color={primary} />
+              <FontAwesome name="truck" size={14} color={primary} />
               <Text style={{ marginHorizontal: 8, fontWeight: 'bold' }}>
-                {itemData.price + '/lb'}
+                {itemData.supplier}
               </Text>
               <Text style={{ color: grey, marginLeft: 5 }}>
                 {'#' + itemData.id}
@@ -102,6 +108,7 @@ const CardItemDetails = ({ route, navigation }): React.ReactElement => {
           <Text style={styles.sectionContent}>{itemData.description}</Text>
         </View>
         <View style={styles.section}>
+          <Text style={[styles.title, { marginBottom: 5 }]}>Details</Text>
           <TextWrapper>
             <Text style={styles.name}>Min Purchase:</Text>
             <Text>{itemData.minimumPurchase + ' Cases'}</Text>
@@ -116,20 +123,37 @@ const CardItemDetails = ({ route, navigation }): React.ReactElement => {
           </TextWrapper>
         </View>
         <View style={styles.section}>
-          <View style={styles.categories}>
-            <View style={styles.categoryContainer}>
-              <FontAwesome name="tag" size={16} color="#fff" />
-              <Text style={styles.category}>Frozen</Text>
-            </View>
-            <View style={styles.categoryContainer}>
-              <FontAwesome name="tag" size={16} color="#fff" />
-              <Text style={styles.category}>Meat</Text>
-            </View>
-            <View style={styles.categoryContainer}>
-              <FontAwesome name="tag" size={16} color="#fff" />
-              <Text style={styles.category}>Pizza</Text>
-            </View>
-          </View>
+          <Text style={[styles.title, { marginBottom: 5 }]}>
+            Price comparison
+          </Text>
+          <TextWrapper>
+            <Text style={styles.name}>Sysco Price:</Text>
+            <Text>{itemData.price + ' lb'}</Text>
+          </TextWrapper>
+          <TextWrapper>
+            <Text style={styles.name}>US Food Price:</Text>
+            <Text>{itemData.price + ' lb'}</Text>
+          </TextWrapper>
+          <TextWrapper>
+            <Text style={styles.name}>Savings/lb:</Text>
+            <Text>{'$' + PriceEffectiveNess}</Text>
+          </TextWrapper>
+          <TextWrapper style={{ justifyContent: 'flex-end', marginTop: 10 }}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(MainRoutes.PriceComparison, itemData)
+              }
+            >
+              <TextWrapper>
+                <Text style={{ color: primary }}>More Info</Text>
+                <FontAwesome
+                  name="chevron-right"
+                  size={12}
+                  style={{ marginHorizontal: 5, color: primary }}
+                />
+              </TextWrapper>
+            </TouchableOpacity>
+          </TextWrapper>
         </View>
       </ImageHeaderScrollView>
     </View>
