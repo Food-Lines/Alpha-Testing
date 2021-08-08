@@ -171,7 +171,7 @@ const SignIn = ({ route, navigation }): React.ReactElement => {
     }
   }
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <View style={styles.header}>
@@ -255,7 +255,7 @@ const SignIn = ({ route, navigation }): React.ReactElement => {
           </StyledFormArea>
         </Animatable.View>
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
+    // </KeyboardAvoidingWrapper>
   )
 }
 

@@ -49,6 +49,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 //Animations
 import * as Animatable from 'react-native-animatable'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const DetailCardView = ({ title, text, text2 }) => {
@@ -90,7 +91,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
     )
   }
   return (
-    <KeyboardAvoidingWrapper>
+    <KeyboardAwareScrollView>
       <StyledContainerFullScreen style={{ backgroundColor: black }}>
         <StatusBar barStyle="light-content" />
         <SignInHeader>
@@ -121,7 +122,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
           </StyledFormArea>
         </Animatable.View>
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
+    </KeyboardAwareScrollView>
   )
 }
 

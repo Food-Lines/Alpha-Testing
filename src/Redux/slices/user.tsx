@@ -126,7 +126,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<any>) =>
-      (state.user = action.payload),
+      {
+        state.user = action.payload
+        return state
+    },
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators

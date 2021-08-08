@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { useEffect } from 'react'
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux'
 import userSlice from './slices/user'
 

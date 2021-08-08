@@ -71,7 +71,7 @@ const SearchSysco = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
         <View style={{ padding: 20 }}>
           <View
@@ -94,7 +94,7 @@ const SearchSysco = ({ navigation }): React.ReactElement => {
               style={styles.textInputStyle}
               placeholder="Search Here"
               value={search}
-              underlineColorAndroid="trasparent"
+              underlineColorAndroid="transparent"
               onChangeText={(text) => searchFilter(text)}
             />
           </View>
@@ -106,7 +106,7 @@ const SearchSysco = ({ navigation }): React.ReactElement => {
           style={{ paddingHorizontal: 20 }}
         />
       </SafeAreaView>
-    </KeyboardAvoidingWrapper>
+    // </KeyboardAvoidingWrapper>
   )
 }
 

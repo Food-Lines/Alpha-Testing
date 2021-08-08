@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Linking from 'expo-linking'
 
 // Colors
@@ -106,21 +106,32 @@ const AuthNavigator = (): React.ReactElement => {
   )
 }
 
+
+
 const MainNavigator = (): React.ReactElement => {
   const reduxUser = useReduxSelector(selectUser)
+  const dispatch = useReduxDispatch()
   let auth = true
   const user = getAuth(Firebase).currentUser
   if (user && reduxUser.uid === user.uid) auth = true
   else if (user && reduxUser.uid !== user.uid) {
-    userSlice.actions.setUser(user)
-    auth = true
+    useEffect(() => {
+      dispatch(userSlice.actions.setUser({
+        email: user.email,
+        uid: user.uid,
+        displayName: user.displayName,
+      }) )
+      auth = true
+    }, [auth])
   } else if (!user && reduxUser.uid) {
-    userSlice.actions.setUser({
-      email: null as string,
-      fullName: null as string,
-      uid: null as string,
-    })
-    auth = false
+    useEffect(() => {
+      dispatch(userSlice.actions.setUser({
+        email: null as string,
+        fullName: null as string,
+        uid: null as string,
+      }))
+      auth = false
+    }, [auth])
   } else auth = false
 
   if (!auth) return <AuthNavigator />

@@ -33,7 +33,7 @@ const Confirmation = ({ navigation }): React.ReactElement => {
     navigation.navigate(MainRoutes.NavBar)
   }
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <StyledContainer style={{ backgroundColor: primary, flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <InnerContainer style={{ marginTop: 20 }}>
@@ -67,7 +67,7 @@ const Confirmation = ({ navigation }): React.ReactElement => {
           </SignInButton>
         </InnerContainer>
       </StyledContainer>
-    </KeyboardAvoidingWrapper>
+    // </KeyboardAvoidingWrapper>
   )
 }
 

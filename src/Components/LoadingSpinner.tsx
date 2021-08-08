@@ -8,10 +8,10 @@ import { Colors } from '../Components/styles'
 // Colors
 const { primary } = Colors
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({color}) => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={primary} />
+      <ActivityIndicator size="large" color={color} />
     </View>
   )
 }

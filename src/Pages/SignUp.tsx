@@ -11,6 +11,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  DrawerLayoutAndroidBase,
 } from 'react-native'
 
 //Components
@@ -27,6 +28,7 @@ import {
   SignInView,
   StyledFormArea,
   ErrorMsg,
+  CardDetailsDark,
 } from '../Components/styles'
 
 // icons
@@ -48,9 +50,12 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 //Animations
 import * as Animatable from 'react-native-animatable'
+import LoadingSpinner from '../Components/LoadingSpinner'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const SignUp = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
+  const [loading, setLoading] = useState(false)
   const dispatch = useReduxDispatch()
 
   const [data, setData] = useState({
@@ -154,26 +159,29 @@ const SignUp = ({ navigation }): React.ReactElement => {
   }
 
   const onSubmitHandler = async () => {
+    setLoading(true)
+    if (!data.check_email || !data.check_name || !data.isValidEmail || !data.isValidConfirmPassword || !data.isValidName || !data.isValidPassword) {setLoading(false); return}
     const { email, password, fullName } = data
     const resultAction = await dispatch(signup({ email, password, fullName }))
-    // if (signup.fulfilled.match(resultAction)) {
-    //   // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
-    //   // const user = resultAction.payload
-    //   alert('Success')
-    // } else {
-    //   alert(`Fail: ${resultAction.payload}`)
-    // }
+    
+    if (signup.fulfilled.match(resultAction)) {
+      // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
+      // const user = resultAction.payload
+      console.log('success')
+    } else {
+      setLoading(false)
+    }
   }
 
   //Components
   const RegisterButton = () => {
     return (
       <TouchableOpacity
-        onPress={onSubmitHandler}
+        onPress={async() => await onSubmitHandler()}
         style={[styles.signIn, { marginTop: 30 }]}
       >
         <LinearGradient colors={['#FFA07A', '#FF6347']} style={styles.signIn}>
-          <SignInTextSign>Register</SignInTextSign>
+          {loading ? <LoadingSpinner color={white}/> :  <SignInTextSign>Register</SignInTextSign>}
         </LinearGradient>
       </TouchableOpacity>
     )
@@ -198,13 +206,14 @@ const SignUp = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <SignInHeader>
           <SignInTextHeader>Sign Up Now!</SignInTextHeader>
         </SignInHeader>
+        
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <SignInTextFooter>Email</SignInTextFooter>
             <SignInAction>
@@ -238,7 +247,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
                 placeholder="Full Name"
                 onChangeText={(val) => onNameChangeHandler(val)}
               />
-              {data.fullName ? (
+              {data.check_name ? (
                 <Animatable.View animation="bounceIn">
                   <Feather name="check-circle" color="green" size={20} />
                 </Animatable.View>
@@ -321,9 +330,11 @@ const SignUp = ({ navigation }): React.ReactElement => {
             <RegisterButton />
             <SignInButton />
           </StyledFormArea>
+          </KeyboardAwareScrollView>
         </Animatable.View>
+        
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
+      
   )
 }
 

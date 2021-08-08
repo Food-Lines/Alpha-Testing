@@ -38,7 +38,7 @@ import {
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 //Redux
-import { useReduxDispatch } from '../Redux'
+import { useAsync, useReduxDispatch } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
@@ -49,9 +49,12 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 //Animations
 import * as Animatable from 'react-native-animatable'
+import LoadingSpinner from '../Components/LoadingSpinner'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
+  const [loading, setLoading] = useState(false)
 
   const [data, setData] = useState({
     email: '',
@@ -80,6 +83,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
         email: val,
         check_email: false,
         isValidEmail: false,
+        correctUserPassword: true,
       })
     }
   }
@@ -90,12 +94,14 @@ const SignIn = ({ navigation }): React.ReactElement => {
         ...data,
         password: val,
         isValidPassword: true,
+        correctUserPassword: true,
       })
     } else {
       setData({
         ...data,
         password: val,
         isValidPassword: false,
+        correctUserPassword: true,
       })
     }
   }
@@ -107,23 +113,21 @@ const SignIn = ({ navigation }): React.ReactElement => {
     })
   }
 
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async() => {
+    setLoading(true)
+    if (!data.isValidEmail || !data.isValidPassword) {setLoading(false); return}
     const { email, password } = data
     const resultAction = await dispatch(login({ email, password }))
     if (login.fulfilled.match(resultAction)) {
       // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
       // const user = resultAction.payload
       console.log('Success')
-      setData({
-        ...data,
-        correctUserPassword: true,
-      })
     } else {
+      setLoading(false)
       setData({
         ...data,
         correctUserPassword: false,
         check_email: false,
-        isValidEmail: false,
       })
     }
   }
@@ -149,13 +153,13 @@ const SignIn = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <SignInHeader>
           <SignInTextHeader>Welcome!</SignInTextHeader>
         </SignInHeader>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <SignInTextFooter>Email</SignInTextFooter>
 
@@ -179,15 +183,15 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 </Animatable.View>
               ) : null}
             </SignInAction>
-            {data.isValidEmail ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
+            {!data.isValidEmail || !data.correctUserPassword ? 
+            <Animatable.View animation="fadeInLeft" duration={500}>
                 {data.correctUserPassword ? (
                   <ErrorMsg>Must be a Valid Email.</ErrorMsg>
                 ) : (
                   <ErrorMsg>Username or Password Invalid.</ErrorMsg>
                 )}
-              </Animatable.View>
-            )}
+              </Animatable.View> : null
+              }
 
             <SignInTextFooter style={{ marginTop: 35 }}>
               Password
@@ -230,19 +234,23 @@ const SignIn = ({ navigation }): React.ReactElement => {
               </Text>
             </ForgetPassword>
 
-            <SignInButton onPress={onSubmitHandler}>
+            <SignInButton onPress={async() => await onSubmitHandler()}>
               <LinearGradient
                 colors={['#FFA07A', '#FF6347']}
                 style={styles.signIn}
               >
-                <SignInTextSign>Sign In</SignInTextSign>
+                { loading ?
+                  <LoadingSpinner color={white}/>:  
+                  <SignInTextSign>Sign In</SignInTextSign>
+                }
+                
               </LinearGradient>
             </SignInButton>
             <SignOutButton />
           </StyledFormArea>
+          </KeyboardAwareScrollView>
         </Animatable.View>
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
   )
 }
 

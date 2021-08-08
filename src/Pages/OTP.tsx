@@ -38,7 +38,7 @@ const OTP = ({ navigation }): React.ReactElement => {
     navigation.navigate('ResetPassword')
   }
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <StyledContainer>
         <StatusBar />
         <InnerContainer>
@@ -92,7 +92,7 @@ const OTP = ({ navigation }): React.ReactElement => {
           </StyledFormArea>
         </InnerContainer>
       </StyledContainer>
-    </KeyboardAvoidingWrapper>
+    // </KeyboardAvoidingWrapper>
   )
 }
 

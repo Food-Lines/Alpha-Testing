@@ -171,7 +171,7 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <SignInHeader>
@@ -325,7 +325,7 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
           </StyledFormArea>
         </Animatable.View>
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
+    // </KeyboardAvoidingWrapper>
   )
 }
 

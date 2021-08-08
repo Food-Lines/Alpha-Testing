@@ -43,6 +43,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 //Animations
 import * as Animatable from 'react-native-animatable'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 //Screen Dimensions
 const { height } = Dimensions.get('screen')
@@ -84,7 +85,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
     const resultAction = await dispatch(sendReset(data.email))
   }
   return (
-    <KeyboardAvoidingWrapper>
+    // <KeyboardAvoidingWrapper>
       <StyledContainerFullScreen>
         <StatusBar barStyle="light-content" />
         <View style={styles.header}>
@@ -105,6 +106,7 @@ const SignIn = ({ navigation }): React.ReactElement => {
           </Animatable.View>
         </View>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <View style={[styles.textPrivate, { marginTop: -2 }]}>
               <Text style={styles.color_textPrivate}>
@@ -151,9 +153,9 @@ const SignIn = ({ navigation }): React.ReactElement => {
               </LinearGradient>
             </SignInButton>
           </StyledFormArea>
+          </KeyboardAwareScrollView>
         </Animatable.View>
       </StyledContainerFullScreen>
-    </KeyboardAvoidingWrapper>
   )
 }
 

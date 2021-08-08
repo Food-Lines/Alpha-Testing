@@ -321,17 +321,6 @@ const HomeStackScreen = ({ navigation }) => {
         }}
       />
       <HomeStack.Screen
-        name={MainRoutes.CardItemDetails}
-        component={CardItemDetails}
-        options={({ route }) => ({
-          title: '',
-          headerBackTitleVisible: false,
-          headerTransparent: true,
-          headerTintColor: white,
-          headerLeftContainerStyle: { marginLeft: 10 },
-        })}
-      />
-      <HomeStack.Screen
         component={Support}
         name={MainRoutes.Support}
         options={{
@@ -461,6 +450,17 @@ const UsFoodsStackScreen = ({ navigation }) => {
         }}
       />
       <UsFoodsStack.Screen
+        name={MainRoutes.CardItemDetails}
+        component={CardItemDetails}
+        options={({ route }) => ({
+          title: '',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
+      <UsFoodsStack.Screen
         name={MainRoutes.SearchUSFood}
         component={SearchUSFood}
         options={{
@@ -485,6 +485,17 @@ const SyscoStackScreen = ({ navigation }) => {
         headerTintColor: black,
       }}
     >
+      <SyscoStack.Screen
+        name={MainRoutes.CardItemDetails}
+        component={CardItemDetails}
+        options={({ route }) => ({
+          title: '',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
       <SyscoStack.Screen
         name={MainRoutes.Sysco}
         component={Sysco}
