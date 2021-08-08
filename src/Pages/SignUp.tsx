@@ -160,10 +160,20 @@ const SignUp = ({ navigation }): React.ReactElement => {
 
   const onSubmitHandler = async () => {
     setLoading(true)
-    if (!data.check_email || !data.check_name || !data.isValidEmail || !data.isValidConfirmPassword || !data.isValidName || !data.isValidPassword) {setLoading(false); return}
+    if (
+      !data.check_email ||
+      !data.check_name ||
+      !data.isValidEmail ||
+      !data.isValidConfirmPassword ||
+      !data.isValidName ||
+      !data.isValidPassword
+    ) {
+      setLoading(false)
+      return
+    }
     const { email, password, fullName } = data
     const resultAction = await dispatch(signup({ email, password, fullName }))
-    
+
     if (signup.fulfilled.match(resultAction)) {
       // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
       // const user = resultAction.payload
@@ -177,11 +187,15 @@ const SignUp = ({ navigation }): React.ReactElement => {
   const RegisterButton = () => {
     return (
       <TouchableOpacity
-        onPress={async() => await onSubmitHandler()}
+        onPress={async () => await onSubmitHandler()}
         style={[styles.signIn, { marginTop: 30 }]}
       >
         <LinearGradient colors={['#FFA07A', '#FF6347']} style={styles.signIn}>
-          {loading ? <LoadingSpinner color={white}/> :  <SignInTextSign>Register</SignInTextSign>}
+          {loading ? (
+            <LoadingSpinner color={white} />
+          ) : (
+            <SignInTextSign>Register</SignInTextSign>
+          )}
         </LinearGradient>
       </TouchableOpacity>
     )
@@ -206,13 +220,13 @@ const SignUp = ({ navigation }): React.ReactElement => {
   }
 
   return (
-      <StyledContainerFullScreen>
-        <StatusBar barStyle="light-content" />
-        <SignInHeader>
-          <SignInTextHeader>Sign Up Now!</SignInTextHeader>
-        </SignInHeader>
-        
-        <Animatable.View style={styles.footer} animation="fadeInUpBig">
+    <StyledContainerFullScreen>
+      <StatusBar barStyle="light-content" />
+      <SignInHeader>
+        <SignInTextHeader>Sign Up Now!</SignInTextHeader>
+      </SignInHeader>
+
+      <Animatable.View style={styles.footer} animation="fadeInUpBig">
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <SignInTextFooter>Email</SignInTextFooter>
@@ -330,11 +344,9 @@ const SignUp = ({ navigation }): React.ReactElement => {
             <RegisterButton />
             <SignInButton />
           </StyledFormArea>
-          </KeyboardAwareScrollView>
-        </Animatable.View>
-        
-      </StyledContainerFullScreen>
-      
+        </KeyboardAwareScrollView>
+      </Animatable.View>
+    </StyledContainerFullScreen>
   )
 }
 

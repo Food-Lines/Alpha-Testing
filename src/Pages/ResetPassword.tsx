@@ -172,89 +172,87 @@ const SignIn = ({ route, navigation }): React.ReactElement => {
   }
   return (
     // <KeyboardAvoidingWrapper>
-      <StyledContainerFullScreen>
-        <StatusBar barStyle="light-content" />
-        <View style={styles.header}>
-          <Animatable.Image
-            style={styles.logo}
-            source={require('../Assets/delta.png')}
-            resizeMode="cover"
-            animation="bounceIn"
-            duration={1500}
-          />
-          <Animatable.View animation="fadeInLeft" duration={500}>
-            <SignInTextHeader>Step 2:</SignInTextHeader>
-            <Text style={styles.text_headerDetail}>Choose New Password</Text>
-          </Animatable.View>
-        </View>
-
-        <Animatable.View style={styles.footer} animation="fadeInUpBig">
-          <StyledFormArea>
-            <SignInTextFooter style={{ marginTop: 0 }}>
-              New Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.secureTextEntry ? true : false}
-                onChangeText={(val) => onPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateSecureTextEntry}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>
-                  Password must be at least 8 characters long.
-                </ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <SignInTextFooter style={{ marginTop: 25 }}>
-              Confirm Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.confirmSecureTextEntry ? true : false}
-                onChangeText={(val) => onConfirmPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-                {data.confirmSecureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidConfirmPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must match password.</ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <SignInButton onPress={onSubmitHandler}>
-              <LinearGradient
-                colors={['#FFA07A', '#FF6347']}
-                style={styles.signIn}
-              >
-                <SignInTextSign>Next</SignInTextSign>
-              </LinearGradient>
-            </SignInButton>
-          </StyledFormArea>
+    <StyledContainerFullScreen>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.header}>
+        <Animatable.Image
+          style={styles.logo}
+          source={require('../Assets/delta.png')}
+          resizeMode="cover"
+          animation="bounceIn"
+          duration={1500}
+        />
+        <Animatable.View animation="fadeInLeft" duration={500}>
+          <SignInTextHeader>Step 2:</SignInTextHeader>
+          <Text style={styles.text_headerDetail}>Choose New Password</Text>
         </Animatable.View>
-      </StyledContainerFullScreen>
+      </View>
+
+      <Animatable.View style={styles.footer} animation="fadeInUpBig">
+        <StyledFormArea>
+          <SignInTextFooter style={{ marginTop: 0 }}>
+            New Password
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="lock" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="* * * * * * * * *"
+              autoCapitalize="none"
+              secureTextEntry={data.secureTextEntry ? true : false}
+              onChangeText={(val) => onPasswordChangeHandler(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color={grey} size={20} />
+              ) : (
+                <Feather name="eye" color={grey} size={20} />
+              )}
+            </TouchableOpacity>
+          </SignInAction>
+          {data.isValidPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Password must be at least 8 characters long.</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <SignInTextFooter style={{ marginTop: 25 }}>
+            Confirm Password
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="lock" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="* * * * * * * * *"
+              autoCapitalize="none"
+              secureTextEntry={data.confirmSecureTextEntry ? true : false}
+              onChangeText={(val) => onConfirmPasswordChangeHandler(val)}
+            />
+            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+              {data.confirmSecureTextEntry ? (
+                <Feather name="eye-off" color={grey} size={20} />
+              ) : (
+                <Feather name="eye" color={grey} size={20} />
+              )}
+            </TouchableOpacity>
+          </SignInAction>
+          {data.isValidConfirmPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must match password.</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <SignInButton onPress={onSubmitHandler}>
+            <LinearGradient
+              colors={['#FFA07A', '#FF6347']}
+              style={styles.signIn}
+            >
+              <SignInTextSign>Next</SignInTextSign>
+            </LinearGradient>
+          </SignInButton>
+        </StyledFormArea>
+      </Animatable.View>
+    </StyledContainerFullScreen>
     // </KeyboardAvoidingWrapper>
   )
 }

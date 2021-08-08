@@ -172,159 +172,151 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
 
   return (
     // <KeyboardAvoidingWrapper>
-      <StyledContainerFullScreen>
-        <StatusBar barStyle="light-content" />
-        <SignInHeader>
-          <SignInTextHeader>Account Authentication</SignInTextHeader>
-        </SignInHeader>
-        <Animatable.View style={styles.footer} animation="fadeInUpBig">
-          <StyledFormArea>
-            <View style={[styles.textPrivate, { marginTop: -2 }]}>
-              <Text style={styles.color_textPrivate}>
-                To provide our price comparison service, we need to be able
-                access your
-                <Text
-                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
-                >
-                  {' '}
-                  Sysco{' '}
-                </Text>
-                and
-                <Text
-                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
-                >
-                  {' '}
-                  US Food
-                </Text>{' '}
-                account. For more information, refer to our
-                <Text
-                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
-                >
-                  {' '}
-                  Privacy Policy
-                </Text>
-                .
-              </Text>
-            </View>
-
-            <SignInTextFooter style={{ marginTop: 20 }}>
-              Sysco Email
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="envelope-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="user@provider.com"
-                autoCapitalize="none"
-                onChangeText={(val) => onEmailChangeHandler(val)}
-                keyboardType="email-address"
-              />
-              {data.check_email ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
-                </Animatable.View>
-              ) : null}
-            </SignInAction>
-            {data.isValidEmail ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must be a Valid Email</ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <SignInTextFooter style={{ marginTop: 20 }}>
-              Sysco Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.secureTextEntry ? true : false}
-                onChangeText={(val) => onSyscoPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateSecureTextEntry}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>
-                  Password must be at least 8 characters long.
-                </ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <SignInTextFooter style={{ marginTop: 20 }}>
-              US Foods ID
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="user-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Full Name"
-                onChangeText={(val) => onIDChangeHandler(val)}
-              />
-              {data.isValidID ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
-                </Animatable.View>
-              ) : null}
-            </SignInAction>
-            {data.isValidID ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must be a Valid ID</ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <SignInTextFooter style={{ marginTop: 20 }}>
-              US Foods Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.confirmSecureTextEntry ? true : false}
-                onChangeText={(val) => onUSFoodsPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-                {data.confirmSecureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidConfirmPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Password Must be 8 characters long.</ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <View style={styles.textPrivate}>
-              <Text style={styles.color_textPrivate}>
-                By signing up you agree to our
-              </Text>
+    <StyledContainerFullScreen>
+      <StatusBar barStyle="light-content" />
+      <SignInHeader>
+        <SignInTextHeader>Account Authentication</SignInTextHeader>
+      </SignInHeader>
+      <Animatable.View style={styles.footer} animation="fadeInUpBig">
+        <StyledFormArea>
+          <View style={[styles.textPrivate, { marginTop: -2 }]}>
+            <Text style={styles.color_textPrivate}>
+              To provide our price comparison service, we need to be able access
+              your
               <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
                 {' '}
-                Terms of service
+                Sysco{' '}
               </Text>
-              <Text style={styles.color_textPrivate}> and</Text>
+              and
               <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
-                Privacy policy
+                {' '}
+                US Food
+              </Text>{' '}
+              account. For more information, refer to our
+              <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
+                {' '}
+                Privacy Policy
               </Text>
-            </View>
+              .
+            </Text>
+          </View>
 
-            <RegisterButton />
-          </StyledFormArea>
-        </Animatable.View>
-      </StyledContainerFullScreen>
+          <SignInTextFooter style={{ marginTop: 20 }}>
+            Sysco Email
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="envelope-o" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="user@provider.com"
+              autoCapitalize="none"
+              onChangeText={(val) => onEmailChangeHandler(val)}
+              keyboardType="email-address"
+            />
+            {data.check_email ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </SignInAction>
+          {data.isValidEmail ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a Valid Email</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <SignInTextFooter style={{ marginTop: 20 }}>
+            Sysco Password
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="lock" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="* * * * * * * * *"
+              autoCapitalize="none"
+              secureTextEntry={data.secureTextEntry ? true : false}
+              onChangeText={(val) => onSyscoPasswordChangeHandler(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color={grey} size={20} />
+              ) : (
+                <Feather name="eye" color={grey} size={20} />
+              )}
+            </TouchableOpacity>
+          </SignInAction>
+          {data.isValidPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Password must be at least 8 characters long.</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <SignInTextFooter style={{ marginTop: 20 }}>
+            US Foods ID
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="user-o" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Full Name"
+              onChangeText={(val) => onIDChangeHandler(val)}
+            />
+            {data.isValidID ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="green" size={20} />
+              </Animatable.View>
+            ) : null}
+          </SignInAction>
+          {data.isValidID ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Must be a Valid ID</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <SignInTextFooter style={{ marginTop: 20 }}>
+            US Foods Password
+          </SignInTextFooter>
+          <SignInAction>
+            <FontAwesome name="lock" color={black} size={20} />
+            <TextInput
+              style={styles.textInput}
+              placeholder="* * * * * * * * *"
+              autoCapitalize="none"
+              secureTextEntry={data.confirmSecureTextEntry ? true : false}
+              onChangeText={(val) => onUSFoodsPasswordChangeHandler(val)}
+            />
+            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+              {data.confirmSecureTextEntry ? (
+                <Feather name="eye-off" color={grey} size={20} />
+              ) : (
+                <Feather name="eye" color={grey} size={20} />
+              )}
+            </TouchableOpacity>
+          </SignInAction>
+          {data.isValidConfirmPassword ? null : (
+            <Animatable.View animation="fadeInLeft" duration={500}>
+              <ErrorMsg>Password Must be 8 characters long.</ErrorMsg>
+            </Animatable.View>
+          )}
+
+          <View style={styles.textPrivate}>
+            <Text style={styles.color_textPrivate}>
+              By signing up you agree to our
+            </Text>
+            <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
+              {' '}
+              Terms of service
+            </Text>
+            <Text style={styles.color_textPrivate}> and</Text>
+            <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
+              Privacy policy
+            </Text>
+          </View>
+
+          <RegisterButton />
+        </StyledFormArea>
+      </Animatable.View>
+    </StyledContainerFullScreen>
     // </KeyboardAvoidingWrapper>
   )
 }

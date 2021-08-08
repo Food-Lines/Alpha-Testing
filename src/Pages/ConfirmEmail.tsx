@@ -86,27 +86,27 @@ const SignIn = ({ navigation }): React.ReactElement => {
   }
   return (
     // <KeyboardAvoidingWrapper>
-      <StyledContainerFullScreen>
-        <StatusBar barStyle="light-content" />
-        <View style={styles.header}>
-          <Animatable.Image
-            style={[styles.logo, { marginBottom: -60 }]}
-            source={require('../Assets/lock.png')}
-            resizeMode="cover"
-            animation="bounceIn"
-            duration={1500}
-          />
-          <Animatable.View
-            animation="fadeInLeft"
-            duration={500}
-            style={{ marginTop: 20 }}
-          >
-            <SignInTextHeader>Step 1:</SignInTextHeader>
-            <Text style={styles.text_headerDetail}>Account Email</Text>
-          </Animatable.View>
-        </View>
-        <Animatable.View style={styles.footer} animation="fadeInUpBig">
-          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+    <StyledContainerFullScreen>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.header}>
+        <Animatable.Image
+          style={[styles.logo, { marginBottom: -60 }]}
+          source={require('../Assets/lock.png')}
+          resizeMode="cover"
+          animation="bounceIn"
+          duration={1500}
+        />
+        <Animatable.View
+          animation="fadeInLeft"
+          duration={500}
+          style={{ marginTop: 20 }}
+        >
+          <SignInTextHeader>Step 1:</SignInTextHeader>
+          <Text style={styles.text_headerDetail}>Account Email</Text>
+        </Animatable.View>
+      </View>
+      <Animatable.View style={styles.footer} animation="fadeInUpBig">
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <View style={[styles.textPrivate, { marginTop: -2 }]}>
               <Text style={styles.color_textPrivate}>
@@ -153,9 +153,9 @@ const SignIn = ({ navigation }): React.ReactElement => {
               </LinearGradient>
             </SignInButton>
           </StyledFormArea>
-          </KeyboardAwareScrollView>
-        </Animatable.View>
-      </StyledContainerFullScreen>
+        </KeyboardAwareScrollView>
+      </Animatable.View>
+    </StyledContainerFullScreen>
   )
 }
 

@@ -8,7 +8,7 @@ import { Colors } from '../Components/styles'
 // Colors
 const { primary } = Colors
 
-const LoadingSpinner = ({color}) => {
+const LoadingSpinner = ({ color }) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={color} />

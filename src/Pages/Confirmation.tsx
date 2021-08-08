@@ -34,39 +34,39 @@ const Confirmation = ({ navigation }): React.ReactElement => {
   }
   return (
     // <KeyboardAvoidingWrapper>
-      <StyledContainer style={{ backgroundColor: primary, flex: 1 }}>
-        <StatusBar barStyle="light-content" />
-        <InnerContainer style={{ marginTop: 20 }}>
-          <PageTitle style={{ fontSize: 40 }}>Password Updated</PageTitle>
-          <Animatable.Image
-            style={{
-              marginTop: 20,
-              width: height_logo,
-              height: height_logo,
-              tintColor: black,
-            }}
-            resizeMode="contain"
-            source={require('../Assets/checkMark.png')}
-          />
-          <SubTitle
-            style={{
-              fontSize: 12,
-              textAlign: 'center',
-              marginTop: 30,
-              color: white,
-            }}
-          >
-            Your password has been updated scucessfully! Don't forget it this
-            time.
-          </SubTitle>
+    <StyledContainer style={{ backgroundColor: primary, flex: 1 }}>
+      <StatusBar barStyle="light-content" />
+      <InnerContainer style={{ marginTop: 20 }}>
+        <PageTitle style={{ fontSize: 40 }}>Password Updated</PageTitle>
+        <Animatable.Image
+          style={{
+            marginTop: 20,
+            width: height_logo,
+            height: height_logo,
+            tintColor: black,
+          }}
+          resizeMode="contain"
+          source={require('../Assets/checkMark.png')}
+        />
+        <SubTitle
+          style={{
+            fontSize: 12,
+            textAlign: 'center',
+            marginTop: 30,
+            color: white,
+          }}
+        >
+          Your password has been updated scucessfully! Don't forget it this
+          time.
+        </SubTitle>
 
-          <SignInButton onPress={onSubmitHandler}>
-            <LinearGradient colors={[black, black]} style={styles.signIn}>
-              <SignInTextSign style={{ color: white }}>Next</SignInTextSign>
-            </LinearGradient>
-          </SignInButton>
-        </InnerContainer>
-      </StyledContainer>
+        <SignInButton onPress={onSubmitHandler}>
+          <LinearGradient colors={[black, black]} style={styles.signIn}>
+            <SignInTextSign style={{ color: white }}>Next</SignInTextSign>
+          </LinearGradient>
+        </SignInButton>
+      </InnerContainer>
+    </StyledContainer>
     // </KeyboardAvoidingWrapper>
   )
 }

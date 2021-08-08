@@ -113,9 +113,12 @@ const SignIn = ({ navigation }): React.ReactElement => {
     })
   }
 
-  const onSubmitHandler = async() => {
+  const onSubmitHandler = async () => {
     setLoading(true)
-    if (!data.isValidEmail || !data.isValidPassword) {setLoading(false); return}
+    if (!data.isValidEmail || !data.isValidPassword) {
+      setLoading(false)
+      return
+    }
     const { email, password } = data
     const resultAction = await dispatch(login({ email, password }))
     if (login.fulfilled.match(resultAction)) {
@@ -153,12 +156,12 @@ const SignIn = ({ navigation }): React.ReactElement => {
   }
 
   return (
-      <StyledContainerFullScreen>
-        <StatusBar barStyle="light-content" />
-        <SignInHeader>
-          <SignInTextHeader>Welcome!</SignInTextHeader>
-        </SignInHeader>
-        <Animatable.View style={styles.footer} animation="fadeInUpBig">
+    <StyledContainerFullScreen>
+      <StatusBar barStyle="light-content" />
+      <SignInHeader>
+        <SignInTextHeader>Welcome!</SignInTextHeader>
+      </SignInHeader>
+      <Animatable.View style={styles.footer} animation="fadeInUpBig">
         <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <StyledFormArea>
             <SignInTextFooter>Email</SignInTextFooter>
@@ -183,15 +186,15 @@ const SignIn = ({ navigation }): React.ReactElement => {
                 </Animatable.View>
               ) : null}
             </SignInAction>
-            {!data.isValidEmail || !data.correctUserPassword ? 
-            <Animatable.View animation="fadeInLeft" duration={500}>
+            {!data.isValidEmail || !data.correctUserPassword ? (
+              <Animatable.View animation="fadeInLeft" duration={500}>
                 {data.correctUserPassword ? (
                   <ErrorMsg>Must be a Valid Email.</ErrorMsg>
                 ) : (
                   <ErrorMsg>Username or Password Invalid.</ErrorMsg>
                 )}
-              </Animatable.View> : null
-              }
+              </Animatable.View>
+            ) : null}
 
             <SignInTextFooter style={{ marginTop: 35 }}>
               Password
@@ -234,23 +237,23 @@ const SignIn = ({ navigation }): React.ReactElement => {
               </Text>
             </ForgetPassword>
 
-            <SignInButton onPress={async() => await onSubmitHandler()}>
+            <SignInButton onPress={async () => await onSubmitHandler()}>
               <LinearGradient
                 colors={['#FFA07A', '#FF6347']}
                 style={styles.signIn}
               >
-                { loading ?
-                  <LoadingSpinner color={white}/>:  
+                {loading ? (
+                  <LoadingSpinner color={white} />
+                ) : (
                   <SignInTextSign>Sign In</SignInTextSign>
-                }
-                
+                )}
               </LinearGradient>
             </SignInButton>
             <SignOutButton />
           </StyledFormArea>
-          </KeyboardAwareScrollView>
-        </Animatable.View>
-      </StyledContainerFullScreen>
+        </KeyboardAwareScrollView>
+      </Animatable.View>
+    </StyledContainerFullScreen>
   )
 }
 

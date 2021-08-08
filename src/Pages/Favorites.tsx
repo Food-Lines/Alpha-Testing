@@ -72,40 +72,40 @@ const Favorites = ({ navigation }): React.ReactElement => {
 
   return (
     // <KeyboardAvoidingWrapper>
-      <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
-        <View style={{ padding: 20 }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              backgroundColor: greyLight,
-              borderColor: grey,
-              borderWidth: 1,
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-            }}
-          >
-            <Ionicons
-              name="search-outline"
-              size={25}
-              style={{ marginHorizontal: 10 }}
-            />
-            <TextInput
-              style={styles.textInputStyle}
-              placeholder="Search Here"
-              value={search}
-              underlineColorAndroid="transparent"
-              onChangeText={(text) => searchFilter(text)}
-            />
-          </View>
+    <SafeAreaView style={{ backgroundColor: white, flex: 1 }}>
+      <View style={{ padding: 20 }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            backgroundColor: greyLight,
+            borderColor: grey,
+            borderWidth: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
+        >
+          <Ionicons
+            name="search-outline"
+            size={25}
+            style={{ marginHorizontal: 10 }}
+          />
+          <TextInput
+            style={styles.textInputStyle}
+            placeholder="Search Here"
+            value={search}
+            underlineColorAndroid="transparent"
+            onChangeText={(text) => searchFilter(text)}
+          />
         </View>
-        <FlatList
-          data={filteredData}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          style={{ paddingHorizontal: 20 }}
-        />
-      </SafeAreaView>
+      </View>
+      <FlatList
+        data={filteredData}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        style={{ paddingHorizontal: 20 }}
+      />
+    </SafeAreaView>
     // </KeyboardAvoidingWrapper>
   )
 }

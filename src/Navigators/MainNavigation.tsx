@@ -106,8 +106,6 @@ const AuthNavigator = (): React.ReactElement => {
   )
 }
 
-
-
 const MainNavigator = (): React.ReactElement => {
   const reduxUser = useReduxSelector(selectUser)
   const dispatch = useReduxDispatch()
@@ -116,20 +114,24 @@ const MainNavigator = (): React.ReactElement => {
   if (user && reduxUser.uid === user.uid) auth = true
   else if (user && reduxUser.uid !== user.uid) {
     useEffect(() => {
-      dispatch(userSlice.actions.setUser({
-        email: user.email,
-        uid: user.uid,
-        displayName: user.displayName,
-      }) )
+      dispatch(
+        userSlice.actions.setUser({
+          email: user.email,
+          uid: user.uid,
+          displayName: user.displayName,
+        })
+      )
       auth = true
     }, [auth])
   } else if (!user && reduxUser.uid) {
     useEffect(() => {
-      dispatch(userSlice.actions.setUser({
-        email: null as string,
-        fullName: null as string,
-        uid: null as string,
-      }))
+      dispatch(
+        userSlice.actions.setUser({
+          email: null as string,
+          fullName: null as string,
+          uid: null as string,
+        })
+      )
       auth = false
     }, [auth])
   } else auth = false
