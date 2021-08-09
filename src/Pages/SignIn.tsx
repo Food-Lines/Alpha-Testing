@@ -7,7 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   Text,
-  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native'
 
 // icons
@@ -156,104 +157,107 @@ const SignIn = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <StyledContainerFullScreen>
-      <StatusBar barStyle="light-content" />
-      <SignInHeader>
-        <SignInTextHeader>Welcome!</SignInTextHeader>
-      </SignInHeader>
-      <Animatable.View style={styles.footer} animation="fadeInUpBig">
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <StyledFormArea>
-            <SignInTextFooter>Email</SignInTextFooter>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <StyledContainerFullScreen>
+        <StatusBar barStyle="light-content" />
 
-            <SignInAction
-              style={{
-                borderBottomColor: data.correctUserPassword ? greyLight : red,
-                borderBottomWidth: data.correctUserPassword ? 1 : 2,
-              }}
-            >
-              <FontAwesome name="user-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="user@provider.com"
-                autoCapitalize="none"
-                onChangeText={(val) => onEmailChangeHandler(val)}
-                keyboardType="email-address"
-              />
-              {data.check_email ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
+        <SignInHeader>
+          <SignInTextHeader>Welcome!</SignInTextHeader>
+        </SignInHeader>
+        <Animatable.View style={styles.footer} animation="fadeInUpBig">
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+            <StyledFormArea>
+              <SignInTextFooter>Email</SignInTextFooter>
+
+              <SignInAction
+                style={{
+                  borderBottomColor: data.correctUserPassword ? greyLight : red,
+                  borderBottomWidth: data.correctUserPassword ? 1 : 2,
+                }}
+              >
+                <FontAwesome name="user-o" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="user@provider.com"
+                  autoCapitalize="none"
+                  onChangeText={(val) => onEmailChangeHandler(val)}
+                  keyboardType="email-address"
+                />
+                {data.check_email ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather name="check-circle" color="green" size={20} />
+                  </Animatable.View>
+                ) : null}
+              </SignInAction>
+              {!data.isValidEmail || !data.correctUserPassword ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  {data.correctUserPassword ? (
+                    <ErrorMsg>Must be a Valid Email.</ErrorMsg>
+                  ) : (
+                    <ErrorMsg>Username or Password Invalid.</ErrorMsg>
+                  )}
                 </Animatable.View>
               ) : null}
-            </SignInAction>
-            {!data.isValidEmail || !data.correctUserPassword ? (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                {data.correctUserPassword ? (
-                  <ErrorMsg>Must be a Valid Email.</ErrorMsg>
-                ) : (
-                  <ErrorMsg>Username or Password Invalid.</ErrorMsg>
-                )}
-              </Animatable.View>
-            ) : null}
 
-            <SignInTextFooter style={{ marginTop: 35 }}>
-              Password
-            </SignInTextFooter>
-            <SignInAction
-              style={{
-                borderBottomColor: data.correctUserPassword ? greyLight : red,
-                borderBottomWidth: data.correctUserPassword ? 1 : 2,
-              }}
-            >
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.secureTextEntry ? true : false}
-                onChangeText={(val) => onPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateSecureTextEntry}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>
-                  Password must be at least 8 characters long.
-                </ErrorMsg>
-              </Animatable.View>
-            )}
-
-            <ForgetPassword
-              onPress={() => navigation.navigate(MainRoutes.ConfirmEmail)}
-            >
-              <Text style={{ fontSize: 14, color: primary }}>
-                Forgot Password?
-              </Text>
-            </ForgetPassword>
-
-            <SignInButton onPress={async () => await onSubmitHandler()}>
-              <LinearGradient
-                colors={['#FFA07A', '#FF6347']}
-                style={styles.signIn}
+              <SignInTextFooter style={{ marginTop: 35 }}>
+                Password
+              </SignInTextFooter>
+              <SignInAction
+                style={{
+                  borderBottomColor: data.correctUserPassword ? greyLight : red,
+                  borderBottomWidth: data.correctUserPassword ? 1 : 2,
+                }}
               >
-                {loading ? (
-                  <LoadingSpinner color={white} />
-                ) : (
-                  <SignInTextSign>Sign In</SignInTextSign>
-                )}
-              </LinearGradient>
-            </SignInButton>
-            <SignOutButton />
-          </StyledFormArea>
-        </KeyboardAwareScrollView>
-      </Animatable.View>
-    </StyledContainerFullScreen>
+                <FontAwesome name="lock" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="* * * * * * * * *"
+                  autoCapitalize="none"
+                  secureTextEntry={data.secureTextEntry ? true : false}
+                  onChangeText={(val) => onPasswordChangeHandler(val)}
+                />
+                <TouchableOpacity onPress={updateSecureTextEntry}>
+                  {data.secureTextEntry ? (
+                    <Feather name="eye-off" color={grey} size={20} />
+                  ) : (
+                    <Feather name="eye" color={grey} size={20} />
+                  )}
+                </TouchableOpacity>
+              </SignInAction>
+              {data.isValidPassword ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>
+                    Password must be at least 8 characters long.
+                  </ErrorMsg>
+                </Animatable.View>
+              )}
+
+              <ForgetPassword
+                onPress={() => navigation.navigate(MainRoutes.ConfirmEmail)}
+              >
+                <Text style={{ fontSize: 14, color: primary }}>
+                  Forgot Password?
+                </Text>
+              </ForgetPassword>
+
+              <SignInButton onPress={async () => await onSubmitHandler()}>
+                <LinearGradient
+                  colors={['#FFA07A', '#FF6347']}
+                  style={styles.signIn}
+                >
+                  {loading ? (
+                    <LoadingSpinner color={white} />
+                  ) : (
+                    <SignInTextSign>Sign In</SignInTextSign>
+                  )}
+                </LinearGradient>
+              </SignInButton>
+              <SignOutButton />
+            </StyledFormArea>
+          </KeyboardAwareScrollView>
+        </Animatable.View>
+      </StyledContainerFullScreen>
+    </TouchableWithoutFeedback>
   )
 }
 

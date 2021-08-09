@@ -7,6 +7,8 @@ import {
   TextInput,
   Text,
   Dimensions,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native'
 
 // icons
@@ -85,77 +87,80 @@ const SignIn = ({ navigation }): React.ReactElement => {
     const resultAction = await dispatch(sendReset(data.email))
   }
   return (
-    // <KeyboardAvoidingWrapper>
-    <StyledContainerFullScreen>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.header}>
-        <Animatable.Image
-          style={[styles.logo, { marginBottom: -60 }]}
-          source={require('../Assets/lock.png')}
-          resizeMode="cover"
-          animation="bounceIn"
-          duration={1500}
-        />
-        <Animatable.View
-          animation="fadeInLeft"
-          duration={500}
-          style={{ marginTop: 20 }}
-        >
-          <SignInTextHeader>Step 1:</SignInTextHeader>
-          <Text style={styles.text_headerDetail}>Account Email</Text>
-        </Animatable.View>
-      </View>
-      <Animatable.View style={styles.footer} animation="fadeInUpBig">
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <StyledFormArea>
-            <View style={[styles.textPrivate, { marginTop: -2 }]}>
-              <Text style={styles.color_textPrivate}>
-                Provide your account's email for which you want to rest your
-                password. A
-                <Text
-                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
-                >
-                  {' '}
-                  Dynamic Link
-                </Text>{' '}
-                will be sent to your email.
-              </Text>
-            </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <StyledContainerFullScreen>
+        <StatusBar barStyle="light-content" />
+        <View style={styles.header}>
+          <Animatable.Image
+            style={[styles.logo, { marginBottom: -60 }]}
+            source={require('../Assets/lock.png')}
+            resizeMode="cover"
+            animation="bounceIn"
+            duration={1500}
+          />
+          <Animatable.View
+            animation="fadeInLeft"
+            duration={500}
+            style={{ marginTop: 20 }}
+          >
+            <SignInTextHeader>Step 1:</SignInTextHeader>
+            <Text style={styles.text_headerDetail}>Account Email</Text>
+          </Animatable.View>
+        </View>
+        <Animatable.View style={styles.footer} animation="fadeInUpBig">
+          <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
+            <StyledFormArea>
+              <View style={[styles.textPrivate, { marginTop: -2 }]}>
+                <Text style={styles.color_textPrivate}>
+                  Provide your account's email for which you want to rest your
+                  password. A
+                  <Text
+                    style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
+                  >
+                    {' '}
+                    Dynamic Link
+                  </Text>{' '}
+                  will be sent to your email.
+                </Text>
+              </View>
 
-            <SignInTextFooter style={{ marginTop: 20 }}>Email</SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="user-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="user@provider.com"
-                autoCapitalize="none"
-                onChangeText={(val) => onEmailChangeHandler(val)}
-                keyboardType="email-address"
-              />
-              {data.check_email ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
+              <SignInTextFooter style={{ marginTop: 20 }}>
+                Email
+              </SignInTextFooter>
+              <SignInAction>
+                <FontAwesome name="user-o" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="user@provider.com"
+                  autoCapitalize="none"
+                  onChangeText={(val) => onEmailChangeHandler(val)}
+                  keyboardType="email-address"
+                />
+                {data.check_email ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather name="check-circle" color="green" size={20} />
+                  </Animatable.View>
+                ) : null}
+              </SignInAction>
+              {data.isValidEmail ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>Must be a Valid Email.</ErrorMsg>
                 </Animatable.View>
-              ) : null}
-            </SignInAction>
-            {data.isValidEmail ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must be a Valid Email.</ErrorMsg>
-              </Animatable.View>
-            )}
+              )}
 
-            <SignInButton onPress={onSubmitHandler}>
-              <LinearGradient
-                colors={['#FFA07A', '#FF6347']}
-                style={styles.signIn}
-              >
-                <SignInTextSign>Next</SignInTextSign>
-              </LinearGradient>
-            </SignInButton>
-          </StyledFormArea>
-        </KeyboardAwareScrollView>
-      </Animatable.View>
-    </StyledContainerFullScreen>
+              <SignInButton onPress={onSubmitHandler}>
+                <LinearGradient
+                  colors={['#FFA07A', '#FF6347']}
+                  style={styles.signIn}
+                >
+                  <SignInTextSign>Next</SignInTextSign>
+                </LinearGradient>
+              </SignInButton>
+            </StyledFormArea>
+          </KeyboardAwareScrollView>
+        </Animatable.View>
+      </StyledContainerFullScreen>
+    </TouchableWithoutFeedback>
   )
 }
 

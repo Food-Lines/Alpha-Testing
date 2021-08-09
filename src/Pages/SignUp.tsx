@@ -11,7 +11,8 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  DrawerLayoutAndroidBase,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native'
 
 //Components
@@ -220,133 +221,142 @@ const SignUp = ({ navigation }): React.ReactElement => {
   }
 
   return (
-    <StyledContainerFullScreen>
-      <StatusBar barStyle="light-content" />
-      <SignInHeader>
-        <SignInTextHeader>Sign Up Now!</SignInTextHeader>
-      </SignInHeader>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <StyledContainerFullScreen>
+        <StatusBar barStyle="light-content" />
+        <SignInHeader>
+          <SignInTextHeader>Sign Up Now!</SignInTextHeader>
+        </SignInHeader>
 
-      <Animatable.View style={styles.footer} animation="fadeInUpBig">
-        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-          <StyledFormArea>
-            <SignInTextFooter>Email</SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="envelope-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="user@provider.com"
-                autoCapitalize="none"
-                onChangeText={(val) => onEmailChangeHandler(val)}
-                keyboardType="email-address"
-              />
-              {data.check_email ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
+        <Animatable.View style={styles.footer} animation="fadeInUpBig">
+          <KeyboardAwareScrollView
+            style={{ paddingHorizontal: 20, paddingVertical: 30 }}
+            keyboardShouldPersistTaps="always"
+          >
+            <StyledFormArea>
+              <SignInTextFooter>Email</SignInTextFooter>
+              <SignInAction>
+                <FontAwesome name="envelope-o" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="user@provider.com"
+                  autoCapitalize="none"
+                  onChangeText={(val) => onEmailChangeHandler(val)}
+                  keyboardType="email-address"
+                />
+                {data.check_email ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather name="check-circle" color="green" size={20} />
+                  </Animatable.View>
+                ) : null}
+              </SignInAction>
+              {data.isValidEmail ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>Must be a Valid Email</ErrorMsg>
                 </Animatable.View>
-              ) : null}
-            </SignInAction>
-            {data.isValidEmail ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must be a Valid Email</ErrorMsg>
-              </Animatable.View>
-            )}
+              )}
 
-            <SignInTextFooter style={{ marginTop: 25 }}>
-              Full Name
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="user-o" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Full Name"
-                onChangeText={(val) => onNameChangeHandler(val)}
-              />
-              {data.check_name ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
+              <SignInTextFooter style={{ marginTop: 25 }}>
+                Full Name
+              </SignInTextFooter>
+              <SignInAction>
+                <FontAwesome name="user-o" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Full Name"
+                  onChangeText={(val) => onNameChangeHandler(val)}
+                />
+                {data.check_name ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather name="check-circle" color="green" size={20} />
+                  </Animatable.View>
+                ) : null}
+              </SignInAction>
+              {data.isValidName ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>Must include First and Last Name</ErrorMsg>
                 </Animatable.View>
-              ) : null}
-            </SignInAction>
-            {data.isValidName ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must include First and Last Name</ErrorMsg>
-              </Animatable.View>
-            )}
+              )}
 
-            <SignInTextFooter style={{ marginTop: 25 }}>
-              Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.secureTextEntry ? true : false}
-                onChangeText={(val) => onPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateSecureTextEntry}>
-                {data.secureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>
-                  Password must be at least 8 characters long.
-                </ErrorMsg>
-              </Animatable.View>
-            )}
+              <SignInTextFooter style={{ marginTop: 25 }}>
+                Password
+              </SignInTextFooter>
+              <SignInAction>
+                <FontAwesome name="lock" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="* * * * * * * * *"
+                  autoCapitalize="none"
+                  secureTextEntry={data.secureTextEntry ? true : false}
+                  onChangeText={(val) => onPasswordChangeHandler(val)}
+                />
+                <TouchableOpacity onPress={updateSecureTextEntry}>
+                  {data.secureTextEntry ? (
+                    <Feather name="eye-off" color={grey} size={20} />
+                  ) : (
+                    <Feather name="eye" color={grey} size={20} />
+                  )}
+                </TouchableOpacity>
+              </SignInAction>
+              {data.isValidPassword ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>
+                    Password must be at least 8 characters long.
+                  </ErrorMsg>
+                </Animatable.View>
+              )}
 
-            <SignInTextFooter style={{ marginTop: 25 }}>
-              Confirm Password
-            </SignInTextFooter>
-            <SignInAction>
-              <FontAwesome name="lock" color={black} size={20} />
-              <TextInput
-                style={styles.textInput}
-                placeholder="* * * * * * * * *"
-                autoCapitalize="none"
-                secureTextEntry={data.confirmSecureTextEntry ? true : false}
-                onChangeText={(val) => onConfirmPasswordChangeHandler(val)}
-              />
-              <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-                {data.confirmSecureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
-                ) : (
-                  <Feather name="eye" color={grey} size={20} />
-                )}
-              </TouchableOpacity>
-            </SignInAction>
-            {data.isValidConfirmPassword ? null : (
-              <Animatable.View animation="fadeInLeft" duration={500}>
-                <ErrorMsg>Must match password.</ErrorMsg>
-              </Animatable.View>
-            )}
+              <SignInTextFooter style={{ marginTop: 25 }}>
+                Confirm Password
+              </SignInTextFooter>
+              <SignInAction>
+                <FontAwesome name="lock" color={black} size={20} />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="* * * * * * * * *"
+                  autoCapitalize="none"
+                  secureTextEntry={data.confirmSecureTextEntry ? true : false}
+                  onChangeText={(val) => onConfirmPasswordChangeHandler(val)}
+                />
+                <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+                  {data.confirmSecureTextEntry ? (
+                    <Feather name="eye-off" color={grey} size={20} />
+                  ) : (
+                    <Feather name="eye" color={grey} size={20} />
+                  )}
+                </TouchableOpacity>
+              </SignInAction>
+              {data.isValidConfirmPassword ? null : (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <ErrorMsg>Must match password.</ErrorMsg>
+                </Animatable.View>
+              )}
 
-            <View style={styles.textPrivate}>
-              <Text style={styles.color_textPrivate}>
-                By signing up you agree to our
-              </Text>
-              <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
-                {' '}
-                Terms of service
-              </Text>
-              <Text style={styles.color_textPrivate}> and</Text>
-              <Text style={[styles.color_textPrivate, { fontWeight: 'bold' }]}>
-                Privacy policy
-              </Text>
-            </View>
+              <View style={styles.textPrivate}>
+                <Text style={styles.color_textPrivate}>
+                  By signing up you agree to our
+                </Text>
+                <Text
+                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
+                >
+                  {' '}
+                  Terms of service
+                </Text>
+                <Text style={styles.color_textPrivate}> and</Text>
+                <Text
+                  style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
+                >
+                  Privacy policy
+                </Text>
+              </View>
 
-            <RegisterButton />
-            <SignInButton />
-          </StyledFormArea>
-        </KeyboardAwareScrollView>
-      </Animatable.View>
-    </StyledContainerFullScreen>
+              <RegisterButton />
+              <SignInButton />
+            </StyledFormArea>
+          </KeyboardAwareScrollView>
+        </Animatable.View>
+      </StyledContainerFullScreen>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -368,8 +378,6 @@ const styles = StyleSheet.create({
     backgroundColor: white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
   },
   text_header: {
     color: white,

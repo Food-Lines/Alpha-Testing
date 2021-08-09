@@ -642,6 +642,7 @@ export const SignInTextSign = styled.Text`
 
 export const ForgetPassword = styled.TouchableOpacity`
   margin-top: 15px;
+  width: 150px;
 `
 
 // US Food and Sysco Components
