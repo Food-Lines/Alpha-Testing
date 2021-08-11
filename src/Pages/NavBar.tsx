@@ -83,188 +83,6 @@ const NavBar = ({ navigation }): React.ReactElement => {
 
 export default NavBar
 
-// const MasterStackScreen = ({ navigation }) => {
-//   return (
-//     <MasterStack.Navigator
-//       screenOptions={{
-//         headerStyle: {
-//           backgroundColor: white,
-//           shadowColor: white, // iOS
-//           elevation: 0, // Android
-//         },
-//         headerTintColor: black,
-//       }}
-//     >
-//       <MasterStack.Screen
-//         name={MainRoutes.Home}
-//         component={Home}
-//         options={{
-//           title: 'Home',
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//           headerLeft: () => (
-//             <Icon.Button
-//               name="ios-menu"
-//               size={25}
-//               backgroundColor={white}
-//               color={black}
-//               onPress={() => navigation.openDrawer()}
-//             />
-//           ),
-//           headerRightContainerStyle: { marginRight: 10 },
-//           headerRight: () => (
-//             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-//               <SearchIcon navigation={navigation} />
-//               <ProfilePictureComp navigation={navigation} />
-//             </View>
-//           ),
-//         }}
-//       />
-
-//       <MasterStack.Screen
-//         name={MainRoutes.CardListScreen}
-//         component={CardListScreen}
-//         options={({ route }) => ({
-//           title: route.params.title,
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         })}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.Favorites}
-//         component={Favorites}
-//         options={{
-//           title: 'Your Favorites',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.CardItemDetails}
-//         component={CardItemDetails}
-//         options={({ route }) => ({
-//           title: '',
-//           headerBackTitleVisible: false,
-//           headerTransparent: true,
-//           headerTintColor: white,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         })}
-//       />
-//       <MasterStack.Screen
-//         component={Support}
-//         name={MainRoutes.Support}
-//         options={{
-//           title: '',
-//           headerBackTitleVisible: false,
-//           headerTransparent: true,
-//           headerTintColor: white,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-//       <MasterStack.Screen
-//         component={Payment}
-//         name={MainRoutes.Payment}
-//         options={{
-//           title: 'Payment',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-
-//       <MasterStack.Screen
-//         component={About}
-//         name={MainRoutes.About}
-//         options={{
-//           title: '',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//           headerTransparent: true,
-//           headerTintColor: white,
-//         }}
-//       />
-
-//       <MasterStack.Screen
-//         component={Search}
-//         name={MainRoutes.Search}
-//         options={{
-//           title: 'What do you need?',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.Profile}
-//         component={Profile}
-//         options={{
-//           title: '',
-//           headerStyle: { borderBottomColor: white },
-//           headerLeftContainerStyle: { marginLeft: 15 },
-//           headerTintColor: black,
-//           headerLeft: () => (
-//             <Icon.Button
-//               name="ios-menu"
-//               size={25}
-//               backgroundColor={white}
-//               color={black}
-//               onPress={() => navigation.openDrawer()}
-//             />
-//           ),
-//           headerRight: () => (
-//             <MaterialCommunityIcons.Button
-//               name="account-edit"
-//               size={25}
-//               backgroundColor={white}
-//               color={black}
-//               onPress={() => navigation.navigate(MainRoutes.EditProfile)}
-//             />
-//           ),
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.EditProfile}
-//         options={{
-//           title: 'Edit Profile',
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//         component={EditProfile}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.UsFoods}
-//         component={UsFood}
-//         options={{
-//           title: '',
-//           headerShown: false,
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.SearchUSFood}
-//         component={SearchUSFood}
-//         options={{
-//           title: 'What do you need?',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.Sysco}
-//         component={Sysco}
-//         options={{
-//           title: '',
-//           headerShown: false,
-//         }}
-//       />
-//       <MasterStack.Screen
-//         name={MainRoutes.SearchSysco}
-//         component={SearchSysco}
-//         options={{
-//           title: 'What do you need?',
-//           headerBackTitleVisible: false,
-//           headerLeftContainerStyle: { marginLeft: 10 },
-//         }}
-//       />
-//     </MasterStack.Navigator>
-//   )
-// }
-
 const HomeStackScreen = ({ navigation }) => {
   return (
     <HomeStack.Navigator
@@ -486,6 +304,14 @@ const SyscoStackScreen = ({ navigation }) => {
       }}
     >
       <SyscoStack.Screen
+        name={MainRoutes.Sysco}
+        component={Sysco}
+        options={{
+          title: '',
+          headerShown: false,
+        }}
+      />
+      <SyscoStack.Screen
         name={MainRoutes.CardItemDetails}
         component={CardItemDetails}
         options={({ route }) => ({
@@ -496,14 +322,7 @@ const SyscoStackScreen = ({ navigation }) => {
           headerLeftContainerStyle: { marginLeft: 10 },
         })}
       />
-      <SyscoStack.Screen
-        name={MainRoutes.Sysco}
-        component={Sysco}
-        options={{
-          title: '',
-          headerShown: false,
-        }}
-      />
+
       <SyscoStack.Screen
         name={MainRoutes.SearchSysco}
         component={SearchSysco}

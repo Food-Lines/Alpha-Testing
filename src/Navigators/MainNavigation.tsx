@@ -27,7 +27,7 @@ import Firebase from '../../config/Firebase.js'
 //Screens Main
 import NavBar from '../Pages/NavBar'
 
-const { primary, tertiary, white, black } = Colors
+const { primary, white, black } = Colors
 import userSlice from '../Redux/slices/user'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { DrawerContent } from '../Components/DrawerContent'
