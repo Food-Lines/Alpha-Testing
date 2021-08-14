@@ -6,7 +6,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import { Colors } from '../Components/styles'
 
 // Colors
-const { primary } = Colors
+const { primary, white } = Colors
 
 const LoadingSpinner = ({ color }) => {
   return (
@@ -19,6 +19,12 @@ const LoadingSpinner = ({ color }) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    padding: 10,
+    alignItems: 'center',
+    height: '100%',
+    backgroundColor: white,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
   },
 })
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { getStorage, ref, getDownloadURL } from 'firebase/storage'
 
 //Components
 import {
@@ -16,16 +17,28 @@ import {
 import { Card } from 'react-native-elements'
 import { Alert, Platform, ToastAndroid, TouchableOpacity } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
-import UsFood from '../Pages/UsFood'
+import LoadingSpinner from './LoadingSpinner'
 
 // Colors
-const { grey, primary, greenUSFood, blueSysco } = Colors
+const { grey, primary, greenUSFood, blueSysco, white } = Colors
 
 const CardView = ({ itemData, onPress }) => {
   const [data, setData] = useState({
     isFav: false,
     isSysco: itemData.supplier === 'Sysco' ? true : false,
+    imageUrl: '',
   })
+
+  useEffect(() => {
+    const storage = getStorage()
+    getDownloadURL(itemData.image)
+      .then((url) => {
+        setData({ ...data, imageUrl: url })
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+  }, [itemData.image])
 
   const onPressHandler = () => {
     setData({
@@ -54,7 +67,7 @@ const CardView = ({ itemData, onPress }) => {
           borderRadius: 8,
           height: 100,
           shadowColor: grey,
-          shadowOffset: { width: 1, height: 1 },
+          shadowOffset: { width: 1, height: 6 },
           shadowRadius: 2,
           shadowOpacity: 0.8,
           elevation: 5,
@@ -66,9 +79,14 @@ const CardView = ({ itemData, onPress }) => {
         }}
         wrapperStyle={{ flexDirection: 'row' }}
       >
-        <CardImageWrapper>
-          <CardImage source={itemData.image} resizeMode="cover" />
-        </CardImageWrapper>
+        {data.imageUrl != '' ? (
+          <CardImageWrapper>
+            <CardImage source={{ uri: data.imageUrl }} resizeMode="cover" />
+          </CardImageWrapper>
+        ) : (
+          <LoadingSpinner color={primary} />
+        )}
+
         <CardInfo>
           <TextWrapper>
             <CardTitle>{itemData.title}</CardTitle>

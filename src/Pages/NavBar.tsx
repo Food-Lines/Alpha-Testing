@@ -111,11 +111,10 @@ const HomeStackScreen = ({ navigation }) => {
               onPress={() => navigation.openDrawer()}
             />
           ),
-          headerRightContainerStyle: { marginRight: 10 },
+          headerRightContainerStyle: { marginRight: 20 },
           headerRight: () => (
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <SearchIcon navigation={navigation} />
-              <ProfilePictureComp navigation={navigation} />
             </View>
           ),
         }}
@@ -129,6 +128,19 @@ const HomeStackScreen = ({ navigation }) => {
           headerLeftContainerStyle: { marginLeft: 10 },
         })}
       />
+
+      <HomeStack.Screen
+        name={MainRoutes.CardItemDetails}
+        component={CardItemDetails}
+        options={({ route }) => ({
+          title: '',
+          headerBackTitleVisible: false,
+          headerTransparent: true,
+          headerTintColor: white,
+          headerLeftContainerStyle: { marginLeft: 10 },
+        })}
+      />
+
       <HomeStack.Screen
         name={MainRoutes.Favorites}
         component={Favorites}
@@ -353,7 +365,7 @@ const ProfilePictureComp = ({ navigation }) => {
 const SearchIcon = ({ navigation }) => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate(MainRoutes.Search)}>
-      <Ionicons name={'search'} size={30} color={black} />
+      <Ionicons name={'search'} size={25} color={black} />
     </TouchableOpacity>
   )
 }

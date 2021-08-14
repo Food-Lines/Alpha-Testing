@@ -71,7 +71,14 @@ const Home = ({ navigation }): React.ReactElement => {
           <Categories label="Dairy" navigation={navigation} title="Dairy" />
         </CategoryContainer>
 
-        <Text style={{ fontWeight: 'bold', padding: 5, alignSelf: 'center' }}>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            padding: 5,
+            alignSelf: 'center',
+            marginTop: 10,
+          }}
+        >
           Recently Viewed
         </Text>
       </View>

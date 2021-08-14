@@ -1,5 +1,10 @@
 import React from 'react'
 
+import { getStorage, ref } from 'firebase/storage'
+
+// Get a reference to the storage service, which is used to create references in your storage bucket
+const storage = getStorage()
+
 const RecentlyViewed = [
   {
     id: '12345',
@@ -8,7 +13,10 @@ const RecentlyViewed = [
     minimumPurchase: 50,
     weight: 40,
     shelfLife: 14,
-    image: 'asdfadfsad',
+    image: ref(
+      storage,
+      'gs://food-lines-40c3c.appspot.com/Food Images/slider1.jpg'
+    ),
     supplier: 'US Foods',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -20,7 +28,10 @@ const RecentlyViewed = [
     minimumPurchase: 50,
     weight: 40,
     shelfLife: 14,
-    image: 'asdfasd',
+    image: ref(
+      storage,
+      'gs://food-lines-40c3c.appspot.com/Food Images/slider2.jpg'
+    ),
     supplier: 'US Foods',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -32,7 +43,10 @@ const RecentlyViewed = [
     minimumPurchase: 50,
     weight: 40,
     shelfLife: 14,
-    image: 'asdfasd',
+    image: ref(
+      storage,
+      'gs://food-lines-40c3c.appspot.com/Food Images/slider3.jpg'
+    ),
     supplier: 'Sysco',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
