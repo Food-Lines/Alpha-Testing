@@ -279,9 +279,19 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
               />
               <TouchableOpacity onPress={updateSecureTextEntry}>
                 {data.secureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
+                  <Feather
+                    name="eye-off"
+                    color={grey}
+                    size={20}
+                    style={{ paddingLeft: 10 }}
+                  />
                 ) : (
-                  <Feather name="eye" color={grey} size={20} />
+                  <Feather
+                    name="eye"
+                    color={grey}
+                    size={20}
+                    style={{ paddingLeft: 10 }}
+                  />
                 )}
               </TouchableOpacity>
             </SignInAction>
@@ -329,9 +339,19 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
               />
               <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
                 {data.confirmSecureTextEntry ? (
-                  <Feather name="eye-off" color={grey} size={20} />
+                  <Feather
+                    name="eye-off"
+                    color={grey}
+                    size={20}
+                    style={{ paddingLeft: 10 }}
+                  />
                 ) : (
-                  <Feather name="eye" color={grey} size={20} />
+                  <Feather
+                    name="eye"
+                    color={grey}
+                    size={20}
+                    style={{ paddingLeft: 10 }}
+                  />
                 )}
               </TouchableOpacity>
             </SignInAction>
