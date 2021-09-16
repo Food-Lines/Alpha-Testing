@@ -37,8 +37,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 //Redux
-import { useReduxDispatch } from '../Redux'
-import { signup } from '../Redux/slices/user'
+import { useReduxDispatch, useReduxSelector } from '../Redux'
 
 // Colors
 const { primary, white, black, grey, red } = Colors
@@ -49,8 +48,21 @@ import { LinearGradient } from 'expo-linear-gradient'
 //Animations
 import * as Animatable from 'react-native-animatable'
 
+import {
+  getDatabase,
+  ref,
+  set
+} from 'firebase/database'  
+import Firebase from '../../config/Firebase'
+import userSlice, { selectUser } from '../Redux/slices/user'
+import * as SecureStore from 'expo-secure-store'
+
+
+
 const FoodAccounts = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
+  const reduxUser = useReduxSelector(selectUser)
+  var AES = require("crypto-js/aes");
   const dispatch = useReduxDispatch()
 
   const [data, setData] = useState({
@@ -153,7 +165,35 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
   }
 
   const onSubmitHandler = async () => {
-    //Need some changes here big man
+    const {
+      syscoEmail,
+      syscoPassword,
+      usFoodsPassword,
+      usFoodID,
+    } = data
+
+    
+    var encSyscoEmail = AES.encrypt(syscoEmail, reduxUser.password).toString()
+    var encSyscoPassword = AES.encrypt(syscoPassword, reduxUser.password).toString()
+    var encUSFoodsPassword = AES.encrypt(usFoodsPassword, reduxUser.password).toString()
+    var encUSFoodID = AES.encrypt(usFoodID, reduxUser.password).toString()
+
+    var password = await SecureStore.getItemAsync("password");
+
+    await set(ref(getDatabase(Firebase), 'users/' + reduxUser.uid), {
+      syscoEmail: encSyscoEmail,
+      syscoPassword: encSyscoPassword,
+      usFoodsPassword: encUSFoodsPassword,
+      usFoodID: encUSFoodID,
+    })
+
+    dispatch(
+      userSlice.actions.setFood(true)
+    )
+
+    // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    // var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
   }
 
   //Components

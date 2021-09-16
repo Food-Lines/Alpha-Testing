@@ -179,6 +179,7 @@ const SignUp = ({ navigation }): React.ReactElement => {
       // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
       // const user = resultAction.payload
       console.log('success')
+      navigation.navigate(MainRoutes.FoodAccounts)
     } else {
       setLoading(false)
     }

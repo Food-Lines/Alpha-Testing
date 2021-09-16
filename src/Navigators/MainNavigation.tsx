@@ -135,6 +135,7 @@ const MainNavigator = (): React.ReactElement => {
       auth = false
     }, [auth])
   } else auth = false
+  if (!reduxUser.foodAcct) auth = false
 
   if (!auth) return <AuthNavigator />
   else return <HomeNavigator />

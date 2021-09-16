@@ -10,7 +10,9 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
 } from 'firebase/auth'
+
 import * as Linking from 'expo-linking'
+import * as SecureStore from 'expo-secure-store'
 
 export const login = createAsyncThunk(
   'users/login',
@@ -43,6 +45,7 @@ export const signup = createAsyncThunk(
     return createUserWithEmailAndPassword(getAuth(Firebase), email, password)
       .then(async (response) => {
         await updateProfile(response.user, { displayName: fullName })
+        await SecureStore.setItemAsync("password", password)
         return {
           email: response.user.email,
           fullName: response.user.displayName,
@@ -117,6 +120,7 @@ const initialState = {
     email: null as string,
     fullName: null as string,
     uid: null as string,
+    foodAcct: false,
   },
   error: null as any,
 }
@@ -129,6 +133,10 @@ const userSlice = createSlice({
       state.user = action.payload
       return state
     },
+    setFood: (state, action: PayloadAction<any>) => {
+      state.user.foodAcct = action.payload
+      return state
+    }
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators
@@ -186,3 +194,4 @@ const userSlice = createSlice({
 export const selectUser = (state: RootState): any => state.user.user
 
 export default userSlice
+
