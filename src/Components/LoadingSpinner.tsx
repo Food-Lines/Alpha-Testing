@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     height: '100%',
-    backgroundColor: white,
+    backgroundColor: primary,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },

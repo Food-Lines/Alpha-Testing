@@ -9,6 +9,7 @@ import {
   Dimensions,
   Keyboard,
   TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native'
 
 // icons
@@ -109,54 +110,56 @@ const SignIn = ({ navigation }): React.ReactElement => {
         </View>
         <Animatable.View style={styles.footer} animation="fadeInUpBig">
           <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
-            <StyledFormArea>
-              <View style={[styles.textPrivate, { marginTop: -2 }]}>
-                <Text style={styles.color_textPrivate}>
-                  Provide your account's email for which you want to rest your
-                  password. A
-                  <Text
-                    style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
-                  >
-                    {' '}
-                    Dynamic Link
-                  </Text>{' '}
-                  will be sent to your email.
-                </Text>
-              </View>
+            <ScrollView>
+              <StyledFormArea>
+                <View style={[styles.textPrivate, { marginTop: -2 }]}>
+                  <Text style={styles.color_textPrivate}>
+                    Provide your account's email for which you want to rest your
+                    password. A
+                    <Text
+                      style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
+                    >
+                      {' '}
+                      Dynamic Link
+                    </Text>{' '}
+                    will be sent to your email.
+                  </Text>
+                </View>
 
-              <SignInTextFooter style={{ marginTop: 20 }}>
-                Email
-              </SignInTextFooter>
-              <SignInAction>
-                <FontAwesome name="user-o" color={black} size={20} />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder="user@provider.com"
-                  autoCapitalize="none"
-                  onChangeText={(val) => onEmailChangeHandler(val)}
-                  keyboardType="email-address"
-                />
-                {data.check_email ? (
-                  <Animatable.View animation="bounceIn">
-                    <Feather name="check-circle" color="green" size={20} />
+                <SignInTextFooter style={{ marginTop: 20 }}>
+                  Email
+                </SignInTextFooter>
+                <SignInAction>
+                  <FontAwesome name="user-o" color={black} size={20} />
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="user@provider.com"
+                    autoCapitalize="none"
+                    onChangeText={(val) => onEmailChangeHandler(val)}
+                    keyboardType="email-address"
+                  />
+                  {data.check_email ? (
+                    <Animatable.View animation="bounceIn">
+                      <Feather name="check-circle" color="green" size={20} />
+                    </Animatable.View>
+                  ) : null}
+                </SignInAction>
+                {data.isValidEmail ? null : (
+                  <Animatable.View animation="fadeInLeft" duration={500}>
+                    <ErrorMsg>Must be a Valid Email.</ErrorMsg>
                   </Animatable.View>
-                ) : null}
-              </SignInAction>
-              {data.isValidEmail ? null : (
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <ErrorMsg>Must be a Valid Email.</ErrorMsg>
-                </Animatable.View>
-              )}
+                )}
 
-              <SignInButton onPress={onSubmitHandler}>
-                <LinearGradient
-                  colors={['#FFA07A', '#FF6347']}
-                  style={styles.signIn}
-                >
-                  <SignInTextSign>Next</SignInTextSign>
-                </LinearGradient>
-              </SignInButton>
-            </StyledFormArea>
+                <SignInButton onPress={onSubmitHandler}>
+                  <LinearGradient
+                    colors={['#FFA07A', '#FF6347']}
+                    style={styles.signIn}
+                  >
+                    <SignInTextSign>Next</SignInTextSign>
+                  </LinearGradient>
+                </SignInButton>
+              </StyledFormArea>
+            </ScrollView>
           </KeyboardAwareScrollView>
         </Animatable.View>
       </StyledContainerFullScreen>

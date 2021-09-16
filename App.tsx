@@ -45,7 +45,7 @@ const App = (): React.ReactElement => {
 
   setTimeout(() => {
     setAnimationDone(true)
-  }, 500)
+  }, 5000)
 
   console.disableYellowBox = true
 
