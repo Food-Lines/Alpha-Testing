@@ -48,21 +48,15 @@ import { LinearGradient } from 'expo-linear-gradient'
 //Animations
 import * as Animatable from 'react-native-animatable'
 
-import {
-  getDatabase,
-  ref,
-  set
-} from 'firebase/database'  
+import { getDatabase, ref, set } from 'firebase/database'
 import Firebase from '../../config/Firebase'
 import userSlice, { selectUser } from '../Redux/slices/user'
 import * as SecureStore from 'expo-secure-store'
 
-
-
 const FoodAccounts = ({ navigation }): React.ReactElement => {
   const [hidePassword, setHidePassword] = useState(true)
   const reduxUser = useReduxSelector(selectUser)
-  var AES = require("crypto-js/aes");
+  var AES = require('crypto-js/aes')
   const dispatch = useReduxDispatch()
 
   const [data, setData] = useState({
@@ -165,20 +159,20 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
   }
 
   const onSubmitHandler = async () => {
-    const {
-      syscoEmail,
-      syscoPassword,
-      usFoodsPassword,
-      usFoodID,
-    } = data
+    const { syscoEmail, syscoPassword, usFoodsPassword, usFoodID } = data
 
-    
     var encSyscoEmail = AES.encrypt(syscoEmail, reduxUser.password).toString()
-    var encSyscoPassword = AES.encrypt(syscoPassword, reduxUser.password).toString()
-    var encUSFoodsPassword = AES.encrypt(usFoodsPassword, reduxUser.password).toString()
+    var encSyscoPassword = AES.encrypt(
+      syscoPassword,
+      reduxUser.password
+    ).toString()
+    var encUSFoodsPassword = AES.encrypt(
+      usFoodsPassword,
+      reduxUser.password
+    ).toString()
     var encUSFoodID = AES.encrypt(usFoodID, reduxUser.password).toString()
 
-    var password = await SecureStore.getItemAsync("password");
+    var password = await SecureStore.getItemAsync('password')
 
     await set(ref(getDatabase(Firebase), 'users/' + reduxUser.uid), {
       syscoEmail: encSyscoEmail,
@@ -187,13 +181,10 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
       usFoodID: encUSFoodID,
     })
 
-    dispatch(
-      userSlice.actions.setFood(true)
-    )
+    dispatch(userSlice.actions.setFood(true))
 
     // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     // var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
   }
 
   //Components

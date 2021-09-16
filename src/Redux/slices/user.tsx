@@ -45,7 +45,7 @@ export const signup = createAsyncThunk(
     return createUserWithEmailAndPassword(getAuth(Firebase), email, password)
       .then(async (response) => {
         await updateProfile(response.user, { displayName: fullName })
-        await SecureStore.setItemAsync("password", password)
+        await SecureStore.setItemAsync('password', password)
         return {
           email: response.user.email,
           fullName: response.user.displayName,
@@ -136,7 +136,7 @@ const userSlice = createSlice({
     setFood: (state, action: PayloadAction<any>) => {
       state.user.foodAcct = action.payload
       return state
-    }
+    },
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators
@@ -194,4 +194,3 @@ const userSlice = createSlice({
 export const selectUser = (state: RootState): any => state.user.user
 
 export default userSlice
-
