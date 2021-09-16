@@ -163,27 +163,34 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
   const onSubmitHandler = async () => {
     const { syscoEmail, syscoPassword, usFoodsPassword, usFoodID } = data
 
-    var encSyscoEmail = AES.encrypt(syscoEmail, reduxUser.password).toString()
-    var encSyscoPassword = AES.encrypt(
-      syscoPassword,
-      reduxUser.password
-    ).toString()
-    var encUSFoodsPassword = AES.encrypt(
-      usFoodsPassword,
-      reduxUser.password
-    ).toString()
-    var encUSFoodID = AES.encrypt(usFoodID, reduxUser.password).toString()
-
     var password = await SecureStore.getItemAsync('password')
 
-    await set(ref(getDatabase(Firebase), 'users/' + reduxUser.uid), {
+    var encSyscoEmail = AES.encrypt(syscoEmail, password).toString()
+    var encSyscoPassword = AES.encrypt(syscoPassword, password).toString()
+    var encUSFoodsPassword = AES.encrypt(usFoodsPassword, password).toString()
+    var encUSFoodID = AES.encrypt(usFoodID, password).toString()
+    var dataRef = ref(
+      getDatabase(
+        Firebase,
+        'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
+      ),
+      'users/' + reduxUser.uid
+    )
+    await set(dataRef, {
       syscoEmail: encSyscoEmail,
       syscoPassword: encSyscoPassword,
       usFoodsPassword: encUSFoodsPassword,
       usFoodID: encUSFoodID,
     })
 
-    dispatch(userSlice.actions.setFood(true))
+    dispatch(
+      userSlice.actions.setUser({
+        syscoEmail: encSyscoEmail,
+        syscoPassword: encSyscoPassword,
+        usFoodsPassword: encUSFoodsPassword,
+        usFoodID: encUSFoodID,
+      })
+    )
 
     // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
     // var originalText = bytes.toString(CryptoJS.enc.Utf8);

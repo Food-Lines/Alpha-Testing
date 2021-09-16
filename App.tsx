@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'react-native-get-random-values'
 import { Provider } from 'react-redux'
 import {
   SafeAreaView,

@@ -62,7 +62,8 @@ export const logout = createAsyncThunk(
   'users/logout',
   async (arg, { rejectWithValue }: any) => {
     return signOut(getAuth(Firebase))
-      .then(() => {
+      .then(async () => {
+        await SecureStore.deleteItemAsync('password')
         return {
           email: null as string,
           fullName: null as string,
@@ -120,7 +121,10 @@ const initialState = {
     email: null as string,
     fullName: null as string,
     uid: null as string,
-    foodAcct: false,
+    syscoEmail: null as string,
+    syscoPassword: null as string,
+    usFoodsPassword: null as string,
+    usFoodID: null as string,
   },
   error: null as any,
 }
@@ -130,18 +134,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<any>) => {
-      state.user = action.payload
-      return state
-    },
-    setFood: (state, action: PayloadAction<any>) => {
-      state.user.foodAcct = action.payload
+      state.user = Object.assign(state.user, action.payload)
       return state
     },
   },
   extraReducers: (builder) => {
     // The `builder` callback form is used here because it provides correctly typed reducers from the action creators
     builder.addCase(login.fulfilled, (state, { payload }) => {
-      state.user = payload
+      state.user = Object.assign(state.user, payload)
     })
     builder.addCase(login.rejected, (state, action) => {
       console.log(action.payload)
@@ -151,7 +151,7 @@ const userSlice = createSlice({
       }
     })
     builder.addCase(signup.fulfilled, (state, { payload }) => {
-      state.user = payload
+      state.user = Object.assign(state.user, payload)
     })
     builder.addCase(signup.rejected, (state, action) => {
       console.log(action.payload)
@@ -161,7 +161,7 @@ const userSlice = createSlice({
       }
     })
     builder.addCase(logout.fulfilled, (state, { payload }) => {
-      state.user = payload
+      state.user = Object.assign(state.user, payload)
     })
     builder.addCase(logout.rejected, (state, action) => {
       console.log(action.payload)
@@ -171,7 +171,7 @@ const userSlice = createSlice({
       }
     })
     builder.addCase(sendReset.fulfilled, (state, { payload }) => {
-      state.user = payload
+      state.user = Object.assign(state.user, payload)
     })
     builder.addCase(sendReset.rejected, (state, action) => {
       console.log(action.payload)

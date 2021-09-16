@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import * as Linking from 'expo-linking'
 
 // Colors
@@ -31,6 +31,8 @@ const { primary, white, black } = Colors
 import userSlice from '../Redux/slices/user'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { DrawerContent } from '../Components/DrawerContent'
+
+import { getDatabase, ref, get, query } from 'firebase/database'
 
 export type resetParams = {
   mode: string
@@ -109,33 +111,61 @@ const AuthNavigator = (): React.ReactElement => {
 const MainNavigator = (): React.ReactElement => {
   const reduxUser = useReduxSelector(selectUser)
   const dispatch = useReduxDispatch()
-  let auth = true
+
+  let auth = false
   const user = getAuth(Firebase).currentUser
-  if (user && reduxUser.uid === user.uid) auth = true
-  else if (user && reduxUser.uid !== user.uid) {
-    useEffect(() => {
-      dispatch(
-        userSlice.actions.setUser({
-          email: user.email,
-          uid: user.uid,
-          displayName: user.displayName,
-        })
-      )
-      auth = true
-    }, [auth])
-  } else if (!user && reduxUser.uid) {
-    useEffect(() => {
-      dispatch(
-        userSlice.actions.setUser({
-          email: null as string,
-          fullName: null as string,
-          uid: null as string,
-        })
-      )
-      auth = false
-    }, [auth])
+  const missingVal = Object.values(reduxUser).some((x) => x == null || x == '')
+
+  if (user && !missingVal && reduxUser.uid === user.uid) auth = true
+  else if (user && missingVal) {
+    console.log('fetch')
+    var dataRef = ref(
+      getDatabase(
+        Firebase,
+        'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
+      ),
+      'users/' + reduxUser.uid
+    )
+    get(query(dataRef))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const coreUser = {
+            uid: user.uid,
+            email: user.email,
+            fullName: user.displayName,
+          }
+          const userData = { ...snapshot.val(), ...coreUser }
+          dispatch(
+            userSlice.actions.setUser({
+              ...userData,
+            })
+          )
+          auth = true
+        } else {
+          console.log('No data available')
+          auth = false
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+        auth = false
+      })
+  } else if (!user) {
+    dispatch(
+      userSlice.actions.setUser({
+        email: null as string,
+        fullName: null as string,
+        uid: null as string,
+        syscoEmail: null as string,
+        syscoPassword: null as string,
+        usFoodsPassword: null as string,
+        usFoodID: null as string,
+      })
+    )
+    auth = false
   } else auth = false
-  if (!reduxUser.foodAcct) auth = false
+
+  console.log(reduxUser)
 
   if (!auth) return <AuthNavigator />
   else return <HomeNavigator />
