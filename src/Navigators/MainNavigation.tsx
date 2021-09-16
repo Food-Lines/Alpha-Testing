@@ -39,8 +39,6 @@ export type resetParams = {
   oobCode: string
 }
 
-
-
 const HomeNavigator = (): React.ReactElement => {
   const Drawer = createDrawerNavigator()
   return (
@@ -110,37 +108,48 @@ const AuthNavigator = (): React.ReactElement => {
   )
 }
 
-
 const MainNavigator = (): React.ReactElement => {
   const reduxUser = useReduxSelector(selectUser)
   const dispatch = useReduxDispatch()
 
   let auth = false
   const user = getAuth(Firebase).currentUser
-  const missingVal = Object.values(reduxUser).some(x => x == null || x == '')
+  const missingVal = Object.values(reduxUser).some((x) => x == null || x == '')
 
   if (user && !missingVal && reduxUser.uid === user.uid) auth = true
   else if (user && missingVal) {
-    console.log("fetch")
-    var dataRef  = ref(getDatabase(Firebase, 'https://food-lines-40c3c-default-rtdb.firebaseio.com/'), 'users/' + reduxUser.uid)
-    get(query(dataRef)).then((snapshot) => {
-      if (snapshot.exists()) {
-        const coreUser = {uid: user.uid, email: user.email, fullName: user.displayName}
-        const userData =  {...snapshot.val(), ...coreUser}
-        dispatch(
-          userSlice.actions.setUser({
-            ...userData
-          })
-        )
-        auth = true
-      } else {
-        console.log("No data available")
+    console.log('fetch')
+    var dataRef = ref(
+      getDatabase(
+        Firebase,
+        'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
+      ),
+      'users/' + reduxUser.uid
+    )
+    get(query(dataRef))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const coreUser = {
+            uid: user.uid,
+            email: user.email,
+            fullName: user.displayName,
+          }
+          const userData = { ...snapshot.val(), ...coreUser }
+          dispatch(
+            userSlice.actions.setUser({
+              ...userData,
+            })
+          )
+          auth = true
+        } else {
+          console.log('No data available')
+          auth = false
+        }
+      })
+      .catch((error) => {
+        console.log(error)
         auth = false
-      }
-    }).catch((error) => {
-      console.log(error)
-      auth = false
-    });
+      })
   } else if (!user) {
     dispatch(
       userSlice.actions.setUser({

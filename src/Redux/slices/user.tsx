@@ -35,7 +35,6 @@ export const login = createAsyncThunk(
   }
 )
 
-
 export const signup = createAsyncThunk(
   'users/signup',
   async (
@@ -63,7 +62,7 @@ export const logout = createAsyncThunk(
   'users/logout',
   async (arg, { rejectWithValue }: any) => {
     return signOut(getAuth(Firebase))
-      .then(async() => {
+      .then(async () => {
         await SecureStore.deleteItemAsync('password')
         return {
           email: null as string,

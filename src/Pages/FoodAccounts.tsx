@@ -166,16 +166,16 @@ const FoodAccounts = ({ navigation }): React.ReactElement => {
     var password = await SecureStore.getItemAsync('password')
 
     var encSyscoEmail = AES.encrypt(syscoEmail, password).toString()
-    var encSyscoPassword = AES.encrypt(
-      syscoPassword,
-      password
-    ).toString()
-    var encUSFoodsPassword = AES.encrypt(
-      usFoodsPassword,
-      password
-    ).toString()
+    var encSyscoPassword = AES.encrypt(syscoPassword, password).toString()
+    var encUSFoodsPassword = AES.encrypt(usFoodsPassword, password).toString()
     var encUSFoodID = AES.encrypt(usFoodID, password).toString()
-    var dataRef  = ref(getDatabase(Firebase, 'https://food-lines-40c3c-default-rtdb.firebaseio.com/'), 'users/' + reduxUser.uid)
+    var dataRef = ref(
+      getDatabase(
+        Firebase,
+        'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
+      ),
+      'users/' + reduxUser.uid
+    )
     await set(dataRef, {
       syscoEmail: encSyscoEmail,
       syscoPassword: encSyscoPassword,

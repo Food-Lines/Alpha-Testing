@@ -19,7 +19,7 @@ const firebaseConfig = {
 }
 
 // Initialize Firebase
-console.log("API_KEY: " + API_KEY)
+console.log('API_KEY: ' + API_KEY)
 const Firebase = initializeApp(firebaseConfig)
 
 export default Firebase
