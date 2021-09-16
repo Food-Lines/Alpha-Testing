@@ -10,6 +10,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native'
+import { getAuth } from 'firebase/auth'
+import Firebase from '../../config/Firebase.js'
+import { getDatabase, ref, get, query } from 'firebase/database'
+import userSlice, { selectUser } from '../Redux/slices/user'
 
 // icons
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -39,7 +43,7 @@ import {
 import KeyboardAvoidingWrapper from '../Components/KeyboardAvoidingWrapper'
 
 //Redux
-import { useAsync, useReduxDispatch } from '../Redux'
+import { useReduxDispatch, useReduxSelector } from '../Redux'
 import { login } from '../Redux/slices/user'
 
 // Colors
@@ -55,6 +59,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 const SignIn = ({ navigation }): React.ReactElement => {
   const dispatch = useReduxDispatch()
+  const reduxUser = useReduxSelector(selectUser)
   const [loading, setLoading] = useState(false)
 
   const [data, setData] = useState({
@@ -122,10 +127,29 @@ const SignIn = ({ navigation }): React.ReactElement => {
     }
     const { email, password } = data
     const resultAction = await dispatch(login({ email, password }))
+    const user = getAuth(Firebase).currentUser
+
     if (login.fulfilled.match(resultAction)) {
       // user will have a type signature of User as we passed that as the Returned parameter in createAsyncThunk
       // const user = resultAction.payload
       console.log('Success')
+      // console.log("fetch")
+      // var dataRef  = ref(getDatabase(Firebase, 'https://food-lines-40c3c-default-rtdb.firebaseio.com/'), 'users/' + reduxUser.uid)
+      // get(query(dataRef)).then((snapshot) => {
+      //   if (snapshot.exists()) {
+      //     const coreUser = {uid: user.uid, email: user.email, fullName: user.displayName}
+      //     const userData =  {...snapshot.val(), ...coreUser}
+      //     dispatch(
+      //       userSlice.actions.setUser({
+      //         ...userData
+      //       })
+      //     )
+      //   } else {
+      //     console.log("No data available");
+      //   }
+      // }).catch((error) => {
+      //   console.error(error);
+      // });
     } else {
       setLoading(false)
       setData({
