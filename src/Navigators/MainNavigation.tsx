@@ -27,6 +27,9 @@ import Firebase from '../../config/Firebase.js'
 //Screens Main
 import NavBar from '../Pages/NavBar'
 
+//Demo Pages
+import DemoHome from '../Pages/Demo/DemoHome'
+
 const { primary, white, black } = Colors
 import userSlice from '../Redux/slices/user'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -44,6 +47,16 @@ const HomeNavigator = (): React.ReactElement => {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name={MainRoutes.NavBar} component={NavBar} />
+    </Drawer.Navigator>
+  )
+}
+
+//For Demo
+const HomeNavigator2 = (): React.ReactElement => {
+  const Drawer = createDrawerNavigator()
+  return (
+    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name={MainRoutes.DemoHome} component={DemoHome} />
     </Drawer.Navigator>
   )
 }
@@ -116,41 +129,41 @@ const MainNavigator = (): React.ReactElement => {
   const user = getAuth(Firebase).currentUser
   const missingVal = Object.values(reduxUser).some((x) => x == null || x == '')
 
-  if (user && !missingVal && reduxUser.uid === user.uid) auth = true
-  else if (user && missingVal) {
-    console.log('fetch')
-    var dataRef = ref(
-      getDatabase(
-        Firebase,
-        'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
-      ),
-      'users/' + reduxUser.uid
-    )
-    get(query(dataRef))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const coreUser = {
-            uid: user.uid,
-            email: user.email,
-            fullName: user.displayName,
-          }
-          const userData = { ...snapshot.val(), ...coreUser }
-          dispatch(
-            userSlice.actions.setUser({
-              ...userData,
-            })
-          )
-          auth = true
-        } else {
-          console.log('No data available')
-          auth = false
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-        auth = false
-      })
-  } else if (!user) {
+  if (user && reduxUser.uid === user.uid) auth = true
+  // else if (user && missingVal) {
+  //   console.log('fetch')
+  //   var dataRef = ref(
+  //     getDatabase(
+  //       Firebase,
+  //       'https://food-lines-40c3c-default-rtdb.firebaseio.com/'
+  //     ),
+  //     'users/' + reduxUser.uid
+  //   )
+  //   get(query(dataRef))
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         const coreUser = {
+  //           uid: user.uid,
+  //           email: user.email,
+  //           fullName: user.displayName,
+  //         }
+  //         const userData = { ...snapshot.val(), ...coreUser }
+  //         dispatch(
+  //           userSlice.actions.setUser({
+  //             ...userData,
+  //           })
+  //         )
+  //         auth = true
+  //       } else {
+  //         console.log('No data available')
+  //         auth = false
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //       auth = false
+  //     })} e
+  else if (!user) {
     dispatch(
       userSlice.actions.setUser({
         email: null as string,
@@ -168,7 +181,7 @@ const MainNavigator = (): React.ReactElement => {
   console.log(reduxUser)
 
   if (!auth) return <AuthNavigator />
-  else return <HomeNavigator />
+  else return <HomeNavigator2 />
 }
 
 const MainNavigation = (): React.ReactElement => {
