@@ -353,13 +353,13 @@ const SignUp = ({ navigation }): React.ReactElement => {
                     style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
                   >
                     {' '}
-                    Terms of service
+                    Terms of Service
                   </Text>
-                  <Text style={styles.color_textPrivate}> and</Text>
+                  <Text style={styles.color_textPrivate}> and </Text>
                   <Text
                     style={[styles.color_textPrivate, { fontWeight: 'bold' }]}
                   >
-                    Privacy policy
+                    Privacy Policy
                   </Text>
                 </View>
 
